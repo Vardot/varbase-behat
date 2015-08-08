@@ -7,6 +7,16 @@ default:
       selenium2: ~
     Drupal\DrupalExtension\Extension:
       blackbox: ~
+  context:
+    parameters:
+      drupal_users:
+        admin:
+          'admin'
+        webmaster:
+          '123123'
+      # the node ID of the group
+      vsite:
+        2
 
 phantomjs:
   context:
@@ -16,4 +26,3 @@ phantomjs:
       base_url:  'http://varbase.local'
       goutte: ~
       selenium2: ~
-
