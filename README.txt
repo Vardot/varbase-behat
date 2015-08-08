@@ -14,4 +14,4 @@ Run this command to
 $ bin/behat
 
 
-$ bin/behat features/you-gherkin-feature.feature
+$ bin/behat features/your-gherkin-feature.feature
