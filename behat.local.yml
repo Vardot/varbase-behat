@@ -1,0 +1,19 @@
+default:
+  paths:
+    features: 'features'
+  extensions:
+    Behat\MinkExtension\Extension:
+      goutte: ~
+      selenium2: ~
+    Drupal\DrupalExtension\Extension:
+      blackbox: ~
+
+phantomjs:
+  context:
+      class:  'FeatureContext'
+  extensions:
+    Behat\MinkExtension\Extension:
+      base_url:  'http://varbase.local'
+      goutte: ~
+      selenium2: ~
+
