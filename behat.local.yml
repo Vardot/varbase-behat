@@ -1,19 +1,21 @@
 default:
   paths:
     features: 'features'
+    bootstrap: 'features/bootstrap'
   extensions:
     Behat\MinkExtension\Extension:
       goutte: ~
       selenium2: ~
     Drupal\DrupalExtension\Extension:
       blackbox: ~
+      api_driver: 'drupal'
+      drupal:
+        drupal_root: '/var/www/varbase_behat/varbase-7-x-3-0-alpha1/docroot'
   context:
     parameters:
       drupal_users:
-        admin:
-          'admin'
         webmaster:
-          '123123'
+          'V@rd0t!@#'
       # the node ID of the group
       vsite:
         2
@@ -23,6 +25,6 @@ phantomjs:
       class:  'FeatureContext'
   extensions:
     Behat\MinkExtension\Extension:
-      base_url:  'http://varbase.local'
+      base_url:  'http://localhost/varbase_behat/varbase-7-x-3-0-alpha1/docroot'
       goutte: ~
       selenium2: ~
