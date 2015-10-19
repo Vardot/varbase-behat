@@ -1,6 +1,5 @@
-
 If you have a Varbase testing site at this location
-/var/www/varbase_behat/varbase-7-x-3-0-alpha1
+/var/www/varbase_behat/varbase-7-x-3-0-alpha1/docroot
 
 Clone this repo to a behat directory
 /var/www/varbase_behat/varbase-7-x-3-0-alpha1/behat
@@ -26,6 +25,3 @@ $ bin/behat -di
       - use -dl to just list definition expressions.
       - use -di to show definitions with extended info.
       - use -d 'needle' to find specific definitions.
-
-
-
