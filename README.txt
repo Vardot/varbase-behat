@@ -25,3 +25,20 @@ $ bin/behat -di
       - use -dl to just list definition expressions.
       - use -di to show definitions with extended info.
       - use -d 'needle' to find specific definitions.
+
+Example :
+==================================================================================
+➜  behat git:(development) ✗ bin/behat features/clear-cache.feature
+@api
+Feature: Clear cache
+  to Clear cache
+
+  Scenario: Clear cache                     # features/clear-cache.feature:5
+    Given the cache has been cleared        # FeatureContext::assertCacheClear()
+    When I am on the homepage               # FeatureContext::iAmOnHomepage()
+    Then I should get a "200" HTTP response # FeatureContext::assertHttpResponse()
+
+1 scenario (1 passed)
+3 steps (3 passed)
+0m34.597s
+==================================================================================
