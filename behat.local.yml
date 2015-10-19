@@ -19,6 +19,8 @@ default:
       drupal_users:
         webmaster:
           'V@rd0t!@#'
+        vsite:
+          2
 
 phantomjs:
   context:
