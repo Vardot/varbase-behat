@@ -4,7 +4,7 @@
 [2] - Clone this repo to a behat directory
 /var/www/varbase_behat/varbase-7-x-3-0-alpha1/behat
 
-[3] - Edit the file behat.local.yml and change: 
+[3] - Edit the file behat.local.yml and change:
 
   drupal_root: '/var/www/varbase_behat/varbase-7-x-3-0-alpha1/docroot'
   base_url:  'http://127.0.0.1/varbase_behat/varbase-7-x-3-0-alpha1/docroot'
@@ -29,7 +29,7 @@ $ bin/behat -di
 
 Example :
 ===============================================================================
-➜  behat git:(development) ✗ bin/behat features/clear-cache.feature
+➜  behat git:(varbase-7-x-3-0-alpha1) ✗ bin/behat features/clear-cache.feature
 @api
 Feature: Clear cache
   to Clear cache
@@ -41,5 +41,5 @@ Feature: Clear cache
 
 1 scenario (1 passed)
 3 steps (3 passed)
-0m34.597s
+0m27.546s
 ================================================================================
