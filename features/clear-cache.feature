@@ -1,3 +1,4 @@
+@api
 Feature: Clear cache
   to Clear cache
 
