@@ -1,29 +1,8 @@
-Feature: 
-As a 
-I want 
-So that 
+@api
+Feature: Clear cache
+  to Clear cache
 
-  Scenario: 
-    Given 
-     When 
-     Then 
-  
-  Scenario: 
-    Given 
-     When 
-     Then 
-  
-  Scenario Outline: 
-    Given 
-     When 
-     Then 
-  
-  Example: 
-  
-  Scenario: 
-    Given 
-     When 
-     Then 
-  
-  Scenario: 
-  
+  Scenario: Clear cache
+    Given the cache has been cleared
+    When I am on the homepage
+    Then I should get a "200" HTTP response
