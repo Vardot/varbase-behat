@@ -14,10 +14,11 @@
 
 [4] - Go to /var/www/varbase_behat/varbase-7-x-3-0-alpha1/behat/
 
-[5] - Run this command to
+[5] - Run this command.
 $ bin/behat
 
-[6] - Run this command with the .feature file to run the Gherkin Script in it to the installed site.
+[6] - Run this command with the .feature file to run the Gherkin Script in
+      it to the installed site.
 $ bin/behat features/your-gherkin-feature.feature
 
 [7] - Run this command to print all available step definitions
@@ -27,7 +28,7 @@ $ bin/behat -di
       - use -d 'needle' to find specific definitions.
 
 Example :
-==================================================================================
+===============================================================================
 ➜  behat git:(development) ✗ bin/behat features/clear-cache.feature
 @api
 Feature: Clear cache
@@ -41,4 +42,4 @@ Feature: Clear cache
 1 scenario (1 passed)
 3 steps (3 passed)
 0m34.597s
-==================================================================================
+================================================================================
