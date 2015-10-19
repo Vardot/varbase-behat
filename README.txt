@@ -1,13 +1,18 @@
 
+If you have a Varbase testing site at this location
+/var/www/varbase_behat/varbase-7-x-3-0-alpha1
 
+Clone this repo to a behat directory
+/var/www/varbase_behat/varbase-7-x-3-0-alpha1/behat
 
-curl http://getcomposer.org/installer | php
+Edit the file behat.local.yml and change: 
 
-php composer.phar install
+  drupal_root: '/var/www/varbase_behat/varbase-7-x-3-0-alpha1/docroot'
+  base_url:  'http://127.0.0.1/varbase_behat/varbase-7-x-3-0-alpha1/docroot'
+  drupal_users:
+    webmaster:
+       'ThePasswored'
 
-
-Edit the file behat.local.yml and change the base_url from http://varbase.local
-to the testing domain.
 
 
 Run this command to
