@@ -6,11 +6,10 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'shvetsgroup\\ParallelRunner' => array($vendorDir . '/shvetsgroup/parallelrunner/src'),
     'WebDriver' => array($vendorDir . '/instaclick/php-webdriver/lib'),
-    'Guzzle\\Stream' => array($vendorDir . '/guzzle/stream'),
-    'Guzzle\\Parser' => array($vendorDir . '/guzzle/parser'),
-    'Guzzle\\Http' => array($vendorDir . '/guzzle/http'),
-    'Guzzle\\Common' => array($vendorDir . '/guzzle/common'),
+    'Guzzle\\Tests' => array($vendorDir . '/guzzle/guzzle/tests'),
+    'Guzzle' => array($vendorDir . '/guzzle/guzzle/src'),
     'Goutte' => array($vendorDir . '/fabpot/goutte'),
     'Drupal\\Exception' => array($vendorDir . '/drupal/drupal-extension/src'),
     'Drupal\\DrupalExtension' => array($vendorDir . '/drupal/drupal-extension/src'),
