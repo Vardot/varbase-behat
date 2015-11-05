@@ -5,7 +5,11 @@ default:
   extensions:
     Behat\MinkExtension\Extension:
       goutte: ~
-      selenium2: ~
+      selenium2:
+        wd_host: http://localhost/varbase_behat/varbase-7-x-3-0-alpha1/docroot
+        browser: 'firefox'
+        capabilities:
+          version: '' # required
     Drupal\DrupalExtension\Extension:
       blackbox: ~
       api_driver: 'drupal'
@@ -13,7 +17,7 @@ default:
       drush:
         alias: 'local'
       drupal:
-        drupal_root: '/var/www/varbase_behat/varbase-7-x-3-0-alpha1/docroot'
+        drupal_root: '/var/www/html/varbase_behat/varbase-7-x-3-0-alpha1/docroot'
   context:
     parameters:
       drupal_users:
@@ -27,6 +31,6 @@ phantomjs:
       class:  'FeatureContext'
   extensions:
     Behat\MinkExtension\Extension:
-      base_url:  'http://127.0.0.1/varbase_behat/varbase-7-x-3-0-alpha1/docroot'
+      base_url:  'http://localhost/varbase_behat/varbase-7-x-3-0-alpha1/docroot'
       goutte: ~
       selenium2: ~
