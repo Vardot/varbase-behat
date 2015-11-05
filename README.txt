@@ -1,18 +1,18 @@
 [1] - If you have a Varbase testing site at this location
-/var/www/varbase_behat/varbase-7-x-3-0-alpha1/docroot
+/var/www/html/varbase_behat/varbase-7-x-3-0-alpha1/docroot
 
 [2] - Clone this repo to a behat directory
-/var/www/varbase_behat/varbase-7-x-3-0-alpha1/behat
+/var/www/html/varbase_behat/varbase-7-x-3-0-alpha1/behat
 
 [3] - Edit the file behat.local.yml and change:
 
-  drupal_root: '/var/www/varbase_behat/varbase-7-x-3-0-alpha1/docroot'
+  drupal_root: '/var/www/html/varbase_behat/varbase-7-x-3-0-alpha1/docroot'
   base_url:  'http://127.0.0.1/varbase_behat/varbase-7-x-3-0-alpha1/docroot'
   drupal_users:
     webmaster:
        'ThePasswored'
 
-[4] - Go to /var/www/varbase_behat/varbase-7-x-3-0-alpha1/behat/
+[4] - Go to /var/www/html/varbase_behat/varbase-7-x-3-0-alpha1/behat/
 
 [5] - Run this command.
 $ bin/behat
