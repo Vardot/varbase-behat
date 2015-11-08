@@ -1,7 +1,13 @@
 Mink BrowserKit Driver
 ======================
 
-- [![Build Status](https://secure.travis-ci.org/Behat/MinkBrowserKitDriver.png?branch=master)](http://travis-ci.org/Behat/MinkBrowserKitDriver)
+[![Latest Stable Version](https://poser.pugx.org/behat/mink-browserkit-driver/v/stable.png)](https://packagist.org/packages/behat/mink-browserkit-driver)
+[![Latest Unstable Version](https://poser.pugx.org/behat/mink-browserkit-driver/v/unstable.svg)](https://packagist.org/packages/behat/mink-browserkit-driver)
+[![Total Downloads](https://poser.pugx.org/behat/mink-browserkit-driver/downloads.png)](https://packagist.org/packages/behat/mink-browserkit-driver)
+[![Build Status](https://travis-ci.org/minkphp/MinkBrowserKitDriver.svg?branch=master)](https://travis-ci.org/minkphp/MinkBrowserKitDriver)
+[![Scrutinizer Quality Score](https://scrutinizer-ci.com/g/minkphp/MinkBrowserKitDriver/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/minkphp/MinkBrowserKitDriver/)
+[![Code Coverage](https://scrutinizer-ci.com/g/minkphp/MinkBrowserKitDriver/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/minkphp/MinkBrowserKitDriver/)
+[![License](https://poser.pugx.org/behat/mink-browserkit-driver/license.svg)](https://packagist.org/packages/behat/mink-browserkit-driver)
 
 Usage Example
 -------------
@@ -30,19 +36,19 @@ Installation
 ``` json
 {
     "require": {
-        "behat/mink":                   "1.4.*",
-        "behat/mink-browserkit-driver": "1.0.*"
+        "behat/mink":                   "~1.5",
+        "behat/mink-browserkit-driver": "~1.1"
     }
 }
 ```
 
 ``` bash
-$> curl http://getcomposer.org/installer | php
+$> curl -sS https://getcomposer.org/installer | php
 $> php composer.phar install
 ```
 
 Maintainers
 -----------
 
-* Konstantin Kudryashov [everzet](http://github.com/everzet)
-* Other [awesome developers](https://github.com/Behat/MinkBrowserKitDriver/graphs/contributors)
+* Christophe Coevoet [stof](https://github.com/stof)
+* Other [awesome developers](https://github.com/minkphp/MinkBrowserKitDriver/graphs/contributors)

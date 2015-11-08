@@ -1,19 +1,17 @@
 <?php
 
-namespace Behat\MinkExtension\Context;
-
-use Behat\Gherkin\Node\TableNode;
-
-use Behat\Behat\Context\TranslatedContextInterface,
-    Behat\Behat\Event\ScenarioEvent;
-
 /*
- * This file is part of the Behat\MinkExtension.
+ * This file is part of the Behat MinkExtension.
  * (c) Konstantin Kudryashov <ever.zet@gmail.com>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
+namespace Behat\MinkExtension\Context;
+
+use Behat\Behat\Context\TranslatableContext;
+use Behat\Gherkin\Node\TableNode;
 
 /**
  * Mink context for Behat BDD tool.
@@ -21,7 +19,7 @@ use Behat\Behat\Context\TranslatedContextInterface,
  *
  * @author Konstantin Kudryashov <ever.zet@gmail.com>
  */
-class MinkContext extends RawMinkContext implements TranslatedContextInterface
+class MinkContext extends RawMinkContext implements TranslatableContext
 {
     /**
      * Opens homepage.
@@ -31,7 +29,7 @@ class MinkContext extends RawMinkContext implements TranslatedContextInterface
      */
     public function iAmOnHomepage()
     {
-        $this->getSession()->visit($this->locatePath('/'));
+        $this->visitPath('/');
     }
 
     /**
@@ -42,7 +40,7 @@ class MinkContext extends RawMinkContext implements TranslatedContextInterface
      */
     public function visit($page)
     {
-        $this->getSession()->visit($this->locatePath($page));
+        $this->visitPath($page);
     }
 
     /**
@@ -422,7 +420,7 @@ class MinkContext extends RawMinkContext implements TranslatedContextInterface
      */
     public function printCurrentUrl()
     {
-        $this->printDebug($this->getSession()->getCurrentUrl());
+        echo $this->getSession()->getCurrentUrl();
     }
 
     /**
@@ -432,7 +430,7 @@ class MinkContext extends RawMinkContext implements TranslatedContextInterface
      */
     public function printLastResponse()
     {
-        $this->printDebug(
+        echo (
             $this->getSession()->getCurrentUrl()."\n\n".
             $this->getSession()->getPage()->getContent()
         );
@@ -459,9 +457,9 @@ class MinkContext extends RawMinkContext implements TranslatedContextInterface
      *
      * @return array
      */
-    public function getTranslationResources()
+    public static function getTranslationResources()
     {
-        return $this->getMinkTranslationResources();
+        return self::getMinkTranslationResources();
     }
 
     /**
@@ -469,7 +467,7 @@ class MinkContext extends RawMinkContext implements TranslatedContextInterface
      *
      * @return array
      */
-    public function getMinkTranslationResources()
+    public static function getMinkTranslationResources()
     {
         return glob(__DIR__.'/../../../../i18n/*.xliff');
     }

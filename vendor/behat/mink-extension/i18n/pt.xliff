@@ -68,7 +68,7 @@
         </trans-unit>
         <trans-unit id="i-attach-the-file-to-field">
             <source><![CDATA[/^(?:|I )attach the file "(?P<path>[^"]*)" to "(?P<field>(?:[^"]|\\")*)"$/]]></source>
-            <target><![CDATA[/^(?:|Eu )anexo o arquivo "(?P<path>[^"]*)" в поле "(?P<field>(?:[^"]|\\")*)"$/]]></target>
+            <target><![CDATA[/^(?:|Eu )anexo o arquivo "(?P<path>[^"]*)" ao "(?P<field>(?:[^"]|\\")*)"$/]]></target>
         </trans-unit>
         <trans-unit id="i-should-see-text">
             <source><![CDATA[/^(?:|I )should see "(?P<text>(?:[^"]|\\")*)"$/]]></source>
@@ -104,15 +104,15 @@
         </trans-unit>
         <trans-unit id="the-checkbox-should-be-checked">
             <source><![CDATA[/^the "(?P<checkbox>(?:[^"]|\\")*)" checkbox should be checked$/]]></source>
-            <target><![CDATA[/^o checkbox "(?P<checkbox>(?:[^"]|\\")*)" deve ser marcado$/]]></target>
+            <target><![CDATA[/^o checkbox "(?P<checkbox>(?:[^"]|\\")*)" deve (?:ser|estar) marcado$/]]></target>
         </trans-unit>
         <trans-unit id="the-checkbox-should-not-be-checked">
             <source><![CDATA[/^the "(?P<checkbox>(?:[^"]|\\")*)" checkbox should not be checked$/]]></source>
-            <target><![CDATA[/^o checkbox "(?P<checkbox>(?:[^"]|\\")*)" não deve ser marcado$/]]></target>
+            <target><![CDATA[/^o checkbox "(?P<checkbox>(?:[^"]|\\")*)" não deve (?:ser|estar) marcado$/]]></target>
         </trans-unit>
         <trans-unit id="i-should-be-on-page">
             <source><![CDATA[/^(?:|I )should be on "(?P<page>[^"]+)"$/]]></source>
-            <target><![CDATA[/^(?:|Eu )estar em "(?P<page>[^"]+)"$/]]></target>
+            <target><![CDATA[/^(?:|Eu )devo estar em "(?P<page>[^"]+)"$/]]></target>
         </trans-unit>
         <trans-unit id="the-url-should-match">
             <source><![CDATA[/^the (?i)url(?-i) should match (?P<pattern>"(?:[^"]|\\")*")$/]]></source>
@@ -148,7 +148,7 @@
         </trans-unit>
         <trans-unit id="the-response-status-code-should-not-be">
             <source><![CDATA[/^the response status code should not be (?P<code>\d+)$/]]></source>
-            <target><![CDATA[/^o código do statis da resposta não deve ser (?P<code>\d+)$/]]></target>
+            <target><![CDATA[/^o código de status da resposta não deve ser (?P<code>\d+)$/]]></target>
         </trans-unit>
         <trans-unit id="print-last-response">
             <source><![CDATA[/^print last response$/]]></source>

@@ -1,9 +1,14 @@
 Mink
 ====
+[![Latest Stable Version](https://poser.pugx.org/behat/mink/v/stable.svg)](https://packagist.org/packages/behat/mink)
+[![Latest Unstable Version](https://poser.pugx.org/behat/mink/v/unstable.svg)](https://packagist.org/packages/behat/mink)
+[![Total Downloads](https://poser.pugx.org/behat/mink/downloads.svg)](https://packagist.org/packages/behat/mink)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/minkphp/Mink/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/minkphp/Mink/?branch=master)
+[![Code Coverage](https://scrutinizer-ci.com/g/minkphp/Mink/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/minkphp/Mink/)
+[![Build Status](https://travis-ci.org/minkphp/Mink.svg?branch=master)](https://travis-ci.org/minkphp/Mink)
+[![SensioLabsInsight](https://insight.sensiolabs.com/projects/5bb8fab0-978f-428a-ae23-44ee4e129fbc/mini.png)](https://insight.sensiolabs.com/projects/5bb8fab0-978f-428a-ae23-44ee4e129fbc)
+[![License](https://poser.pugx.org/behat/mink/license.svg)](https://packagist.org/packages/behat/mink)
 
-- [stable (master)](https://github.com/Behat/Mink) ([![Master Build
-Status](https://secure.travis-ci.org/Behat/Mink.png?branch=master)](http://travis-ci.org/Behat/Mink)) - staging branch. Last stable version.
-- [development (develop)](https://github.com/Behat/Mink/tree/develop) ([![Develop Build Status](https://secure.travis-ci.org/Behat/Mink.png?branch=develop)](http://travis-ci.org/Behat/Mink)) - development branch. Development happens here and you should send your PRs here too.
 
 Useful Links
 ------------
@@ -37,7 +42,7 @@ $mink = new Mink(array(
 $mink->setDefaultSessionName('goutte2');
 
 // visit a page
-$mink->visit($startUrl);
+$mink->getSession()->visit($startUrl);
 
 // call to getSession() without argument will always return a default session if has one (goutte2 here)
 $mink->getSession()->getPage()->findLink('Downloads')->click();
@@ -56,12 +61,14 @@ Install Dependencies
 --------------------
 
 ``` bash
-$> curl http://getcomposer.org/installer | php
+$> curl -sS https://getcomposer.org/installer | php
 $> php composer.phar install
 ```
 
 Contributors
 ------------
 
-* Konstantin Kudryashov [everzet](http://github.com/everzet) [lead developer]
-* Other [awesome developers](https://github.com/Behat/Mink/graphs/contributors)
+* Konstantin Kudryashov [everzet](https://github.com/everzet) [lead developer]
+* Christophe Coevoet [stof](https://github.com/stof) [lead developer]
+* Alexander Obuhovich [aik099](https://github.com/aik099) [lead developer]
+* Other [awesome developers](https://github.com/minkphp/Mink/graphs/contributors)

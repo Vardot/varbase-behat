@@ -1,16 +1,16 @@
 <?php
 
-namespace Behat\Gherkin\Cache;
-
-use Behat\Gherkin\Node\FeatureNode;
-
 /*
 * This file is part of the Behat Gherkin.
-* (c) 2013 Konstantin Kudryashov <ever.zet@gmail.com>
+* (c) Konstantin Kudryashov <ever.zet@gmail.com>
 *
 * For the full copyright and license information, please view the LICENSE
 * file that was distributed with this source code.
 */
+
+namespace Behat\Gherkin\Cache;
+
+use Behat\Gherkin\Node\FeatureNode;
 
 /**
  * Memory cache.
@@ -49,7 +49,7 @@ class MemoryCache implements CacheInterface
      */
     public function read($path)
     {
-        return unserialize($this->features[$path]);
+        return $this->features[$path];
     }
 
     /**
@@ -60,7 +60,7 @@ class MemoryCache implements CacheInterface
      */
     public function write($path, FeatureNode $feature)
     {
-        $this->features[$path]   = serialize($feature);
+        $this->features[$path]   = $feature;
         $this->timestamps[$path] = time();
     }
 }

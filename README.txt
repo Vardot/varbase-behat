@@ -7,7 +7,7 @@
 [3] - Edit the file behat.local.yml and change:
 
   drupal_root: '/var/www/html/varbase_behat/varbase-7-x-3-0-alpha1/docroot'
-  base_url:  'http://127.0.0.1/varbase_behat/varbase-7-x-3-0-alpha1/docroot'
+  base_url:  'http://localhost/varbase_behat/varbase-7-x-3-0-alpha1/docroot'
   drupal_users:
     webmaster:
        'ThePasswored'
@@ -29,17 +29,5 @@ $ bin/behat -di
 
 Example :
 ===============================================================================
-➜  behat git:(varbase-7-x-3-0-alpha1) ✗ bin/behat features/clear-cache.feature
-@api
-Feature: Clear cache
-  to Clear cache
-
-  Scenario: Clear cache                     # features/clear-cache.feature:5
-    Given the cache has been cleared        # FeatureContext::assertCacheClear()
-    When I am on the homepage               # FeatureContext::iAmOnHomepage()
-    Then I should get a "200" HTTP response # FeatureContext::assertHttpResponse()
-
-1 scenario (1 passed)
-3 steps (3 passed)
-0m27.546s
+$ bin/behat features/website-base-requirements_user-registration_only-admins-login_v1-0.feature
 ================================================================================

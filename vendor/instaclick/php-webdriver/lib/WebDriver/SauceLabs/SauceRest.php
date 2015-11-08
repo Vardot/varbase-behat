@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright 2012-2013 Anthon Pang. All Rights Reserved.
+ * Copyright 2012-2014 Anthon Pang. All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -59,7 +59,7 @@ class SauceRest
      * @param string $requestMethod HTTP request method
      * @param string $url           URL
      * @param mixed  $parameters    Parameters
-     * 
+     *
      * @return mixed
      *
      * @see http://saucelabs.com/docs/saucerest
@@ -69,13 +69,19 @@ class SauceRest
         $extraOptions = array(
             CURLOPT_HTTPAUTH => CURLAUTH_BASIC,
             CURLOPT_USERPWD => $this->userId . ':' . $this->accessKey,
+
+            // don't verify SSL certificates
+            CURLOPT_SSL_VERIFYPEER => false,
+            CURLOPT_SSL_VERIFYHOST => false,
+
+            CURLOPT_HTTPHEADER => Array ('Expect:'),
         );
 
         $url = 'https://saucelabs.com/rest/v1/' . $url;
 
-        list($rawResults, $info) = ServiceFactory::getInstance()->getService('service.curl')->execute($requestMethod, $url, $parameters, $extraOptions);
+        list($rawResult, $info) = ServiceFactory::getInstance()->getService('service.curl')->execute($requestMethod, $url, $parameters, $extraOptions);
 
-        return json_decode($rawResults, true);
+        return json_decode($rawResult, true);
     }
 
     /**
@@ -221,6 +227,18 @@ class SauceRest
     }
 
     /**
+     * Delete job: /rest/v1/:userId/jobs/:jobId (DELETE)
+     *
+     * @param string $jobId
+     *
+     * @return array
+     */
+    public function deleteJob($jobId)
+    {
+        return $this->execute('DELETE', $this->userId . '/jobs/' . $jobId);
+    }
+
+    /**
      * Get running tunnels for a given user: /rest/v1/:userId/tunnels (GET)
      *
      * @return array
@@ -267,10 +285,16 @@ class SauceRest
     /**
      * Get currently supported browsers: /rest/v1/info/browsers (GET)
      *
+     * @param string $termination Optional termination (one of "all", "selenium-rc", or "webdriver')
+     *
      * @return array
      */
-    public function getBrowsers()
+    public function getBrowsers($termination = false)
     {
+        if ($termination) {
+            return $this->execute('GET', 'info/browsers/' . $termination);
+        }
+
         return $this->execute('GET', 'info/browsers');
     }
 
