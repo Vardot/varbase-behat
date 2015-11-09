@@ -1,23 +1,11 @@
 {
   "require": {
     "behat/behat": "3.*@stable",
-    "behat/mink": "^1.7",
-    "behat/mink-zombie-driver": "^1.3",
-    "behat/mink-extension": "@stable",
-    "behat/mink-goutte-driver": "@stable",
-    "behat/mink-selenium2-driver": "*",
-    "guzzlehttp/guzzle" : "^6.0@dev",
-    "drupal/drupal-extension": "~3.0"
-  },
-  "autoload" : {
-    "psr-0" : {
-        "" : "src/",
-        "Context" : "features/"
-    }
+    "drupal/drupal-extension": "3.*@stable",
+    "behat/mink-zombie-driver": "@stable",
+    "phpunit/phpunit": "3.*@stable"
   },
   "config": {
     "bin-dir": "bin/"
   }
-
-
 }

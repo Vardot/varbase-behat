@@ -1,4 +1,6 @@
 default:
+  autoload:
+        '': %paths.base%/features/bootstrap
   suites:
     default:
       contexts:
@@ -13,7 +15,7 @@ default:
     Behat\MinkExtension:
       goutte: ~
       zombie: ~
-      base_url: http://localhost/varbase_behat/varbase-7-0-x-3-0-alpha1/docroot
+      base_url: 'http://localhost/varbase_behat/varbase-7-0-x-3-0-alpha1/docroot'
       javascript_session: zombie
     Drupal\DrupalExtension:
       blackbox: ~
@@ -47,7 +49,7 @@ drupal7:
         tags: "@d7"
   extensions:
     Behat\MinkExtension:
-      base_url: http://localhost/varbase_behat/varbase-7-0-x-3-0-alpha1/docroot
+      base_url: 'http://localhost/varbase_behat/varbase-7-0-x-3-0-alpha1/docroot'
     Drupal\DrupalExtension:
       api_driver: "drupal"
       drupal:
@@ -71,7 +73,7 @@ drush:
         tags: "@drushTest"
   extensions:
     Behat\MinkExtension:
-      base_url: http://localhost/varbase_behat/varbase-7-0-x-3-0-alpha1/docroot
+      base_url: 'http://localhost/varbase_behat/varbase-7-0-x-3-0-alpha1/docroot'
     Drupal\DrupalExtension:
       api_driver: "drush"
       drush_driver: "drush"

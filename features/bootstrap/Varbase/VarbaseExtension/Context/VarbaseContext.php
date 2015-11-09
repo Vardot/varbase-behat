@@ -2,15 +2,19 @@
 
 namespace Varbase\VarbaseExtension\Context;
 
-use Drupal\DrupalExtension\Context\DrupalContext;
+use Behat\Behat\Context\Context;
 use Behat\Behat\Context\SnippetAcceptingContext;
 use Behat\Gherkin\Node\PyStringNode;
 use Behat\Gherkin\Node\TableNode;
+use Drupal\DrupalExtension\Context\RawDrupalContext;
+use Drupal\DrupalExtension\Context\DrupalContext;
+
+
 
 /**
  * Defines application features from the specific context.
  */
-class VarbaseContext extends DrupalContext {
+class VarbaseContext implements Context, SnippetAcceptingContext {
 
   /**
    * Initializes context.
@@ -20,6 +24,7 @@ class VarbaseContext extends DrupalContext {
    * context constructor through behat.yml.
    */
   public function __construct() {
+
   }
 
 }
