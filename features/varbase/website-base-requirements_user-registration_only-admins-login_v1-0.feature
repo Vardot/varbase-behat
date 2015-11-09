@@ -2,6 +2,7 @@ Feature: Website Base Requirements - User Registration - Only admins login
   As an anonymous user
   I will not be able to register as a user in the website
   So that I will need a site admin or super admin to add me to the website
+
   Background:
     Given I am an anonymous user
 
