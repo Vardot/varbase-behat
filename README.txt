@@ -6,11 +6,8 @@
 
 [3] - Edit the file behat.local.yml and change:
 
-  drupal_root: '/var/www/html/varbase_behat/varbase-7-x-3-0-alpha1/docroot'
   base_url:  'http://localhost/varbase_behat/varbase-7-x-3-0-alpha1/docroot'
-  drupal_users:
-    webmaster:
-       'ThePasswored'
+
 
 [4] - Go to /var/www/html/varbase_behat/varbase-7-x-3-0-alpha1/behat/
 
@@ -30,4 +27,27 @@ $ bin/behat -di
 Example :
 ===============================================================================
 $ bin/behat features/website-base-requirements_user-registration_only-admins-login_v1-0.feature
+Feature: Website Base Requirements - User Registration - Only admins login
+  As an anonymous user
+  I will not be able to register as a user in the website
+  So that I will need a site admin or super admin to add me to the website
+
+  Background:                    # features/website-base-requirements_user-registration_only-admins-login_v1-0.feature:5
+    Given I am an anonymous user # Drupal\DrupalExtension\Context\DrupalContext::assertAnonymousUser()
+
+  Scenario: Check if a not logged in user can create an account # features/website-base-requirements_user-registration_only-admins-login_v1-0.feature:8
+    When I go to "/user"                                        # Drupal\DrupalExtension\Context\MinkContext::visit()
+    Then I should not see "Create new account"                  # Drupal\DrupalExtension\Context\MinkContext::assertPageNotContainsText()
+
+  Scenario: Check if a not logged in user can register an account # features/website-base-requirements_user-registration_only-admins-login_v1-0.feature:12
+    When I go to "/user/register"                                 # Drupal\DrupalExtension\Context\MinkContext::visit()
+    Then I should see "Access denied"                             # Drupal\DrupalExtension\Context\MinkContext::assertPageContainsText()
+
+  Scenario: Check if a not logged in user can access administration pages # features/website-base-requirements_user-registration_only-admins-login_v1-0.feature:16
+    When I go to "/admin"                                                 # Drupal\DrupalExtension\Context\MinkContext::visit()
+    Then I should see "Access denied"                                     # Drupal\DrupalExtension\Context\MinkContext::assertPageContainsText()
+
+3 scenarios (3 passed)
+9 steps (9 passed)
+0m0.55s (15.68Mb)
 ================================================================================

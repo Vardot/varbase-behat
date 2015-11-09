@@ -1,27 +1,20 @@
 default:
-  autoload:
-        '': %paths.base%/features/bootstrap
   suites:
     default:
       contexts:
+        - VarbaseContext
         - Drupal\DrupalExtension\Context\DrupalContext
         - Drupal\DrupalExtension\Context\MessageContext
         - Drupal\DrupalExtension\Context\MinkContext
         - Drupal\DrupalExtension\Context\MarkupContext
-        - Varbase\VarbaseExtension\Context\VarbaseContext
-      filters:
-        tags: "@blackbox"
   extensions:
     Behat\MinkExtension:
       goutte: ~
       zombie: ~
-      base_url: 'http://localhost/varbase_behat/varbase-7-0-x-3-0-alpha1/docroot'
+      base_url: http://localhost/varbase_behat/varbase-7-0-x-3-0-alpha1/docroot
       javascript_session: zombie
     Drupal\DrupalExtension:
       blackbox: ~
-      api_driver: "drupal"
-      drupal:
-        drupal_root: '/var/www/html/varbase_behat/varbase-7-0-x-3-0-alpha1/docroot'
       region_map:
         content: "#content"
         footer: "#footer"
@@ -33,52 +26,3 @@ default:
         error_message_selector: '.messages.error'
         success_message_selector: '.messages.status'
         warning_message_selector: '.messages.warning'
-
-# Separate profile for testing using the api driver. This assumes a
-# stock Drupal 7 install.
-drupal7:
-  suites:
-    default:
-      contexts:
-        - Drupal\DrupalExtension\Context\DrupalContext
-        - Drupal\DrupalExtension\Context\MessageContext
-        - Drupal\DrupalExtension\Context\MinkContext
-        - Drupal\DrupalExtension\Context\MarkupContext
-        - Varbase\VarbaseExtension\Context\VarbaseContext
-      filters:
-        tags: "@d7"
-  extensions:
-    Behat\MinkExtension:
-      base_url: 'http://localhost/varbase_behat/varbase-7-0-x-3-0-alpha1/docroot'
-    Drupal\DrupalExtension:
-      api_driver: "drupal"
-      drupal:
-        drupal_root: '/var/www/html/varbase_behat/varbase-7-0-x-3-0-alpha1/docroot'
-      region_map:
-        left sidebar: "#sidebar-first"
-        content: "#content"
-
-# Separate profile for testing using the Drush driver. Assumes a stock
-# Drupal 7 install.
-drush:
-  suites:
-    default:
-      contexts:
-        - Drupal\DrupalExtension\Context\DrupalContext
-        - Drupal\DrupalExtension\Context\MessageContext
-        - Drupal\DrupalExtension\Context\MinkContext
-        - Drupal\DrupalExtension\Context\MarkupContext
-        - Varbase\VarbaseExtension\Context\VarbaseContext
-      filters:
-        tags: "@drushTest"
-  extensions:
-    Behat\MinkExtension:
-      base_url: 'http://localhost/varbase_behat/varbase-7-0-x-3-0-alpha1/docroot'
-    Drupal\DrupalExtension:
-      api_driver: "drush"
-      drush_driver: "drush"
-      drush:
-        drupal_root: '/var/www/html/varbase_behat/varbase-7-0-x-3-0-alpha1/docroot'
-      region_map:
-        left sidebar: "#sidebar-first"
-        content: "#content"
