@@ -16,7 +16,8 @@ $ bin/behat
 
 [6] - Run this command with the .feature file to run the Gherkin Script in
       it to the installed site.
-$ bin/behat features/your-gherkin-feature.feature
+$ bin/behat features/varbase/your-gherkin-feature.feature
+$ bin/behat features/project-name/your-gherkin-feature.feature
 
 [7] - Run this command to print all available step definitions
 $ bin/behat -di
@@ -25,8 +26,8 @@ $ bin/behat -di
       - use -d 'needle' to find specific definitions.
 
 Example :
-===============================================================================
-$ bin/behat features/website-base-requirements_user-registration_only-admins-login_v1-0.feature
+================================================================================
+$ bin/behat features/varbase/website-base-requirements_user-registration_only-admins-login_v1-0.feature
 Feature: Website Base Requirements - User Registration - Only admins login
   As an anonymous user
   I will not be able to register as a user in the website
