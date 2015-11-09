@@ -39,6 +39,7 @@ drupal7:
     default:
       contexts:
         - Drupal\DrupalExtension\Context\DrupalContext
+        - Drupal\DrupalExtension\Context\MessageContext
         - Drupal\DrupalExtension\Context\MinkContext
         - Drupal\DrupalExtension\Context\MarkupContext
         - Varbase\VarbaseExtension\Context\VarbaseContext
@@ -62,7 +63,7 @@ drush:
     default:
       contexts:
         - Drupal\DrupalExtension\Context\DrupalContext
-        - Drupal\DrupalExtension\Context\DrushContext
+        - Drupal\DrupalExtension\Context\MessageContext
         - Drupal\DrupalExtension\Context\MinkContext
         - Drupal\DrupalExtension\Context\MarkupContext
         - Varbase\VarbaseExtension\Context\VarbaseContext
@@ -75,7 +76,7 @@ drush:
       api_driver: "drush"
       drush_driver: "drush"
       drush:
-        root: '/var/www/html/varbase_behat/varbase-7-0-x-3-0-alpha1/docroot'
+        drupal_root: '/var/www/html/varbase_behat/varbase-7-0-x-3-0-alpha1/docroot'
       region_map:
         left sidebar: "#sidebar-first"
         content: "#content"

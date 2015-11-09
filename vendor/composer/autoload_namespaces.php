@@ -13,9 +13,11 @@ return array(
     'Drupal\\Drupal' => array($vendorDir . '/drupal/drupal-extension/src'),
     'Drupal\\Driver' => array($vendorDir . '/drupal/drupal-driver/src'),
     'Drupal\\Component' => array($vendorDir . '/drupal/drupal-driver/src'),
+    'Context' => array($baseDir . '/features'),
     'Behat\\Transliterator' => array($vendorDir . '/behat/transliterator/src'),
     'Behat\\Testwork' => array($vendorDir . '/behat/behat/src'),
     'Behat\\MinkExtension' => array($vendorDir . '/behat/mink-extension/src'),
     'Behat\\Gherkin' => array($vendorDir . '/behat/gherkin/src'),
     'Behat\\Behat' => array($vendorDir . '/behat/behat/src'),
+    '' => array($baseDir . '/src'),
 );

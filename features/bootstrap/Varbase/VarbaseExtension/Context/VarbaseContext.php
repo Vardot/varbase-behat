@@ -2,7 +2,7 @@
 
 namespace Varbase\VarbaseExtension\Context;
 
-use Drupal\DrupalExtension\Context\RawDrupalContext;
+use Drupal\DrupalExtension\Context\DrupalContext;
 use Behat\Behat\Context\SnippetAcceptingContext;
 use Behat\Gherkin\Node\PyStringNode;
 use Behat\Gherkin\Node\TableNode;
@@ -10,7 +10,7 @@ use Behat\Gherkin\Node\TableNode;
 /**
  * Defines application features from the specific context.
  */
-class VarbaseContext extends RawDrupalContext implements SnippetAcceptingContext {
+class VarbaseContext extends DrupalContext {
 
   /**
    * Initializes context.
