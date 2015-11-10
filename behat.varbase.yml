@@ -15,8 +15,6 @@ default:
         - Drupal\DrupalExtension\Context\MessageContext
         - Drupal\DrupalExtension\Context\MinkContext
         - Drupal\DrupalExtension\Context\MarkupContext
-      filters:
-        tags: "@blackbox"
   extensions:
     Behat\MinkExtension:
       goutte: ~

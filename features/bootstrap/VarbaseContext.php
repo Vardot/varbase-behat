@@ -44,7 +44,7 @@ class VarbaseContext extends RawDrupalContext {
   /**
    * Authenticates a user with password from varbase configuration.
    *
-   * @Given /^I am a logged in with the "([^"]*)" user$/
+   * @Given /^I am a logged in user with the "([^"]*)" user$/
    */
   public function iAmloggedInUserWithTheUser($username) {
 
