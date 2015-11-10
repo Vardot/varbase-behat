@@ -4,7 +4,7 @@
 [2] - Clone this repo to a behat directory
 /var/www/html/varbase_behat/varbase-7-x-3-0-alpha2/behat
 
-[3] - Edit the file behat.local.yml and change:
+[3] - Edit the file behat.varbase.yml and change:
 
   base_url:  'http://localhost/varbase_behat/varbase-7-x-3-0-alpha2/docroot'
 
