@@ -3,7 +3,7 @@ Feature: User Management - Standard User Management - Login
   I want to be able to login to the site
   So that I will be able to view/add/edit/ or delete content in the site
 
-  Scenario: Check if the a vistor can login with a valid username and password
+  Scenario: Check if the a visitor can login with a valid username and password
     Given I am on "user/login"
      When I fill in "test_authenticated" for "Username"
       And I fill in "123123" for "Password"
