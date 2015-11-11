@@ -16,7 +16,7 @@ Feature: File & Media Management - Assets Management - Files and their usage lis
      Then I should see "Add file"
       And I should not see "Access denied"
 
-  Scenario: Check if we do have a file named "Flag Earth" , if not then upload the file dependently. then edit and delete the file.
+  Scenario: Check if we do have a file named "Flag Earth" , if not then upload the file dependently.
      When I go to "admin/content/file"
      Then I should see "Add file"
      When I fill in "Flag Earth" for "Name"
@@ -38,7 +38,7 @@ Feature: File & Media Management - Assets Management - Files and their usage lis
      Then I should see "Add file"
       And I should see the "Edit" in the "Flag Earth" row
 
-    Scenario: Check if we do have a file named "Flag Earth" , if not then upload the file dependently. then edit and delete the file.
+    Scenario: Check if content admins can edit files.
        When I go to "admin/content/file"
        Then I should see "Add file"
        When I fill in "Flag Earth" for "Name"
@@ -51,7 +51,7 @@ Feature: File & Media Management - Assets Management - Files and their usage lis
        Then I should see "Image Flag Earth after edit has been updated."
         And I should see "Edit" in the "Flag Earth after edit" row
 
-    Scenario: Check if we do have a file named "Flag Earth" , if not then upload the file dependently. then edit and delete the file.
+    Scenario: Check if content admins can delete files.
        When I go to "admin/content/file"
        Then I should see "Add file"
        When I fill in "Flag Earth after edit" for "Name"
