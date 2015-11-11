@@ -1,6 +1,6 @@
 {
   "name":         "Varbase Behat",
-  "description":  "Browser controller/emulator abstraction for PHP",
+  "description":  "Custom Behat set of Contexts, and Gherkin Features, which help in the automated testing of Varbase.",
   "keywords":     ["web", "testing", "browser", "varbase", "vardot"],
   "homepage":     "http://vardot.com",
   "license":      "MIT",
