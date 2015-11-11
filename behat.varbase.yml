@@ -49,7 +49,7 @@ drush:
                 test_editor: { email: 'editor.test@vardot.com', password: '123123' }
                 test_content_admin: { email: 'content.admin.test@vardot.com', password: '123123' }
                 test_site_admin: { email: 'site.admin.test@vardot.com', password: '123123' }
-                test_super_admin: { email: 'test.super.admin.test@vardot.com', password: '123123' }
+                test_super_admin: { email: 'super.admin.test@vardot.com', password: '123123' }
         - Drupal\DrupalExtension\Context\DrupalContext
         - Drupal\DrupalExtension\Context\DrushContext
         - Drupal\DrupalExtension\Context\MinkContext
