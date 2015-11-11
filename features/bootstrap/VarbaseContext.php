@@ -66,7 +66,7 @@ class VarbaseContext extends RawDrupalContext {
   }
 
   public function cleanUsers() {
-    $this->logout();
+
   }
 
 }
