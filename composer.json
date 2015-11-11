@@ -1,4 +1,17 @@
 {
+  "name":         "Varbase Behat",
+  "description":  "Browser controller/emulator abstraction for PHP",
+  "keywords":     ["web", "testing", "browser", "varbase", "vardot"],
+  "homepage":     "http://vardot.com",
+  "license":      "MIT",
+
+  "authors": [
+      {
+          "name":      "Rajab Natshah",
+          "email":     "r.natshah@vardot.com",
+          "homepage":  "http://vardot.com"
+      }
+  ],
   "require": {
     "behat/behat": "3.*@stable",
     "drupal/drupal-extension": "3.*@stable",
