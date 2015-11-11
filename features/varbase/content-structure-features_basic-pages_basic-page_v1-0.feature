@@ -5,7 +5,7 @@ So that the "Basic page" will show up in the structured menu under it's parent p
 
 # Check if users with the ( "authenticated user", "Editor", "Content Admin", "Site Admin", or "Super Admin" ) role can add [Basic page]
   Scenario: Check if [authenticated user]s can add content of "Basic page" type.
-    Given I am a logged in user with the "test_editor" user
+    Given I am a logged in user with the "test_authenticated" user
      When I go to "/node/add"
      Then I should not see "Basic page"
 
