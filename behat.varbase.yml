@@ -19,6 +19,7 @@ default:
     Behat\MinkExtension:
       goutte: ~
       zombie: ~
+      selenium2: ~
       base_url: http://localhost/varbase_behat/varbase-7-0-x-3-0-alpha2/docroot
       javascript_session: zombie
     Drupal\DrupalExtension:
@@ -58,6 +59,9 @@ drush:
         tags: "@drushTest"
   extensions:
     Behat\MinkExtension:
+      goutte: ~
+      zombie: ~
+      selenium2: ~
       base_url: http://localhost/varbase_behat/varbase-7-0-x-3-0-alpha2/docroot
     Drupal\DrupalExtension:
       api_driver: "drush"
