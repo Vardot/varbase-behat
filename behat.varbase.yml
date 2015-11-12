@@ -68,6 +68,7 @@ drush:
       drush_driver: "drush"
       drush:
         root: "/var/www/html/varbase_behat/varbase-7-0-x-3-0-alpha2/docroot"
+        alias: self
       region_map:
         left sidebar: "#sidebar-first"
         content: "#content"
