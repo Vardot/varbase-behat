@@ -19,7 +19,10 @@ default:
     Behat\MinkExtension:
       goutte: ~
       zombie: ~
-      selenium2: ~
+      selenium2:
+        wd_host: 127.0.0.1:4445/wd/hub
+        capabilities:
+          browser: firefox
       base_url: http://localhost/varbase_behat/varbase-7-0-x-3-0-alpha2/docroot
       javascript_session: zombie
     Drupal\DrupalExtension:
@@ -61,7 +64,10 @@ drush:
     Behat\MinkExtension:
       goutte: ~
       zombie: ~
-      selenium2: ~
+      selenium2:
+        wd_host: 127.0.0.1:4445/wd/hub
+        capabilities:
+          browser: firefox
       base_url: http://localhost/varbase_behat/varbase-7-0-x-3-0-alpha2/docroot
     Drupal\DrupalExtension:
       api_driver: "drush"

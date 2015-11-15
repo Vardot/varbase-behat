@@ -25,6 +25,9 @@ $ bin/behat -di
       - use -di to show definitions with extended info.
       - use -d 'needle' to find specific definitions.
 
+[8] - Run the selenium2 at the port you want .. for Example port 4445
+$ java -jar selenium-server-standalone-2.48.2.jar -port 4445
+
 Example :
 ================================================================================
 $ bin/behat features/varbase/website-base-requirements_user-registration_only-admins-login_v1-0.feature
