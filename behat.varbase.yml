@@ -24,7 +24,7 @@ default:
         capabilities:
           browser: firefox
       base_url: http://localhost/varbase_behat/varbase-7-0-x-3-0-alpha2/docroot
-      javascript_session: zombie
+      javascript_session: selenium2
     Drupal\DrupalExtension:
       blackbox: ~
       api_driver: "drupal"
@@ -69,6 +69,7 @@ drush:
         capabilities:
           browser: firefox
       base_url: http://localhost/varbase_behat/varbase-7-0-x-3-0-alpha2/docroot
+      javascript_session: selenium2
     Drupal\DrupalExtension:
       api_driver: "drush"
       drush_driver: "drush"

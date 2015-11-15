@@ -65,6 +65,66 @@ class VarbaseContext extends RawDrupalContext {
     $submit->click();
   }
 
+  //  To wait for "secounds" of time.
+  //  Example 1: I wait for "1 second"
+  //  Example 2: I wait for "10 secounds"
+  /**
+   * @When /^I wait for "([^"]*)"$/
+   */
+  public function iWaitFor($time) {
+    $this->getSession()->wait($time * 1000);
+  }
+
+  // Media Browser functions
+  /**
+   * @When /^I wait "([^"]*)" for the media browser to open$/
+   */
+  public function iWaitForTheMediaBrowserToOpen($time) {
+    $this->getSession()->wait($time * 1000);
+    if (!$elem = $this->getSession()->getPage()->find('css', '.ui-dialog.media-wrapper') || !$this->getSession()->getPage()->find('css', '.ui-dialog.media-wrapper .media-browser-panes')) {
+      throw new Exception('The media browser failed to open.');
+    }
+  }
+
+  /**
+   * @When /^I click on "([^"]*)" button in the media browser$/
+   */
+  public function iClickOnButtonInTheMediaBrowser($text) {
+    $element = $this->getSession()->getPage()->find('xpath', "//*[contains(@class, 'media-browser-button') and text() = '{$text}']");
+    $element->click();
+  }
+
+  // Rich text editor Functions CKEditor.
+
+  /**
+   * @When /^I fill in the rich text editor field "([^"]*)" with "([^"]*)"$/
+   */
+  public function iFillInTheRichTextEditorField($locator, $value) {
+    $el = $this->getSession()->getPage()->findField($locator);
+    $fieldId = $el->getAttribute('id');
+
+    if (empty($fieldId)) {
+      throw new Exception('Could not find an id for the rich text editor field : ' . $locator);
+    }
+
+    $this->getSession()->executeScript("CKEDITOR.instances[\"$fieldId\"].setData(\"$value\");");
+  }
+
+  /**
+   * @When /^I click on "([^"]*)" command button in the rich text editor field "([^"]*)"$/
+   */
+  public function iClickOnCommandButtonInTheRichTextEditorField($selectorCommand, $locator) {
+
+    $el = $this->getSession()->getPage()->findField($locator);
+    $fieldId = $el->getAttribute('id');
+
+    if (empty($fieldId)) {
+      throw new Exception('Could not find an id for the rich text editor field : ' . $locator);
+    }
+
+    $this->getSession()->executeScript("CKEDITOR.instances[\"$fieldId\"].execCommand( '$selectorCommand' );");
+  }
+
   public function cleanUsers() {
 
   }
