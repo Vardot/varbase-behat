@@ -42,7 +42,11 @@ class VarbaseContext extends RawDrupalContext {
   }
 
   /**
-   * Authenticates a user with password from varbase configuration.
+   * #varbase : To authenticat a user with password from varbase configuration.
+   *            If you want to see the list of users or add yours you can go and
+   *            edit the behat.varbase.yml file under the varbase_users list.
+   *
+   * Example: I am a logged in user with the username "test_content_admin"
    *
    * @Given /^I am a logged in user with the "([^"]*)" user$/
    */
@@ -65,10 +69,45 @@ class VarbaseContext extends RawDrupalContext {
     $submit->click();
   }
 
-  //  To wait for "secounds" of time.
-  //  Example 1: I wait for "1 second"
-  //  Example 2: I wait for "10 secounds"
   /**
+   * #varbase : To authenticat a user with a gavin username and password on the spot.
+   *
+   * Example: I am a logged in user with the username "testing" and password "testing user password"
+   *
+   * @Given /^I am a logged in user with the username "([^"]*)" and password "([^"]*)"$/
+   */
+  public function iAmLoggedInUserWithTheUsernameAndPassword($username, $password) {
+    // Logout if I am logged in.
+    if ($this->loggedIn()) {
+      $this->logout();
+    }
+
+    // Login with the
+    $element = $this->getSession()->getPage();
+    $this->getSession()->visit($this->locatePath('/user'));
+    $element->fillField('Username', $username);
+    $element->fillField('Password', $password);
+    $submit = $element->findButton('Log in');
+    $submit->click();
+  }
+
+  /**
+   * #varbase: To go directly to an external website.
+   *
+   * Example: When I go to "https://www.google.com" website
+   *
+   * @When /^I go to "([^"]*)" website$/
+   */
+  public function iGoToWebsite($domain) {
+    $this->getSession()->visit($domain);
+  }
+
+  /**
+   * #varbase: To wait for time before going to the next step
+   *
+   * Example 1: I wait for "1 second"
+   * Example 2: I wait for "10 secounds"
+   *
    * @When /^I wait for "([^"]*)"$/
    */
   public function iWaitFor($time) {
@@ -76,11 +115,11 @@ class VarbaseContext extends RawDrupalContext {
   }
 
   // Media Browser functions
+  // ===========================================================================
   /**
-   * @When /^I wait "([^"]*)" for the media browser to open$/
+   * @Then /^the media browser is open$/
    */
-  public function iWaitForTheMediaBrowserToOpen($time) {
-    $this->getSession()->wait($time * 1000);
+  public function theMediaBrowserIsOpen() {
     if (!$elem = $this->getSession()->getPage()->find('css', '.ui-dialog.media-wrapper') || !$this->getSession()->getPage()->find('css', '.ui-dialog.media-wrapper .media-browser-panes')) {
       throw new Exception('The media browser failed to open.');
     }
@@ -94,11 +133,35 @@ class VarbaseContext extends RawDrupalContext {
     $element->click();
   }
 
+  /**
+   * @When /^I click on the "([^"]*)" tab in the media browser$/
+   */
+  public function iClickOnTheTabInTheMediaBrowser($xpath) {
+    $element = $this->getSession()->getPage()->find(
+     'xpath',
+     $this->getSession()->getSelectorsHandler()->selectorToXpath('xpath', $xpath)
+    );
+
+    if (null === $element) {
+      throw new \InvalidArgumentException(sprintf('The media browser dose not have this tab "%s"', $xpath));
+    }
+
+    $element->click();
+  }
+  // ===========================================================================
+
+
   // Rich text editor Functions CKEditor.
+  // ===========================================================================
 
   /**
-   * @When /^I fill in the rich text editor field "([^"]*)" with "([^"]*)"$/
-   */
+  * #varbase : To fill in a rich text editor field  WYSIWYG with content
+  *            using the name of the field.
+  *
+  *  Example: When I fill in the rich text editor field "Body" with "Test Body text"
+  *
+  * @When /^I fill in the rich text editor field "([^"]*)" with "([^"]*)"$/
+  */
   public function iFillInTheRichTextEditorField($locator, $value) {
     $el = $this->getSession()->getPage()->findField($locator);
     $fieldId = $el->getAttribute('id');
@@ -111,6 +174,10 @@ class VarbaseContext extends RawDrupalContext {
   }
 
   /**
+   * #varbase : To click a command button in the rich text editor
+   *  Example 1: When I click on "bold" command button in the rich text editor field "Body"
+   *  Exmaple 2: When I click on "media" command button in the rich text editor field "Body"
+   *
    * @When /^I click on "([^"]*)" command button in the rich text editor field "([^"]*)"$/
    */
   public function iClickOnCommandButtonInTheRichTextEditorField($selectorCommand, $locator) {
@@ -124,6 +191,62 @@ class VarbaseContext extends RawDrupalContext {
 
     $this->getSession()->executeScript("CKEDITOR.instances[\"$fieldId\"].execCommand( '$selectorCommand' );");
   }
+  // ===========================================================================
+
+  // Mouse Functions.
+  // ===========================================================================
+   /**
+   * #varbase: To move the mouse over an element.
+   *
+   * Example: When I move the mouse over "header#navbar #main_menu ul.nav li a"
+   *
+   * @When /^I move the mouse over the "([^"]*)"$/
+   */
+  public function iMouseOver($selector) {
+    $elem = $this->getSession()->getPage()->find('css', $selector);
+    if ($elem) {
+      $elem->mouseOver();
+    }
+    else {
+      throw new Exception("No element matching \"$selector\" is found.");
+    }
+  }
+
+  /**
+  * #varbase: To double click on an element.
+  *
+  * Example: When I move the mouse over "#select .option-switch"
+  *
+  * @When /^I double click "([^"]*)"$/
+  */
+  public function iDoubleClick($selector) {
+    $elem = $this->getSession()->getPage()->find('css', $selector);
+    if ($elem) {
+     $elem->doubleClick();
+    }
+    else {
+     throw new Exception("No element matching \"$selector\" is found.");
+    }
+  }
+
+  /**
+  * #varbase: To right click on an element.
+  *
+  * Example: When I move the mouse over "#right-click-to-configure a"
+  *
+  * @When /^I right click "([^"]*)"$/
+  */
+  public function iRightClick($selector) {
+    $elem = $this->getSession()->getPage()->find('css', $selector);
+    if ($elem) {
+      $elem->rightClick();
+    }
+    else {
+      throw new Exception("No element matching \"$selector\" is found.");
+    }
+  }
+  // ===========================================================================
+
 
   public function cleanUsers() {
 
