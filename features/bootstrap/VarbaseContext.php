@@ -3,6 +3,7 @@
 use Drupal\DrupalExtension\Context\DrupalContext;
 use Drupal\DrupalExtension\Context\RawDrupalContext;
 use Drupal\Driver\DrupalDriver;
+use Behat\MinkExtension\Context;
 use Behat\Behat\Context\SnippetAcceptingContext;
 use Behat\Gherkin\Node\PyStringNode;
 use Behat\Gherkin\Node\TableNode;
@@ -126,28 +127,248 @@ class VarbaseContext extends RawDrupalContext {
   }
 
   /**
-   * @When /^I click on "([^"]*)" button in the media browser$/
+   * #varbase : To press a button in the filter form under the media browser.
+   *
+   * Example 1: When I press the "Apply" button under the media browser
+   * Example 2: When I press the "Submit" button under the media browser
+   *
+   * @When /^I press the "([^"]*)" button under the media browser$/
    */
-  public function iClickOnButtonInTheMediaBrowser($text) {
-    $element = $this->getSession()->getPage()->find('xpath', "//*[contains(@class, 'media-browser-button') and text() = '{$text}']");
-    $element->click();
+  public function iPressTheButtonUnderTheMediaBrowser($button) {
+    // Switch to the "mediaBrowser" iframe.
+    $this->getSession()->switchToIFrame('mediaBrowser');
+
+
+      try {
+        $this->getSession()->wait(1000, 'typeof(jQuery)=="undefined" || jQuery("#autocomplete").length === 0');
+      }
+      catch (UnsupportedDriverActionException $e) {
+
+      }
+
+    $this->getSession()->getPage()->pressButton($button);
+
+    // Switch back too the page from the "mediaBrowser" iframe.
+    $this->getSession()->switchToIFrame(null);
   }
 
   /**
-   * @When /^I click on the "([^"]*)" tab in the media browser$/
+   * #varbase : To click on a media browser
+   *
+   * Example: When I click "Submit" button under the media browser
+   *
+   * @When /^I click "([^"]*)" button under the media browser$/
    */
-  public function iClickOnTheTabInTheMediaBrowser($xpath) {
-    $element = $this->getSession()->getPage()->find(
-     'xpath',
-     $this->getSession()->getSelectorsHandler()->selectorToXpath('xpath', $xpath)
-    );
+  public function iClickButtonUnderTheMediaBrowser($text) {
+    // Switch to the "mediaBrowser" iframe.
+    $this->getSession()->switchToIFrame('mediaBrowser');
 
-    if (null === $element) {
-      throw new \InvalidArgumentException(sprintf('The media browser dose not have this tab "%s"', $xpath));
+    // Find the Tab by txt
+    $element = $this->getSession()->getPage()->find('xpath', "//*[contains(@class, 'button') and text() = '{$text}']");
+
+    if (empty($element)) {
+      throw new Exception('The media browser dose not have [ ' . $text . ' ] button.');
     }
 
     $element->click();
+
+    // Switch back too the page from the "mediaBrowser" iframe.
+    $this->getSession()->switchToIFrame(null);
   }
+
+  /**
+   * #varbase : To click on a media browser style selecter
+   *
+   * Example: When I click "Submit" button under the media browser style selecter
+   *
+   * @When /^I click "([^"]*)" button under the media browser style selecter$/
+   */
+  public function iClickButtonUnderTheMediaBrowserStyleSelecter($text) {
+    // Switch to the "mediaStyleSelector" iframe.
+    $this->getSession()->switchToIFrame('mediaStyleSelector');
+
+    // Find the Tab by txt
+    $element = $this->getSession()->getPage()->find('xpath', "//*[contains(@class, 'button') and text() = '{$text}']");
+
+    if (empty($element)) {
+      throw new Exception('The media browser dose not have [ ' . $text . ' ] button.');
+    }
+
+    $element->click();
+
+    // Switch back too the page from the "mediaBrowser" iframe.
+    $this->getSession()->switchToIFrame(null);
+  }
+
+  /**
+   * #varbase : To click on a media browser tab.
+   *
+   * Example 1: When I click on the "Library" tab under the media browser
+   * Example 2: When I click on the "My files" tab under the media browser
+   *
+   * @When /^I click on the "([^"]*)" tab under the media browser$/
+   */
+  public function iClickOnTheTabUnderTheMediaBrowser($text) {
+    // Switch to the "mediaBrowser" iframe.
+    $this->getSession()->switchToIFrame('mediaBrowser');
+
+    // Find the Tab by txt
+    $element = $this->getSession()->getPage()->find('xpath', "//*[contains(@class, 'ui-tabs-anchor') and text() = '{$text}']");
+
+    if (empty($element)) {
+      throw new Exception('The media browser dose not have [ ' . $text . ' ] tab.');
+    }
+
+    $element->click();
+
+    // Switch back too the page from the "mediaBrowser" iframe.
+    $this->getSession()->switchToIFrame(null);
+  }
+
+  /**
+   * #varbase : To click on a media browser File.
+   *
+   * Example 1: When I click on the "Flag Earth" file under the media browser
+   *
+   * @When /^I select the "([^"]*)" file under the media browser$/
+   */
+  public function iSelectTheFileUnderTheMediaBrowser($text) {
+    // Switch to the "mediaBrowser" iframe.
+    $this->getSession()->switchToIFrame('mediaBrowser');
+
+    // Find the file by text.
+    $element = $this->getSession()->getPage()->find('xpath', "//div[contains(@class, 'media-item') and contains(@title, '{$text}')]");
+
+    if (empty($element)) {
+      throw new Exception('The media browser dose not have [ ' . $text . ' ] file.');
+    }
+
+    $element->click();
+
+    // Switch back too the page from the "mediaBrowser" iframe.
+    $this->getSession()->switchToIFrame(null);
+  }
+
+  /**
+  * #varbase : To fill in a form field with id|name|title|alt|value
+  *            under the media browser.
+  *
+  * Example: I fill in "flag earth" for "File name" under the media browser
+  *
+  * @When /^(?:|I )fill in "(?P<field>(?:[^"]|\\")*)" with "(?P<value>(?:[^"]|\\")*)" under the media browser$/
+  * @When /^(?:|I )fill in "(?P<field>(?:[^"]|\\")*)" with: under the media browser$/
+  * @When /^(?:|I )fill in "(?P<value>(?:[^"]|\\")*)" for "(?P<field>(?:[^"]|\\")*)" under the media browser$/
+  */
+  public function iFillInFieldUnderTheMediaBrowser($field, $value) {
+    // Switch to the "mediaBrowser" iframe.
+    $this->getSession()->switchToIFrame('mediaBrowser');
+
+    $field = str_replace('\\"', '"', $field);
+    $value = str_replace('\\"', '"', $value);
+    $this->getSession()->getPage()->fillField($field, $value);
+
+    // Switch back too the page from the "mediaBrowser" iframe.
+    $this->getSession()->switchToIFrame(null);
+  }
+
+  /**
+  * #varbase : To fill in a form field with id|name|title|alt|value
+  *            under the media browser style selecter.
+  *
+  * Example: I fill in "flag earth" for "File name" under the media browser style selecter
+  *
+  * @When /^(?:|I )fill in "(?P<field>(?:[^"]|\\")*)" with "(?P<value>(?:[^"]|\\")*)" under the media browser style selecter$/
+  * @When /^(?:|I )fill in "(?P<field>(?:[^"]|\\")*)" with: under the media browser style selecter$/
+  * @When /^(?:|I )fill in "(?P<value>(?:[^"]|\\")*)" for "(?P<field>(?:[^"]|\\")*)" under the media browser style selecter$/
+  */
+  public function iFillInFieldUnderTheMediaBrowserStyleSelecter($field, $value) {
+    // Switch to the "mediaStyleSelector" iframe.
+    $this->getSession()->switchToIFrame('mediaStyleSelector');
+
+    $field = str_replace('\\"', '"', $field);
+    $value = str_replace('\\"', '"', $value);
+    $this->getSession()->getPage()->fillField($field, $value);
+
+    // Switch back too the page from the "mediaBrowser" iframe.
+    $this->getSession()->switchToIFrame(null);
+  }
+
+  /**
+   * @Then /^I should see "([^"]*)" under the media browser$/
+   */
+  public function iShouldSeeTextUnderTheMediaBrowser($text) {
+    // Switch to the "mediaBrowser" iframe.
+    $this->getSession()->switchToIFrame('mediaBrowser');
+
+    $actual = $this->getSession()->getPage()->getText();
+    $actual = preg_replace('/\s+/u', ' ', $actual);
+    $regex = '/'.preg_quote($text, '/').'/ui';
+
+    if (!preg_match($regex, $actual)) {
+      throw new Exception(sprintf('The text "%s" was not found anywhere in the text of the current page.', $text));
+    }
+
+    // Switch back too the page from the "mediaBrowser" iframe.
+    $this->getSession()->switchToIFrame(null);
+  }
+
+  /**
+   * @Then /^I should see "([^"]*)" under the media browser style selecter$/
+   */
+  public function iShouldSeeTextUnderTheMediaBrowserStyleSelecter($text) {
+    // Switch to the "mediaStyleSelector" iframe.
+    $this->getSession()->switchToIFrame('mediaStyleSelector');
+
+    $actual = $this->getSession()->getPage()->getText();
+    $actual = preg_replace('/\s+/u', ' ', $actual);
+    $regex = '/'.preg_quote($text, '/').'/ui';
+
+    if (!preg_match($regex, $actual)) {
+      throw new Exception(sprintf('The text "%s" was not found anywhere in the text of the current page.', $text));
+    }
+
+    // Switch back too the page from the "mediaBrowser" iframe.
+    $this->getSession()->switchToIFrame(null);
+  }
+
+  /**
+   * @Then /^I should not see "([^"]*)" under the media browser$/
+   */
+  public function iShouldNotSeeTextUnderTheMediaBrowser($text) {
+    // Switch to the "mediaBrowser" iframe.
+    $this->getSession()->switchToIFrame('mediaBrowser');
+
+    $actual = $this->getSession()->getPage()->getText();
+    $actual = preg_replace('/\s+/u', ' ', $actual);
+    $regex = '/'.preg_quote($text, '/').'/ui';
+
+    if (preg_match($regex, $actual)) {
+      throw new Exception(sprintf('The text "%s" was not found anywhere in the text of the current page.', $text));
+    }
+
+    // Switch back too the page from the "mediaBrowser" iframe.
+    $this->getSession()->switchToIFrame(null);
+  }
+
+  /**
+   * @Then /^I should not see "([^"]*)" under the media browser style selecter$/
+   */
+  public function iShouldNotSeeTextUnderTheMediaBrowserStyleSelecter($text) {
+    // Switch to the "mediaStyleSelector" iframe.
+    $this->getSession()->switchToIFrame('mediaStyleSelector');
+
+    $actual = $this->getSession()->getPage()->getText();
+    $actual = preg_replace('/\s+/u', ' ', $actual);
+    $regex = '/'.preg_quote($text, '/').'/ui';
+
+    if (preg_match($regex, $actual)) {
+      throw new Exception(sprintf('The text "%s" was not found anywhere in the text of the current page.', $text));
+    }
+
+    // Switch back too the page from the "mediaBrowser" iframe.
+    $this->getSession()->switchToIFrame(null);
+  }
+
   // ===========================================================================
 
 
@@ -191,6 +412,45 @@ class VarbaseContext extends RawDrupalContext {
 
     $this->getSession()->executeScript("CKEDITOR.instances[\"$fieldId\"].execCommand( '$selectorCommand' );");
   }
+  // ===========================================================================
+
+
+
+  // Images Functions.
+  // ===========================================================================
+
+  /**
+   * #varbase : To Find an image with the title text attribute.
+   *
+   * Example 1: Then I should see image with the "Flag Earth" title text
+   *
+   * @Then /^I should see image with the "([^"]*)" title text$/
+   */
+  public function iShouldSeeImageWithTheTitleText($titleText) {
+    // Find an image with the title.
+    $element = $this->getSession()->getPage()->find('xpath', "//img[contains(@title, '{$titleText}')]");
+
+    if (empty($element)) {
+      throw new Exception('The page dose not have an image with the [ ' . $titleText . ' ] title.');
+    }
+  }
+
+  /**
+   * #varbase : To Find an image with the alt text attribute.
+   *
+   * Example 1: Then I should see image with the "Flag Earth" alt text
+   *
+   * @Then /^I should see image with the "([^"]*)" alt text$/
+   */
+  public function iShouldSeeImageWithTheAltText($altText) {
+    // Find an image with the title.
+    $element = $this->getSession()->getPage()->find('xpath', "//img[contains(@alt, '{$altText}')]");
+
+    if (empty($element)) {
+      throw new Exception('The page dose not have an image with the [ ' . $altText . ' ] title.');
+    }
+  }
+
   // ===========================================================================
 
   // Mouse Functions.
