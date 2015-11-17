@@ -62,33 +62,3 @@ Feature: File & Media Management - Assets Management - Ability to embed existing
       When I click "Submit" button under the media browser style selecter
        And I press the "Save" button
       Then I should see image with the "Embed Flag Earth" title text
-
-  # Clear data after thesting case.
-  # ----------------------------------------------------------------------------
-  Scenario: Delete the "Test Basic page to embed existing files" content after testing.
-    When I go to "admin/content"
-    Then I should see "Content"
-    When I fill in "Test Basic page to embed existing files" for "Title"
-     And I press the "Apply" button
-    Then I should see "Test Basic page to embed existing files"
-    When I click "Test Basic page to embed existing files"
-    Then I should see "Test Basic page to embed existing files"
-    When I click "delete" in the "Test Basic page to embed existing files" row
-    Then I should see "Are you sure you want to delete Test Basic page to embed existing files?"
-    When I press the "Delete" button
-    Then I should see "Basic page Test Basic page to embed existing files has been deleted"
-
-  Scenario: Delete the "Embed Flag Earth" file after we finish testing.
-    When I go to "admin/content/file"
-    Then I should see "Add file"
-    When I fill in "Embed Flag Earth" for "Name"
-     And I press the "Apply" button
-    Then I should see "Embed Flag Earth"
-    When I click "Delete"
-    Then I should see "Are you sure you want to delete the file Embed Flag Earth?"
-    When I press the "Delete" button
-    Then I should see "Image Embed Flag Earth has been deleted."
-    When I fill in "Embed Flag Earth" for "Name"
-     And I press the "Apply" button
-    Then I should not see "Embed Flag Earth"
-  # ----------------------------------------------------------------------------
