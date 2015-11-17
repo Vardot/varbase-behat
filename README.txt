@@ -1,7 +1,7 @@
 [1] - If you have a Varbase testing site at this location
 /var/www/html/varbase_behat/varbase-7-x-3-0-alpha2/docroot
 
-[2] - Clone this repo to a behat directory
+[2] - Download the latest behat package from "Downloads" section in the Bitbucket repo, and place it in the folder as below
 /var/www/html/varbase_behat/varbase-7-x-3-0-alpha2/behat
 
 [3] - Edit the file behat.varbase.yml and change:
