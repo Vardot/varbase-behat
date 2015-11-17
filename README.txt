@@ -13,8 +13,8 @@
 #############################################################
 IMPORTANT NOTE FOR WINDOWS USERS:
 If you are using Windows, run the following command:
-php composer.phar update
-
+Delete vendor and bin folders.
+Then run php composer.phar install
 #############################################################
 
 [5] - Run this command.
