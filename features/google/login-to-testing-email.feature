@@ -11,4 +11,4 @@ Feature: Check the inbox for emails using the testing@vardot.com email
       And I wait for "5 secounds"
       And I go to "https://mail.google.com/mail/u/0/#inbox"
      Then I should see "Inbox"
-      And I wait for "10 secounds"
+      And I wait for "10 seconds"
