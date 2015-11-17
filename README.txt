@@ -8,8 +8,14 @@
 
   base_url:  'http://localhost/varbase_behat/varbase-7-x-3-0-alpha2/docroot'
 
-
 [4] - Go to /var/www/html/varbase_behat/varbase-7-x-3-0-alpha2/behat/
+
+#############################################################
+IMPORTANT NOTE FOR WINDOWS USERS:
+If you are using Windows, run the following command:
+php composer.phar update
+
+#############################################################
 
 [5] - Run this command.
 $ bin/behat
