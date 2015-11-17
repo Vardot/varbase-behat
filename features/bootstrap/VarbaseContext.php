@@ -177,13 +177,13 @@ class VarbaseContext extends RawDrupalContext {
   }
 
   /**
-   * #varbase : To click on a media browser style selecter
+   * #varbase : To click on a media browser style selector
    *
-   * Example: When I click "Submit" button under the media browser style selecter
+   * Example: When I click "Submit" button under the media browser style selector
    *
-   * @When /^I click "([^"]*)" button under the media browser style selecter$/
+   * @When /^I click "([^"]*)" button under the media browser style selector$/
    */
-  public function iClickButtonUnderTheMediaBrowserStyleSelecter($text) {
+  public function iClickButtonUnderTheMediaBrowserStyleSelector($text) {
     // Switch to the "mediaStyleSelector" iframe.
     $this->getSession()->switchToIFrame('mediaStyleSelector');
 
@@ -273,15 +273,15 @@ class VarbaseContext extends RawDrupalContext {
 
   /**
   * #varbase : To fill in a form field with id|name|title|alt|value
-  *            under the media browser style selecter.
+  *            under the media browser style selector.
   *
-  * Example: I fill in "flag earth" for "File name" under the media browser style selecter
+  * Example: I fill in "flag earth" for "File name" under the media browser style selector
   *
-  * @When /^(?:|I )fill in "(?P<field>(?:[^"]|\\")*)" with "(?P<value>(?:[^"]|\\")*)" under the media browser style selecter$/
-  * @When /^(?:|I )fill in "(?P<field>(?:[^"]|\\")*)" with: under the media browser style selecter$/
-  * @When /^(?:|I )fill in "(?P<value>(?:[^"]|\\")*)" for "(?P<field>(?:[^"]|\\")*)" under the media browser style selecter$/
+  * @When /^(?:|I )fill in "(?P<field>(?:[^"]|\\")*)" with "(?P<value>(?:[^"]|\\")*)" under the media browser style selector$/
+  * @When /^(?:|I )fill in "(?P<field>(?:[^"]|\\")*)" with: under the media browser style selector$/
+  * @When /^(?:|I )fill in "(?P<value>(?:[^"]|\\")*)" for "(?P<field>(?:[^"]|\\")*)" under the media browser style selector$/
   */
-  public function iFillInFieldUnderTheMediaBrowserStyleSelecter($field, $value) {
+  public function iFillInFieldUnderTheMediaBrowserStyleSelector($field, $value) {
     // Switch to the "mediaStyleSelector" iframe.
     $this->getSession()->switchToIFrame('mediaStyleSelector');
 
@@ -313,9 +313,9 @@ class VarbaseContext extends RawDrupalContext {
   }
 
   /**
-   * @Then /^I should see "([^"]*)" under the media browser style selecter$/
+   * @Then /^I should see "([^"]*)" under the media browser style selector$/
    */
-  public function iShouldSeeTextUnderTheMediaBrowserStyleSelecter($text) {
+  public function iShouldSeeTextUnderTheMediaBrowserStyleSelector($text) {
     // Switch to the "mediaStyleSelector" iframe.
     $this->getSession()->switchToIFrame('mediaStyleSelector');
 
@@ -351,9 +351,9 @@ class VarbaseContext extends RawDrupalContext {
   }
 
   /**
-   * @Then /^I should not see "([^"]*)" under the media browser style selecter$/
+   * @Then /^I should not see "([^"]*)" under the media browser style selector$/
    */
-  public function iShouldNotSeeTextUnderTheMediaBrowserStyleSelecter($text) {
+  public function iShouldNotSeeTextUnderTheMediaBrowserStyleSelector($text) {
     // Switch to the "mediaStyleSelector" iframe.
     $this->getSession()->switchToIFrame('mediaStyleSelector');
 

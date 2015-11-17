@@ -50,15 +50,15 @@ Feature: File & Media Management - Assets Management - Ability to embed existing
       Then I should see "Media browser"
        And the media browser is open
       When I click on the "Library" tab under the media browser
-       And I wait for "1 secounds"
+       And I wait for "1 seconds"
       Then I should see "Media browser"
       When I fill in "Embed Flag Earth" for "File name" under the media browser
        And I press the "Apply" button under the media browser
       Then I should see "Embed Flag Earth" under the media browser
       When I select the "Embed Flag Earth" file under the media browser
        And I click "Submit" button under the media browser
-       And I wait for "1 secounds"
-      Then I should see "Embedding Embed Flag Earth" under the media browser style selecter
-      When I click "Submit" button under the media browser style selecter
+       And I wait for "1 seconds"
+      Then I should see "Embedding Embed Flag Earth" under the media browser style selector
+      When I click "Submit" button under the media browser style selector
        And I press the "Save" button
       Then I should see image with the "Embed Flag Earth" title text
