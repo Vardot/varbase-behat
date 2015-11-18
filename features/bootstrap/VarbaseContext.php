@@ -431,7 +431,7 @@ class VarbaseContext extends RawDrupalContext {
     $element = $this->getSession()->getPage()->find('xpath', "//img[contains(@title, '{$titleText}')]");
 
     if (empty($element)) {
-      throw new Exception('The page dose not have an image with the [ ' . $titleText . ' ] title.');
+      throw new Exception('The page dose not have an image with the [ ' . $titleText . ' ] title text.');
     }
   }
 
@@ -447,8 +447,57 @@ class VarbaseContext extends RawDrupalContext {
     $element = $this->getSession()->getPage()->find('xpath', "//img[contains(@alt, '{$altText}')]");
 
     if (empty($element)) {
-      throw new Exception('The page dose not have an image with the [ ' . $altText . ' ] title.');
+      throw new Exception('The page dose not have an image with the [ ' . $altText . ' ] Alt Text.');
     }
+  }
+
+  /**
+   * #varbase : To Find an image with the title text attribute
+   *            under a custom iframe.
+   *
+   * Example 1: Then I should see image with the "Flag Earth" title text in the rich text editor field "Body"
+   *
+   * @Then /^I should see image with the "([^"]*)" title text in the rich text editor field "([^"]*)"$/
+   */
+  public function iShouldSeeImageWithTheTitleTextUnder($titleText, $filedName) {
+    // Switch to the iframe.
+    $iFreamID = $this->_getIFrameID($filedName);
+    $this->getSession()->switchToIFrame($iFreamID);
+
+    // Find an image with the title.
+    $element = $this->getSession()->getPage()->find('xpath', "//img[contains(@title, '{$titleText}')]");
+
+    if (empty($element)) {
+      throw new Exception('The page dose not have an image with the [ ' . $titleText . ' ] title text under [ '. $filedName .' ].');
+    }
+
+    // Switch back too the page from the iframe.
+    $this->getSession()->switchToIFrame(null);
+  }
+
+  /**
+   * #varbase : To Find an image with the alt text attribute.
+   *            under a custom iframe.
+   *
+   * Example 1: Then I should see image with the "Flag Earth" alt text in the rich text editor field "Body"
+   *
+   * @Then /^I should see image with the "([^"]*)" alt text in the rich text editor field "([^"]*)"$/
+   */
+  public function iShouldSeeImageWithTheAltTextUnder($altText, $filedName) {
+    // Switch to the iframe.
+    $iFreamID = $this->_getIFrameID($filedName);
+
+    $this->getSession()->switchToIFrame($iFreamID);
+
+    // Find an image with the title.
+    $element = $this->getSession()->getPage()->find('xpath', "//img[contains(@alt, '{$altText}')]");
+
+    if (empty($element)) {
+      throw new Exception('The page dose not have an image with the [ ' . $altText . ' ] Alt Text under [ '. $filedName .' ].');
+    }
+
+    // Switch back too the page from the iframe.
+    $this->getSession()->switchToIFrame(null);
   }
 
   // ===========================================================================
@@ -510,6 +559,23 @@ class VarbaseContext extends RawDrupalContext {
 
   public function cleanUsers() {
 
+  }
+
+  /**
+   * helper function to get the iframe ID
+   * @param  [string] $filedName
+   * @return [string]
+   */
+  private function _getIFrameID($filedName) {
+    $element = $this->getSession()->getPage()->find('xpath', "//iframe[contains(@title, '{$filedName}')]");
+
+    echo "<pre>";
+    print_r($element->getAttribute('id'));
+    die(' con--');
+
+
+
+    return $element->getAttribute('id');
   }
 
 }

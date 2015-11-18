@@ -1,63 +1,86 @@
 [1] - If you have a Varbase testing site at this location
 /var/www/html/varbase_behat/varbase-7-x-3-0-alpha2/docroot
 
-[2] - Download the latest behat package from "Downloads" section in the Bitbucket repo, and place it in the folder as below
+[2] - Download the latest behat package from "Downloads" section in
+      the Bitbucket repo, and place it in the folder as below
 /var/www/html/varbase_behat/varbase-7-x-3-0-alpha2/behat
 
 [3] - Edit the file behat.varbase.yml and change:
 
   base_url:  'http://localhost/varbase_behat/varbase-7-x-3-0-alpha2/docroot'
 
-[4] - Go to /var/www/html/varbase_behat/varbase-7-x-3-0-alpha2/behat/
+[4] Go to /var/www/html/varbase_behat/varbase-7-x-3-0-alpha2/behat/
+    Then run the following commands to install all required packages,
+    Libraries from vendors.
 
-#############################################################
-IMPORTANT NOTE FOR WINDOWS USERS:
-If you are using Windows, run the following command:
-Delete vendor and bin folders.
-Then run php composer.phar install
-#############################################################
+$ curl -sS https://getcomposer.org/installer | php
+$ php composer.phar install
 
-[5] - Run this command.
-$ bin/behat
+[5] Initializes behat.
+$ bin/behat --init
 
-[6] - Run this command with the .feature file to run the Gherkin Script in
+[6] Open a new terminal window then start selenium2 at the port 4445.
+    You can change the port number by changing the parameter
+    "wd_host: 127.0.0.1:4445/wd/hub" in the behat.varbase.yml file.
+
+$ java6-jar selenium-server-standalone-2.48.2.jar -port 4445
+
+[7] Run the behat command at /var/www/html/varbase_behat/varbase-7-x-3-0-alpha2/behat/
+
+$ bin/behat features/example.feature
+
+[8] Run this command.
+$ bin/behat features/google/google-search.feature
+
+[9] Run this command with the .feature file to run the Gherkin Script in
       it to the installed site.
 $ bin/behat features/varbase/your-gherkin-feature.feature
 $ bin/behat features/project-name/your-gherkin-feature.feature
 
-[7] - Run this command to print all available step definitions
+[10] Run this command to print all available step definitions
 $ bin/behat -di
-      - use -dl to just list definition expressions.
-      - use -di to show definitions with extended info.
-      - use -d 'needle' to find specific definitions.
+    - use -dl to just list definition expressions.
+    - use -di to show definitions with extended info.
+    - use -d 'needle' to find specific definitions.
 
-[8] - Run the selenium2 at the port you want .. for Example port 4445
-$ java -jar selenium-server-standalone-2.48.2.jar -port 4445
+[11] All Varbase custom step definitions are tagged with #varbase tag.
+
+  Example : after a run for  bin/behat -di command.
+================================================================================
+  default | Then /^I should see image with the "([^"]*)" title text$/
+          | #varbase : To Find an image with the title text attribute.
+          | Example 1: Then I should see image with the "Flag Earth" title text
+          | at `VarbaseContext::iShouldSeeImageWithTheTitleText()`
+
+  default | Then /^I should see image with the "([^"]*)" alt text$/
+          | #varbase : To Find an image with the alt text attribute.
+          | Example 1: Then I should see image with the "Flag Earth" alt text
+          | at `VarbaseContext::iShouldSeeImageWithTheAltText()`
+================================================================================
 
 Example :
 ================================================================================
-$ bin/behat features/varbase/website-base-requirements_user-registration_only-admins-login_v1-0.feature
-Feature: Website Base Requirements - User Registration - Only admins login
-  As an anonymous user
-  I will not be able to register as a user in the website
-  So that I will need a site admin or super admin to add me to the website
+bin/behat features/example.feature
+Feature: Example
 
-  Background:                    # features/website-base-requirements_user-registration_only-admins-login_v1-0.feature:5
-    Given I am an anonymous user # Drupal\DrupalExtension\Context\DrupalContext::assertAnonymousUser()
+ Scenario: Go to about page with no visaul view.  # features/example.feature:3
+   Given I go to "https://www.vardot.com" website # VarbaseContext::iGoToWebsite()
+   When I click "About"                           # Drupal\DrupalExtension\Context\MinkContext::assertClick()
+   Then I should see "the team"                   # Drupal\DrupalExtension\Context\MinkContext::assertPageContainsText()
 
-  Scenario: Check if a not logged in user can create an account # features/website-base-requirements_user-registration_only-admins-login_v1-0.feature:8
-    When I go to "/user"                                        # Drupal\DrupalExtension\Context\MinkContext::visit()
-    Then I should not see "Create new account"                  # Drupal\DrupalExtension\Context\MinkContext::assertPageNotContainsText()
+ @mink:selenium2
+ Scenario: Go to about page using mink selenium2  # features/example.feature:9
+   Given I go to "https://www.vardot.com" website # VarbaseContext::iGoToWebsite()
+   When I click "About"                           # Drupal\DrupalExtension\Context\MinkContext::assertClick()
+   Then I should see "the team"                   # Drupal\DrupalExtension\Context\MinkContext::assertPageContainsText()
 
-  Scenario: Check if a not logged in user can register an account # features/website-base-requirements_user-registration_only-admins-login_v1-0.feature:12
-    When I go to "/user/register"                                 # Drupal\DrupalExtension\Context\MinkContext::visit()
-    Then I should see "Access denied"                             # Drupal\DrupalExtension\Context\MinkContext::assertPageContainsText()
-
-  Scenario: Check if a not logged in user can access administration pages # features/website-base-requirements_user-registration_only-admins-login_v1-0.feature:16
-    When I go to "/admin"                                                 # Drupal\DrupalExtension\Context\MinkContext::visit()
-    Then I should see "Access denied"                                     # Drupal\DrupalExtension\Context\MinkContext::assertPageContainsText()
+ @javascript
+ Scenario: To search in Google about Varbase.     # features/example.feature:15
+   Given I go to "https://www.vardot.com" website # VarbaseContext::iGoToWebsite()
+   When I click "About"                           # Drupal\DrupalExtension\Context\MinkContext::assertClick()
+   Then I should see "the team"                   # Drupal\DrupalExtension\Context\MinkContext::assertPageContainsText()
 
 3 scenarios (3 passed)
 9 steps (9 passed)
-0m0.55s (15.68Mb)
+0m51.12s (47.83Mb)
 ================================================================================
