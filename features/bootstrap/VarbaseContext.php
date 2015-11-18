@@ -571,7 +571,7 @@ class VarbaseContext extends RawDrupalContext {
    * @return string                      Attribute value for the first matching element.
    */
   private function _getAttributeByOtherAttributeValue($attributeName, $otherAttributeName, $otherAttributeValue, $htmlTagName = "*") {
-    $element = $this->getSession()->getPage()->find('xpath', "//{$htmlTagName}[contains(@{$attributeName}, '{$attributeValue}')]");
+    $element = $this->getSession()->getPage()->find('xpath', "//{$htmlTagName}[contains(@{$otherAttributeName}, '{$otherAttributeValue}')]");
     return $element->getAttribute($attributeName);
   }
 
