@@ -461,7 +461,7 @@ class VarbaseContext extends RawDrupalContext {
    */
   public function iShouldSeeImageWithTheTitleTextUnder($titleText, $filedName) {
     // Switch to the iframe.
-    $iFreamID = $this->_getIFrameID($filedName);
+    $iFreamID = $this->_getAttributeByOtherAttributeValue('id', 'title', $filedName, 'iframe');
     $this->getSession()->switchToIFrame($iFreamID);
 
     // Find an image with the title.
@@ -485,8 +485,7 @@ class VarbaseContext extends RawDrupalContext {
    */
   public function iShouldSeeImageWithTheAltTextUnder($altText, $filedName) {
     // Switch to the iframe.
-    $iFreamID = $this->_getIFrameID($filedName);
-
+    $iFreamID = $this->_getAttributeByOtherAttributeValue('id', 'title', $filedName, 'iframe');
     $this->getSession()->switchToIFrame($iFreamID);
 
     // Find an image with the title.
@@ -562,20 +561,18 @@ class VarbaseContext extends RawDrupalContext {
   }
 
   /**
-   * helper function to get the iframe ID
-   * @param  [string] $filedName
-   * @return [string]
+   * Helper function to let you get the value of an attribute name for
+   * an HTML tag by other Attribute name and value
+   *
+   * @param  string $attributeName       The attribute name.
+   * @param  string $otherAttributeName  other attribute name.
+   * @param  string $otherAttributeValue other attribute value.
+   * @param  string $htmlTagName         the HTML tag name you are filtring with.
+   * @return string                      Attribute value for the first matching element.
    */
-  private function _getIFrameID($filedName) {
-    $element = $this->getSession()->getPage()->find('xpath', "//iframe[contains(@title, '{$filedName}')]");
-
-    echo "<pre>";
-    print_r($element->getAttribute('id'));
-    die(' con--');
-
-
-
-    return $element->getAttribute('id');
+  private function _getAttributeByOtherAttributeValue($attributeName, $otherAttributeName, $otherAttributeValue, $htmlTagName = "*") {
+    $element = $this->getSession()->getPage()->find('xpath', "//{$htmlTagName}[contains(@{$attributeName}, '{$attributeValue}')]");
+    return $element->getAttribute($attributeName);
   }
 
 }
