@@ -4,18 +4,21 @@ Feature: File & Media Management - Assets Management - Files and their usage lis
   So that I will be able to manage files, see where they have been used in contents.
 
   Background:
-    Given I am a logged in user with the "test_content_admin" user
+    Given I am a logged in user with the "test_site_admin" user
 
+  @javascrip
   Scenario: Check if content admins can access the content files page.
      When I go to "admin/content/file"
      Then I should see "Add file"
       And I should not see "Access denied"
 
+ @javascrip
  Scenario: Check if content admins can access the Thumbnails view of files.
      When I go to "admin/content/file/thumbnails"
      Then I should see "Add file"
       And I should not see "Access denied"
 
+  @javascrip
   Scenario: Check if we do have a file named "Flag Earth" , if not then upload the file dependently.
      When I go to "admin/content/file"
      Then I should see "Add file"
@@ -26,7 +29,7 @@ Feature: File & Media Management - Assets Management - Files and their usage lis
      Then I should see "Add file"
      When I click "Add file"
      Then I should see "Upload a new file"
-     When I attach the file "/var/www/html/varbase_behat/varbase-7-0-x-3-0-alpha2/behat/assets/flag-earth.jpg" to "Upload a new file"
+     When I attach the file "flag-earth.jpg" to "Upload a new file"
       And I press the "Upload" button
      Then I should see "flag-earth.jpg"
      When I press the "Next" button
@@ -38,6 +41,7 @@ Feature: File & Media Management - Assets Management - Files and their usage lis
      Then I should see "Add file"
       And I should see the "Edit" in the "Flag Earth" row
 
+    @javascrip
     Scenario: Check if content admins can edit files.
        When I go to "admin/content/file"
        Then I should see "Add file"
@@ -51,6 +55,7 @@ Feature: File & Media Management - Assets Management - Files and their usage lis
        Then I should see "Image Flag Earth after edit has been updated."
         And I should see "Edit" in the "Flag Earth after edit" row
 
+    @javascrip
     Scenario: Check if content admins can delete files.
        When I go to "admin/content/file"
        Then I should see "Add file"

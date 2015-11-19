@@ -10,14 +10,7 @@ Feature: User Management - Standard User Management - Request new password
      When I go to "/user/login"
      Then I should see "Request new password"
 
-  Scenario: Check if the email has been used to rest the password is not existing email - varbase-7-0-x-3-0-alpha1
-     When I go to "/user/password"
-     Then I should see "User Account"
-     When I fill in "not.existing.email@vardot.com" for "Username or e-mail address *"
-      And I press the "E-mail new password" button
-     Then I should see "Sorry, not.existing.email@vardot.com is not recognized as a user name or an e-mail address."
-
-  Scenario: Check if the email has been used to rest the password is not existing email - varbase-7-0-x-3-0-alpha2
+  Scenario: Check if the email has been used to rest the password is not existing email.
       When I go to "/user/password"
       Then I should see "User Account"
       When I fill in "not.existing.email@vardot.com" for "Username or e-mail address *"

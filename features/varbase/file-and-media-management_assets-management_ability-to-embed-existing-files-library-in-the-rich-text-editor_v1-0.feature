@@ -21,7 +21,7 @@ Feature: File & Media Management - Assets Management - Ability to embed existing
     Then I should see "Add file"
     When I click "Add file"
     Then I should see "Upload a new file"
-    When I attach the file "/var/www/html/varbase_behat/varbase-7-0-x-3-0-alpha2/behat/assets/flag-earth.jpg" to "Upload a new file"
+    When I attach the file "flag-earth.jpg" to "Upload a new file"
      And I press the "Upload" button
     Then I should see "flag-earth.jpg"
     When I press the "Next" button
