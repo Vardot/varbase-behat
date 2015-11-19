@@ -17,19 +17,20 @@ default:
         - Drupal\DrupalExtension\Context\MarkupContext
   extensions:
     Behat\MinkExtension:
+      files_path: "%paths.base%/assets/"
       goutte: ~
       zombie: ~
       selenium2:
         wd_host: 127.0.0.1:4445/wd/hub
         capabilities:
           browser: firefox
-      base_url: http://localhost/varbase_behat/varbase-7-0-x-3-0-alpha2/docroot
+      base_url: http://localhost/varbase_behat/varbase-7-x-3-0-alpha3/docroot
       javascript_session: selenium2
     Drupal\DrupalExtension:
       blackbox: ~
       api_driver: "drupal"
       drupal:
-        drupal_root: "/var/www/html/varbase_behat/varbase-7-0-x-3-0-alpha2/docroot"
+        drupal_root: "/var/www/html/varbase_behat/varbase-7-x-3-0-alpha3/docroot"
       region_map:
         content: "#content"
         footer: "#footer"
@@ -62,19 +63,20 @@ drush:
         tags: "@drushTest"
   extensions:
     Behat\MinkExtension:
+      files_path: "%paths.base%/assets/"
       goutte: ~
       zombie: ~
       selenium2:
         wd_host: 127.0.0.1:4445/wd/hub
         capabilities:
           browser: firefox
-      base_url: http://localhost/varbase_behat/varbase-7-0-x-3-0-alpha2/docroot
+      base_url: http://localhost/varbase_behat/varbase-7-x-3-0-alpha3/docroot
       javascript_session: selenium2
     Drupal\DrupalExtension:
       api_driver: "drush"
       drush_driver: "drush"
       drush:
-        root: "/var/www/html/varbase_behat/varbase-7-0-x-3-0-alpha2/docroot"
+        root: "/var/www/html/varbase_behat/varbase-7-x-3-0-alpha3/docroot"
         alias: self
       region_map:
         left sidebar: "#sidebar-first"
