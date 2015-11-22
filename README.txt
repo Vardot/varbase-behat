@@ -1,49 +1,86 @@
-[1] - If you have a Varbase testing site at this location
+    Varbase Behat is a set of Gherkin Features and custom Varbase Context with
+  custom step definitions, and assets, which help in the automatic testing
+  for varbase websites.
+
+
+   This page can help  you to have all steps, which you need to run the
+ Behat Gherkin Features to test a varbase website in your localhost machine.
+
+
+ Predefined request, you will need to have a running Varbase website:
+   - Apache/http/https server.
+   - PHP server, and have the mod_rewrite enabled.
+   - MySQL server.
+   - Configure your PHP/MySQL to work will with Varbase, Have a look at
+     https://bitbucket.org/snippets/Vardot/8rGL/dev-tools-installs snippets.
+   - Download Varbase from https://www.drupal.org/project/varbase Drupal website.
+   - Install Varbase by following the  Installing Varbase 7.x-3.x
+     https://www.drupal.org/node/2570843 documentation page.
+   - Download Varbase Behat:
+     https://bitbucket.org/Vardot/varbase-behat/downloads/#tag-downloads
+
+ After that you can go through the following steps.
+
+--------------------------------------------------------------------------------
+1. If you have a Varbase testing site at this location
 /var/www/html/varbase_behat/varbase-7-x-3-0-alpha3/docroot
 
-[2] - Download the latest behat package from "Downloads" section in
-      the Bitbucket repo, and place it in the folder as below
+--------------------------------------------------------------------------------
+2. Download the latest behat package from "Downloads" section in the Bitbucket
+   repository, and place it in the folder as below.
 /var/www/html/varbase_behat/varbase-7-x-3-0-alpha3/behat
 
-[3] - Edit the file behat.varbase.yml and change:
+--------------------------------------------------------------------------------
+3. Edit the file behat.varbase.yml and change:
 
   base_url:  'http://localhost/varbase_behat/varbase-7-x-3-0-alpha3/docroot'
 
-[4] Go to /var/www/html/varbase_behat/varbase-7-x-3-0-alpha3/behat/
-    Then run the following commands to install all required packages,
-    Libraries from vendors.
+--------------------------------------------------------------------------------
+5. Go to /var/www/html/varbase_behat/varbase-7-x-3-0-alpha3/behat/ Then run the
+  following commands to install all required packages, Libraries from vendors.
 
 $ curl -sS https://getcomposer.org/installer | php
 $ php composer.phar install
 
-[5] Initializes behat.
-$ bin/behat --init
+--------------------------------------------------------------------------------
+6. Initializes behat.
 
-[6] Open a new terminal window then start selenium2 at the port 4445.
-    You can change the port number by changing the parameter
+   $ bin/behat --init
+
+--------------------------------------------------------------------------------
+7. Open a new terminal window then start selenium2 at the port 4445. You can
+   change the port number by changing the parameter.
+
     "wd_host: 127.0.0.1:4445/wd/hub" in the behat.varbase.yml file.
 
 $ java6-jar selenium-server-standalone-2.48.2.jar -port 4445
 
-[7] Run the behat command at /var/www/html/varbase_behat/varbase-7-x-3-0-alpha3/behat/
+--------------------------------------------------------------------------------
+8. Run the behat command at /var/www/html/varbase_behat/varbase-7-x-3-0-alpha3/behat/
 
 $ bin/behat features/example.feature
 
-[8] Run this command.
+--------------------------------------------------------------------------------
+9. Run this command.
 $ bin/behat features/google/google-search.feature
 
-[9] Run this command with the .feature file to run the Gherkin Script in
-      it to the installed site.
+--------------------------------------------------------------------------------
+10. Run this command with the .feature file to run the Gherkin Script in it to the installed site.
+
 $ bin/behat features/varbase/your-gherkin-feature.feature
 $ bin/behat features/project-name/your-gherkin-feature.feature
 
-[10] Run this command to print all available step definitions
+--------------------------------------------------------------------------------
+11. Run this command to print all available step definitions
+
 $ bin/behat -di
+
     - use -dl to just list definition expressions.
     - use -di to show definitions with extended info.
     - use -d 'needle' to find specific definitions.
 
-[11] All Varbase custom step definitions are tagged with #varbase tag.
+--------------------------------------------------------------------------------
+12. All Varbase custom step definitions are tagged with #varbase tag.
 
   Example : after a run for  bin/behat -di command.
 ================================================================================
@@ -58,12 +95,14 @@ $ bin/behat -di
           | at `VarbaseContext::iShouldSeeImageWithTheAltText()`
 ================================================================================
 
+--------------------------------------------------------------------------------
 Example :
 ================================================================================
-bin/behat features/example.feature
+$ bin/behat features/example.feature
+
 Feature: Example
 
- Scenario: Go to about page with no visaul view.  # features/example.feature:3
+ Scenario: Go to about page with no visual view.  # features/example.feature:3
    Given I go to "https://www.vardot.com" website # VarbaseContext::iGoToWebsite()
    When I click "About"                           # Drupal\DrupalExtension\Context\MinkContext::assertClick()
    Then I should see "the team"                   # Drupal\DrupalExtension\Context\MinkContext::assertPageContainsText()
