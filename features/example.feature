@@ -1,6 +1,6 @@
 Feature: Example
 
-  Scenario: Go to about page with no visaul view.
+  Scenario: Go to about page with no visual view.
     Given I go to "https://www.vardot.com" website
      When I click "About"
      Then I should see "the team"
