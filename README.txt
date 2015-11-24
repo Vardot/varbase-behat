@@ -53,7 +53,7 @@ $ php composer.phar install
 
     "wd_host: 127.0.0.1:4445/wd/hub" in the behat.varbase.yml file.
 
-$ java6-jar selenium-server-standalone-2.48.2.jar -port 4445
+$ java -jar selenium-server-standalone-2.48.2.jar -port 4445
 
 --------------------------------------------------------------------------------
 8. Run the behat command at /var/www/html/varbase_behat/varbase-7-x-3-0-alpha3/behat/
