@@ -9,7 +9,7 @@ Feature: Create default testing users.
 Background:
   Given I am a logged in user with the "webmaster" user
 
-@javascript
+  @javascript
   Scenario: Create testing users.
      When I go to "/admin/people/create"
       And I fill in "test_authenticated" for "Username"
@@ -19,15 +19,18 @@ Background:
      When I go to "/admin/people"
       And I fill in "test_authenticated" for "Username"
       And I press "Apply"
-      And I wait for "1 second"
+      And I wait max of "5" seconds for the page to be ready and loaded
      Then I should see "test_authenticated"
      When I click "test_authenticated"
+      And I wait max of "5" seconds for the page to be ready and loaded
      Then I should see "History"
      When I click "Edit"
       And I fill in "123123" for "Password"
       And I fill in "123123" for "Confirm password"
      Then I press "Save"
 
+   @javascript
+   Scenario: Create testing users.
      When I go to "/admin/people/create"
       And I fill in "test_editor" for "Username"
       And I fill in "editor.test@vardot.com" for "E-mail address"
@@ -37,7 +40,7 @@ Background:
       When I go to "/admin/people"
        And I fill in "test_editor" for "Username"
        And I press "Apply"
-       And I wait for "1 second"
+      And I wait max of "5" seconds for the page to be ready and loaded
       Then I should see "test_editor"
       When I click "test_editor"
       Then I should see "History"
@@ -46,6 +49,8 @@ Background:
        And I fill in "123123" for "Confirm password"
       Then I press "Save"
 
+  @javascript
+  Scenario: Create testing users.
      When I go to "/admin/people/create"
       And I fill in "test_content_admin" for "Username"
       And I fill in "content.admin.test@vardot.com" for "E-mail address"
@@ -55,7 +60,7 @@ Background:
       When I go to "/admin/people"
        And I fill in "test_content_admin" for "Username"
        And I press "Apply"
-       And I wait for "1 second"
+       And I wait max of "5" seconds for the page to be ready and loaded
       Then I should see "test_content_admin"
       When I click "test_content_admin"
       Then I should see "History"
@@ -64,6 +69,8 @@ Background:
        And I fill in "123123" for "Confirm password"
       Then I press "Save"
 
+  @javascript
+  Scenario: Create testing users.
      When I go to "/admin/people/create"
       And I fill in "test_site_admin" for "Username"
       And I fill in "site.admin.test@vardot.com" for "E-mail address"
@@ -73,7 +80,7 @@ Background:
       When I go to "/admin/people"
        And I fill in "test_site_admin" for "Username"
        And I press "Apply"
-       And I wait for "1 second"
+       And I wait max of "5" seconds for the page to be ready and loaded
       Then I should see "test_site_admin"
       When I click "test_site_admin"
       Then I should see "History"
@@ -82,6 +89,8 @@ Background:
        And I fill in "123123" for "Confirm password"
       Then I press "Save"
 
+  @javascript
+  Scenario: Create testing users.
      When I go to "/admin/people/create"
       And I fill in "test_super_admin" for "Username"
       And I fill in "super.admin.test@vardot.com" for "E-mail address"
@@ -91,7 +100,7 @@ Background:
       When I go to "/admin/people"
        And I fill in "test_super_admin" for "Username"
        And I press "Apply"
-       And I wait for "1 second"
+       And I wait max of "5" seconds for the page to be ready and loaded
       Then I should see "test_super_admin"
       When I click "test_super_admin"
       Then I should see "History"

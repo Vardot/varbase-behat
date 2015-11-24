@@ -46,18 +46,18 @@ Feature: File & Media Management - Assets Management - Ability to embed existing
       When I click "Edit"
       Then I should see "Edit Basic page Test Basic page to embed existing files"
       When I click on "media" command button in the rich text editor field "Body"
-       And I wait for "1 seconds"
+       And I wait for AJAX to finish
       Then I should see "Media browser"
        And the media browser is open
       When I click on the "Library" tab under the media browser
-       And I wait for "1 seconds"
+       And I wait for AJAX to finish
       Then I should see "Media browser"
       When I fill in "Embed Flag Earth" for "File name" under the media browser
        And I press the "Apply" button under the media browser
       Then I should see "Embed Flag Earth" under the media browser
       When I select the "Embed Flag Earth" file under the media browser
        And I click "Submit" button under the media browser
-       And I wait for "1 seconds"
+       And I wait for AJAX to finish
       Then I should see "Embedding Embed Flag Earth" under the media browser style selector
       When I click "Submit" button under the media browser style selector
        And I press the "Save" button

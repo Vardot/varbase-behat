@@ -104,15 +104,66 @@ class VarbaseContext extends RawDrupalContext {
   }
 
   /**
-   * #varbase: To wait for time before going to the next step
+   * #varbase: To wait for seconds before going to the next step.
    *
-   * Example 1: I wait for "1 second"
-   * Example 2: I wait for "10 secounds"
+   * Example 1:  And I wait for "1" second
+   * Example 2: When I wait for "5" seconds
+   * Example 3: I wait for "1 second"
+   * Example 4: I wait for "10 secounds"
    *
+   * @When /^I wait for "([^"]*)" second$/
+   * @When /^I wait for "([^"]*)" seconds$/
    * @When /^I wait for "([^"]*)"$/
    */
-  public function iWaitFor($time) {
-    $this->getSession()->wait($time * 1000);
+  public function iWaitForSeconds($seconds) {
+    $this->getSession()->wait($seconds * 1000);
+  }
+
+  /**
+   * #varbase: To wait for minutes before going to the next step
+   *
+   * Example 1:  And I wait for "1" minute
+   * Example 2: When I wait for "2" minutes
+   *
+   * @When /^I wait for "([^"]*)" minute$/
+   * @When /^I wait for "([^"]*)" minutes$/
+   */
+  public function iWaitForMinutes($minutes) {
+    $this->getSession()->wait($minutes * 60 * 1000);
+  }
+
+  /**
+   * #varbase : I wait max of seconds for the page to be ready and loaded.
+   *
+   * Example: I wait max of "5" seconds for the page to be ready and loaded
+   *
+   * @Given /^I wait max of "([^"]*)" seconds for the page to be ready and loaded$/
+   *
+   * @throws BehaviorException If timeout is reached
+   */
+  public function iWaitMaxOfSecondsForThePageToBeReadyAndLoaded($time = 10000) {
+      if (!$this->getSession()->getDriver() instanceof Selenium2Driver) {
+          return;
+      }
+      $start = microtime(true);
+      $end = $start + $time / 1000.0;
+      $defaultCondition = true;
+      $conditions = [
+          "document.readyState == 'complete'",           // Page is ready
+          "typeof $ != 'undefined'",                     // jQuery is loaded
+          "!$.active",                                   // No ajax request is active
+          "$('#page').css('display') == 'block'",        // Page is displayed (no progress bar)
+          "$('.loading-mask').css('display') == 'none'", // Page is not loading (no black mask loading page)
+          "$('.jstree-loading').length == 0",            // Jstree has finished loading
+      ];
+      $condition = implode(' && ', $conditions);
+      // Make sure the AJAX calls are fired up before checking the condition
+      $this->getSession()->wait(100, false);
+      $this->getSession()->wait($time, $condition);
+      // Check if we reached the timeout unless the condition is false to explicitly wait the specified time
+      if ($condition !== false && microtime(true) > $end) {
+        throw new BehaviorException(sprintf('Timeout of %d reached when checking on %s', $time, $condition));
+      }
   }
 
   // Media Browser functions
@@ -459,13 +510,27 @@ class VarbaseContext extends RawDrupalContext {
    *
    * @Then /^I should see image with the "([^"]*)" title text in the rich text editor field "([^"]*)"$/
    */
-  public function iShouldSeeImageWithTheTitleTextUnder($titleText, $filedName) {
+  public function iShouldSeeImageWithTheTitleTextInTheRichTextEditorField($titleText, $locator) {
+
+    $el = $this->getSession()->getPage()->findField($locator);
+    $fieldId = $el->getAttribute('id');
+
+    if (empty($fieldId)) {
+      throw new Exception('Could not find an id for the rich text editor field : ' . $locator);
+    }
+
+    $CKEditorContent = $this->getSession()->executeScript("return CKEDITOR.instances[\"$fieldId\"].getData();");
+
+    echo "<pre>";
+    print_r($CKEditorContent);
+    die(' con -- ');
+
     // Switch to the iframe.
     $iFreamID = $this->_getAttributeByOtherAttributeValue('id', 'title', $filedName, 'iframe');
     $this->getSession()->switchToIFrame($iFreamID);
 
     // Find an image with the title.
-    $element = $this->getSession()->getPage()->find('xpath', "//img[contains(@title, '{$titleText}')]");
+    $element = $this->getSession()->getPage()->findAll('xpath', "//img[contains(@title, '{$titleText}')]");
 
     if (empty($element)) {
       throw new Exception('The page dose not have an image with the [ ' . $titleText . ' ] title text under [ '. $filedName .' ].');
