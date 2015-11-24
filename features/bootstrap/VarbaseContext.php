@@ -135,9 +135,11 @@ class VarbaseContext extends RawDrupalContext {
   /**
    * #varbase : I wait max of seconds for the page to be ready and loaded.
    *
-   * Example: I wait max of "5" seconds for the page to be ready and loaded
+   * Example 1: I wait for the page
+   * Example 2: I wait max of "5" seconds for the page to be ready and loaded
    *
    * @Given /^I wait max of "([^"]*)" seconds for the page to be ready and loaded$/
+   * @Given /^I wait for the page$/
    *
    * @throws BehaviorException If timeout is reached
    */

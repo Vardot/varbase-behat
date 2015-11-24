@@ -19,10 +19,10 @@ Background:
      When I go to "/admin/people"
       And I fill in "test_authenticated" for "Username"
       And I press "Apply"
-      And I wait max of "5" seconds for the page to be ready and loaded
+      And I wait for the page
      Then I should see "test_authenticated"
      When I click "test_authenticated"
-      And I wait max of "5" seconds for the page to be ready and loaded
+      And I wait for the page
      Then I should see "History"
      When I click "Edit"
       And I fill in "123123" for "Password"
@@ -40,7 +40,7 @@ Background:
       When I go to "/admin/people"
        And I fill in "test_editor" for "Username"
        And I press "Apply"
-      And I wait max of "5" seconds for the page to be ready and loaded
+      And I wait for the page
       Then I should see "test_editor"
       When I click "test_editor"
       Then I should see "History"
@@ -60,7 +60,7 @@ Background:
       When I go to "/admin/people"
        And I fill in "test_content_admin" for "Username"
        And I press "Apply"
-       And I wait max of "5" seconds for the page to be ready and loaded
+       And I wait for the page
       Then I should see "test_content_admin"
       When I click "test_content_admin"
       Then I should see "History"
@@ -80,7 +80,7 @@ Background:
       When I go to "/admin/people"
        And I fill in "test_site_admin" for "Username"
        And I press "Apply"
-       And I wait max of "5" seconds for the page to be ready and loaded
+       And I wait for the page
       Then I should see "test_site_admin"
       When I click "test_site_admin"
       Then I should see "History"
@@ -100,7 +100,7 @@ Background:
       When I go to "/admin/people"
        And I fill in "test_super_admin" for "Username"
        And I press "Apply"
-       And I wait max of "5" seconds for the page to be ready and loaded
+       And I wait for the page
       Then I should see "test_super_admin"
       When I click "test_super_admin"
       Then I should see "History"
