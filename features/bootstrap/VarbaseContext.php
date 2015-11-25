@@ -49,7 +49,7 @@ class VarbaseContext extends RawDrupalContext {
    *
    * Example: I am a logged in user with the username "test_content_admin"
    *
-   * @Given /^I am a logged in user with the "([^"]*)" user$/
+   * @Given /^I am a logged in user with the "(?P<username>[^"]*)" user$/
    */
   public function iAmloggedInUserWithTheUser($username) {
 
@@ -75,7 +75,7 @@ class VarbaseContext extends RawDrupalContext {
    *
    * Example: I am a logged in user with the username "testing" and password "testing user password"
    *
-   * @Given /^I am a logged in user with the username "([^"]*)" and password "([^"]*)"$/
+   * @Given /^I am a logged in user with the username "(?P<username>[^"]*)" and password "(?P<password>[^"]*)"$/
    */
   public function iAmLoggedInUserWithTheUsernameAndPassword($username, $password) {
     // Logout if I am logged in.
@@ -97,7 +97,7 @@ class VarbaseContext extends RawDrupalContext {
    *
    * Example: When I go to "https://www.google.com" website
    *
-   * @When /^I go to "([^"]*)" website$/
+   * @When /^I go to "(?P<domain>[^"]*)" website$/
    */
   public function iGoToWebsite($domain) {
     $this->getSession()->visit($domain);
@@ -106,14 +106,18 @@ class VarbaseContext extends RawDrupalContext {
   /**
    * #varbase: To wait for seconds before going to the next step.
    *
-   * Example 1:  And I wait for "1" second
+   * Example 1:  And wait for "1" second
    * Example 2: When I wait for "5" seconds
-   * Example 3: I wait for "1 second"
-   * Example 4: I wait for "10 secounds"
+   * Example 3:  And wait 1 second
+   * Example 4: When I wait for 60 seconds
+   * Example 5:  And wait 1s
+   * Example 6: When I wait for 60s
    *
-   * @When /^I wait for "([^"]*)" second$/
-   * @When /^I wait for "([^"]*)" seconds$/
-   * @When /^I wait for "([^"]*)"$/
+   * @When /^(?:|I )wait (?:|for )"(?P<seconds>\d+)" second$/
+   * @When /^(?:|I )wait (?:|for )"(?P<seconds>\d+)" seconds$/
+   * @When /^(?:|I )wait (?:|for )(?P<seconds>\d+) second$/
+   * @When /^(?:|I )wait (?:|for )(?P<seconds>\d+) seconds$/
+   * @When /^(?:|I )wait (?:|for )(?P<seconds>\d+)s$/
    */
   public function iWaitForSeconds($seconds) {
     $this->getSession()->wait($seconds * 1000);
@@ -124,9 +128,16 @@ class VarbaseContext extends RawDrupalContext {
    *
    * Example 1:  And I wait for "1" minute
    * Example 2: When I wait for "2" minutes
+   * Example 3:  And wait 1 minute
+   * Example 4: When I wait for 3 minutes
+   * Example 5:  And wait 1m
+   * Example 6: When I wait for 3m
    *
-   * @When /^I wait for "([^"]*)" minute$/
-   * @When /^I wait for "([^"]*)" minutes$/
+   * @When /^(?:|I )wait (?:|for )"(?P<minutes>\d+)" minute$/
+   * @When /^(?:|I )wait (?:|for )"(?P<minutes>\d+)" minutes$/
+   * @When /^(?:|I )wait (?:|for )(?P<minutes>\d+) minute$/
+   * @When /^(?:|I )wait (?:|for )(?P<minutes>\d+) minutes$/
+   * @When /^(?:|I )wait (?:|for )(?P<minutes>\d+)m$/
    */
   public function iWaitForMinutes($minutes) {
     $this->getSession()->wait($minutes * 60 * 1000);
@@ -135,11 +146,24 @@ class VarbaseContext extends RawDrupalContext {
   /**
    * #varbase : I wait max of seconds for the page to be ready and loaded.
    *
-   * Example 1: I wait for the page
-   * Example 2: I wait max of "5" seconds for the page to be ready and loaded
+   * Exmaple 1: And wait
+   * Exmaple 2: And I wait
+   * Example 3: And wait for the page
+   * Example 4: And I wait for the page
+   * Example 5: And wait max of 5 seconds
+   * Example 6: And wait max of 5s
+   * Example 7: And I wait max of 5s
+   * Example 8: And I wait max of "5" seconds
+   * Example 9: And I wait max of "5" seconds for the page to be ready and loaded
    *
-   * @Given /^I wait max of "([^"]*)" seconds for the page to be ready and loaded$/
-   * @Given /^I wait for the page$/
+   * @Given /^(?:|I )wait max of "(?P<time>\d+)" seconds for the page to be ready and loaded$/
+   * @Given /^(?:|I )wait max of "(?P<time>\d+)" seconds$/
+   * @Given /^(?:|I )wait max of (?P<time>\d+) seconds for the page to be ready and loaded$/
+   * @Given /^(?:|I )wait max of (?P<time>\d+) seconds$/
+   * @Given /^(?:|I )wait max of (?P<time>\d+)s for the page to be ready and loaded$/
+   * @Given /^(?:|I )wait max of (?P<time>\d+)s$/
+   * @Given /^(?:|I )wait for the page$/
+   * @Given /^(?:|I )wait$/
    *
    * @throws BehaviorException If timeout is reached
    */
@@ -512,35 +536,32 @@ class VarbaseContext extends RawDrupalContext {
    *
    * @Then /^I should see image with the "([^"]*)" title text in the rich text editor field "([^"]*)"$/
    */
-  public function iShouldSeeImageWithTheTitleTextInTheRichTextEditorField($titleText, $locator) {
-
-    $el = $this->getSession()->getPage()->findField($locator);
-    $fieldId = $el->getAttribute('id');
-
-    if (empty($fieldId)) {
-      throw new Exception('Could not find an id for the rich text editor field : ' . $locator);
-    }
-
-    $CKEditorContent = $this->getSession()->executeScript("return CKEDITOR.instances[\"$fieldId\"].getData();");
-
-    echo "<pre>";
-    print_r($CKEditorContent);
-    die(' con -- ');
-
-    // Switch to the iframe.
-    $iFreamID = $this->_getAttributeByOtherAttributeValue('id', 'title', $filedName, 'iframe');
-    $this->getSession()->switchToIFrame($iFreamID);
-
-    // Find an image with the title.
-    $element = $this->getSession()->getPage()->findAll('xpath', "//img[contains(@title, '{$titleText}')]");
-
-    if (empty($element)) {
-      throw new Exception('The page dose not have an image with the [ ' . $titleText . ' ] title text under [ '. $filedName .' ].');
-    }
-
-    // Switch back too the page from the iframe.
-    $this->getSession()->switchToIFrame(null);
-  }
+  // public function iShouldSeeImageWithTheTitleTextInTheRichTextEditorField($titleText, $locator) {
+  //
+  //   $el = $this->getSession()->getPage()->findField($locator);
+  //   $fieldId = $el->getAttribute('id');
+  //
+  //   if (empty($fieldId)) {
+  //     throw new Exception('Could not find an id for the rich text editor field : ' . $locator);
+  //   }
+  //
+  //   $CKEditorContent = $this->getSession()->executeScript("return CKEDITOR.instances[\"$fieldId\"].getData();");
+  //
+  //
+  //   // Switch to the iframe.
+  //   $iFreamID = $this->_getAttributeByOtherAttributeValue('id', 'title', $filedName, 'iframe');
+  //   $this->getSession()->switchToIFrame($iFreamID);
+  //
+  //   // Find an image with the title.
+  //   $element = $this->getSession()->getPage()->findAll('xpath', "//img[contains(@title, '{$titleText}')]");
+  //
+  //   if (empty($element)) {
+  //     throw new Exception('The page dose not have an image with the [ ' . $titleText . ' ] title text under [ '. $filedName .' ].');
+  //   }
+  //
+  //   // Switch back too the page from the iframe.
+  //   $this->getSession()->switchToIFrame(null);
+  // }
 
   /**
    * #varbase : To Find an image with the alt text attribute.
