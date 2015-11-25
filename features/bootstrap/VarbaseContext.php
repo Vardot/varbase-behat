@@ -49,7 +49,8 @@ class VarbaseContext extends RawDrupalContext {
    *
    * Example: I am a logged in user with the username "test_content_admin"
    *
-   * @Given /^I am a logged in user with the "(?P<username>[^"]*)" user$/
+   * @Given /^I am a logged in user with (?:|the )"(?P<username>[^"]*)"(?:| user)$/
+   * @Then /^I login with (?:|the )"(?P<username>[^"]*)"(?:| user)$/
    */
   public function iAmloggedInUserWithTheUser($username) {
 
@@ -75,7 +76,7 @@ class VarbaseContext extends RawDrupalContext {
    *
    * Example: I am a logged in user with the username "testing" and password "testing user password"
    *
-   * @Given /^I am a logged in user with the username "(?P<username>[^"]*)" and password "(?P<password>[^"]*)"$/
+   * @Given /^I am a logged in user with (?:|the )username "(?P<username>[^"]*)" and password "(?P<password>[^"]*)"$/
    */
   public function iAmLoggedInUserWithTheUsernameAndPassword($username, $password) {
     // Logout if I am logged in.
@@ -91,6 +92,20 @@ class VarbaseContext extends RawDrupalContext {
     $submit = $element->findButton('Log in');
     $submit->click();
   }
+
+  /**
+   * #varbase : To logout from the current session.
+   *
+   * Example: When I logout
+   *
+   * @When /^I logout$/
+   */
+   public function logout() {
+     // Logout if I am logged in.
+     if ($this->loggedIn()) {
+       $this->logout();
+     }
+   }
 
   /**
    * #varbase: To go directly to an external website.
@@ -113,10 +128,8 @@ class VarbaseContext extends RawDrupalContext {
    * Example 5:  And wait 1s
    * Example 6: When I wait for 60s
    *
-   * @When /^(?:|I )wait (?:|for )"(?P<seconds>\d+)" second$/
-   * @When /^(?:|I )wait (?:|for )"(?P<seconds>\d+)" seconds$/
-   * @When /^(?:|I )wait (?:|for )(?P<seconds>\d+) second$/
-   * @When /^(?:|I )wait (?:|for )(?P<seconds>\d+) seconds$/
+   * @When /^(?:|I )wait (?:|for )"(?P<seconds>\d+)" second(?:|s)$/
+   * @When /^(?:|I )wait (?:|for )(?P<seconds>\d+) second(?:|s)$/
    * @When /^(?:|I )wait (?:|for )(?P<seconds>\d+)s$/
    */
   public function iWaitForSeconds($seconds) {
@@ -133,10 +146,8 @@ class VarbaseContext extends RawDrupalContext {
    * Example 5:  And wait 1m
    * Example 6: When I wait for 3m
    *
-   * @When /^(?:|I )wait (?:|for )"(?P<minutes>\d+)" minute$/
-   * @When /^(?:|I )wait (?:|for )"(?P<minutes>\d+)" minutes$/
-   * @When /^(?:|I )wait (?:|for )(?P<minutes>\d+) minute$/
-   * @When /^(?:|I )wait (?:|for )(?P<minutes>\d+) minutes$/
+   * @When /^(?:|I )wait (?:|for )"(?P<minutes>\d+)" minute(?:|s)$/
+   * @When /^(?:|I )wait (?:|for )(?P<minutes>\d+) minute(?:|s)$/
    * @When /^(?:|I )wait (?:|for )(?P<minutes>\d+)m$/
    */
   public function iWaitForMinutes($minutes) {
@@ -156,14 +167,10 @@ class VarbaseContext extends RawDrupalContext {
    * Example 8: And I wait max of "5" seconds
    * Example 9: And I wait max of "5" seconds for the page to be ready and loaded
    *
-   * @Given /^(?:|I )wait max of "(?P<time>\d+)" seconds for the page to be ready and loaded$/
-   * @Given /^(?:|I )wait max of "(?P<time>\d+)" seconds$/
-   * @Given /^(?:|I )wait max of (?P<time>\d+) seconds for the page to be ready and loaded$/
-   * @Given /^(?:|I )wait max of (?P<time>\d+) seconds$/
-   * @Given /^(?:|I )wait max of (?P<time>\d+)s for the page to be ready and loaded$/
-   * @Given /^(?:|I )wait max of (?P<time>\d+)s$/
-   * @Given /^(?:|I )wait for the page$/
-   * @Given /^(?:|I )wait$/
+   * @Given /^(?:|I )wait max of "(?P<time>\d+)" second(?:|s)(?:| for the page to be ready and loaded)$/
+   * @Given /^(?:|I )wait max of (?P<time>\d+) second(?:|s)(?:| for the page to be ready and loaded)$/
+   * @Given /^(?:|I )wait max of (?P<time>\d+)s(?:| for the page to be ready and loaded)$/
+   * @Given /^(?:|I )wait(?:| for the page)$/
    *
    * @throws BehaviorException If timeout is reached
    */
@@ -209,7 +216,7 @@ class VarbaseContext extends RawDrupalContext {
    * Example 1: When I press the "Apply" button under the media browser
    * Example 2: When I press the "Submit" button under the media browser
    *
-   * @When /^I press the "([^"]*)" button under the media browser$/
+   * @When /^I press (?:|the )"([^"]*)" button under the media browser$/
    */
   public function iPressTheButtonUnderTheMediaBrowser($button) {
     // Switch to the "mediaBrowser" iframe.
@@ -232,9 +239,11 @@ class VarbaseContext extends RawDrupalContext {
   /**
    * #varbase : To click on a media browser
    *
-   * Example: When I click "Submit" button under the media browser
+   * Example 1: When I click "Submit" button under the media browser
+   * Example 2: When I click "Submit" under media browser
+   * Example 3: When I click "Upload" under the media browser
    *
-   * @When /^I click "([^"]*)" button under the media browser$/
+   * @When /^I click "([^"]*)" (?:|button )under (?:|the )media browser$/
    */
   public function iClickButtonUnderTheMediaBrowser($text) {
     // Switch to the "mediaBrowser" iframe.
@@ -256,9 +265,11 @@ class VarbaseContext extends RawDrupalContext {
   /**
    * #varbase : To click on a media browser style selector
    *
-   * Example: When I click "Submit" button under the media browser style selector
+   * Example 1: When I click "Submit" button under the media browser style selector
+   * Example 2: When I click "Submit" under media browser style selector
+   * Example 3: When I click "Submit" under the media browser style selector
    *
-   * @When /^I click "([^"]*)" button under the media browser style selector$/
+   * @When /^I click "([^"]*)" (?:|button )under (?:|the )media browser style selector$/
    */
   public function iClickButtonUnderTheMediaBrowserStyleSelector($text) {
     // Switch to the "mediaStyleSelector" iframe.
@@ -307,7 +318,7 @@ class VarbaseContext extends RawDrupalContext {
    *
    * Example 1: When I click on the "Flag Earth" file under the media browser
    *
-   * @When /^I select the "([^"]*)" file under the media browser$/
+   * @When /^I select (?:|the )"([^"]*)" file under (?:|the )media browser$/
    */
   public function iSelectTheFileUnderTheMediaBrowser($text) {
     // Switch to the "mediaBrowser" iframe.
@@ -332,9 +343,9 @@ class VarbaseContext extends RawDrupalContext {
   *
   * Example: I fill in "flag earth" for "File name" under the media browser
   *
-  * @When /^(?:|I )fill in "(?P<field>(?:[^"]|\\")*)" with "(?P<value>(?:[^"]|\\")*)" under the media browser$/
-  * @When /^(?:|I )fill in "(?P<field>(?:[^"]|\\")*)" with: under the media browser$/
-  * @When /^(?:|I )fill in "(?P<value>(?:[^"]|\\")*)" for "(?P<field>(?:[^"]|\\")*)" under the media browser$/
+  * @When /^(?:|I )fill in "(?P<field>(?:[^"]|\\")*)" with "(?P<value>(?:[^"]|\\")*)" under (?:|the )media browser$/
+  * @When /^(?:|I )fill in "(?P<field>(?:[^"]|\\")*)" with: under (?:|the )media browser$/
+  * @When /^(?:|I )fill in "(?P<value>(?:[^"]|\\")*)" for "(?P<field>(?:[^"]|\\")*)" under (?:|the )media browser$/
   */
   public function iFillInFieldUnderTheMediaBrowser($field, $value) {
     // Switch to the "mediaBrowser" iframe.
@@ -354,9 +365,9 @@ class VarbaseContext extends RawDrupalContext {
   *
   * Example: I fill in "flag earth" for "File name" under the media browser style selector
   *
-  * @When /^(?:|I )fill in "(?P<field>(?:[^"]|\\")*)" with "(?P<value>(?:[^"]|\\")*)" under the media browser style selector$/
-  * @When /^(?:|I )fill in "(?P<field>(?:[^"]|\\")*)" with: under the media browser style selector$/
-  * @When /^(?:|I )fill in "(?P<value>(?:[^"]|\\")*)" for "(?P<field>(?:[^"]|\\")*)" under the media browser style selector$/
+  * @When /^(?:|I )fill in "(?P<field>(?:[^"]|\\")*)" with "(?P<value>(?:[^"]|\\")*)" under (?:|the )media browser style selector$/
+  * @When /^(?:|I )fill in "(?P<field>(?:[^"]|\\")*)" with: under (?:|the )media browser style selector$/
+  * @When /^(?:|I )fill in "(?P<value>(?:[^"]|\\")*)" for "(?P<field>(?:[^"]|\\")*)" under (?:|the )media browser style selector$/
   */
   public function iFillInFieldUnderTheMediaBrowserStyleSelector($field, $value) {
     // Switch to the "mediaStyleSelector" iframe.
@@ -371,8 +382,14 @@ class VarbaseContext extends RawDrupalContext {
   }
 
   /**
-   * @Then /^I should see "([^"]*)" under the media browser$/
-   */
+  * #varbase : To check if we can see a text
+  *            under the media browser.
+  *
+  * Example 1: Then I should see "this text" under media browser
+  * Example 2: Then I should see "this text" under the media browser modal window
+  *
+  * @Then /^I should see "([^"]*)" under (?:|the )media browser(?:| modal window)$/
+  */
   public function iShouldSeeTextUnderTheMediaBrowser($text) {
     // Switch to the "mediaBrowser" iframe.
     $this->getSession()->switchToIFrame('mediaBrowser');
@@ -389,8 +406,14 @@ class VarbaseContext extends RawDrupalContext {
     $this->getSession()->switchToIFrame(null);
   }
 
-  /**
-   * @Then /^I should see "([^"]*)" under the media browser style selector$/
+   /**
+   * #varbase : To check if we can see a text
+   *            under the media browser style selector.
+   *
+   * Example 1: Then I should see "this text" under media browser style selector
+   * Example 2: Then I should see "this text" under the media browser style selector modal window
+   *
+   * @Then /^I should see "([^"]*)" under (?:|the )media browser style selector(?:| modal window)$/
    */
   public function iShouldSeeTextUnderTheMediaBrowserStyleSelector($text) {
     // Switch to the "mediaStyleSelector" iframe.
@@ -408,8 +431,14 @@ class VarbaseContext extends RawDrupalContext {
     $this->getSession()->switchToIFrame(null);
   }
 
-  /**
-   * @Then /^I should not see "([^"]*)" under the media browser$/
+   /**
+   * #varbase : To check if we can NOT see a text
+   *            under the media browser.
+   *
+   * Example 1: Then I should not see "this text" under media browser
+   * Example 2: Then I should not see "this text" under the media browser modal window
+   *
+   * @Then /^I should not see "([^"]*)" under (?:|the )media browser(?:| modal window)$/
    */
   public function iShouldNotSeeTextUnderTheMediaBrowser($text) {
     // Switch to the "mediaBrowser" iframe.
@@ -429,6 +458,17 @@ class VarbaseContext extends RawDrupalContext {
 
   /**
    * @Then /^I should not see "([^"]*)" under the media browser style selector$/
+   */
+
+
+   /**
+   * #varbase : To check if we can NOT see a text
+   *            under the media browser style selector.
+   *
+   * Example 1: Then I should not see "this text" under media browser style selector
+   * Example 2: Then I should not see "this text" under the media browser style selector modal window
+   *
+   * @Then /^I should not see "([^"]*)" under (?:|the )media browser style selector(?:| modal window)$/
    */
   public function iShouldNotSeeTextUnderTheMediaBrowserStyleSelector($text) {
     // Switch to the "mediaStyleSelector" iframe.
