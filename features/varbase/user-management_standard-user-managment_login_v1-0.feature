@@ -6,7 +6,7 @@ Feature: User Management - Standard User Management - Login
   Scenario: Check if the a visitor can login with a valid username and password
     Given I am on "user/login"
      When I fill in "test_authenticated" for "Username"
-      And I fill in "123123" for "Password"
+      And I fill in "dD.123123" for "Password"
       And I press "Log in"
      Then I should see "History"
       And I should see "Member for"

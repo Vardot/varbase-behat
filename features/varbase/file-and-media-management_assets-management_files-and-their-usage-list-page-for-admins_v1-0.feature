@@ -12,8 +12,8 @@ Feature: File & Media Management - Assets Management - Files and their usage lis
      Then I should see "Add file"
       And I should not see "Access denied"
 
- @javascrip
- Scenario: Check if content admins can access the Thumbnails view of files.
+  @javascrip
+  Scenario: Check if content admins can access the Thumbnails view of files.
      When I go to "admin/content/file/thumbnails"
      Then I should see "Add file"
       And I should not see "Access denied"
@@ -41,31 +41,31 @@ Feature: File & Media Management - Assets Management - Files and their usage lis
      Then I should see "Add file"
       And I should see the "Edit" in the "Flag Earth" row
 
-    @javascrip
-    Scenario: Check if content admins can edit files.
-       When I go to "admin/content/file"
-       Then I should see "Add file"
-       When I fill in "Flag Earth" for "Name"
-        And I press the "Apply" button
-       Then I should see "Flag Earth"
-       When I click "Edit"
-       Then I should see "Edit image Flag Earth"
-       When I fill in "Flag Earth after edit" for "Name *"
-        And I press the "Save" button
-       Then I should see "Image Flag Earth after edit has been updated."
-        And I should see "Edit" in the "Flag Earth after edit" row
+  @javascrip
+  Scenario: Check if content admins can edit files.
+     When I go to "admin/content/file"
+     Then I should see "Add file"
+     When I fill in "Flag Earth" for "Name"
+      And I press the "Apply" button
+     Then I should see "Flag Earth"
+     When I click "Edit"
+     Then I should see "Edit image Flag Earth"
+     When I fill in "Flag Earth after edit" for "Name *"
+      And I press the "Save" button
+     Then I should see "Image Flag Earth after edit has been updated."
+      And I should see "Edit" in the "Flag Earth after edit" row
 
-    @javascrip
-    Scenario: Check if content admins can delete files.
-       When I go to "admin/content/file"
-       Then I should see "Add file"
-       When I fill in "Flag Earth after edit" for "Name"
-        And I press the "Apply" button
-       Then I should see "Flag Earth after edit"
-       When I click "Delete"
-       Then I should see "Are you sure you want to delete the file Flag Earth after edit?"
-       When I press the "Delete" button
-       Then I should see "Image Flag Earth after edit has been deleted."
-       When I fill in "Flag Earth after edit" for "Name"
-        And I press the "Apply" button
-       Then I should not see "Flag Earth after edit"
+  @javascrip
+  Scenario: Check if content admins can delete files.
+     When I go to "admin/content/file"
+     Then I should see "Add file"
+     When I fill in "Flag Earth after edit" for "Name"
+      And I press the "Apply" button
+     Then I should see "Flag Earth after edit"
+     When I click "Delete"
+     Then I should see "Are you sure you want to delete the file Flag Earth after edit?"
+     When I press the "Delete" button
+     Then I should see "Image Flag Earth after edit has been deleted."
+     When I fill in "Flag Earth after edit" for "Name"
+      And I press the "Apply" button
+     Then I should not see "Flag Earth after edit"
