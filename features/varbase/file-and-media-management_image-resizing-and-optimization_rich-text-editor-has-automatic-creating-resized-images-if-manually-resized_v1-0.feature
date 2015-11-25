@@ -64,7 +64,7 @@ Feature: File & Media Management - Image Resizing and Optimization - Rich text e
   #     Then I should see image with the "Flag Earth" title text
 
 
-  @javascript
+  @wip @javascript
   Scenario: Check if changing the size of an embedded image in the rich text dose bring a resized image to the loaded page.
       When I go to "admin/content"
       Then I should see "Content"
