@@ -17,7 +17,7 @@ Feature: Navigational Features - Breadcrumbs - Standard breadcrumbs
       And I should see "Test Basic page root body"
 
   @javascript
-  Scenario: Add the Test Basic page root.
+  Scenario: Add the Test Basic page sub 1, then check the breadcrumb.
     Given I am a logged in user with the "test_site_admin" user
      When I go to "/node/add/page"
       And I fill in "Test Basic page sub 1 title" for "Title"
@@ -31,7 +31,7 @@ Feature: Navigational Features - Breadcrumbs - Standard breadcrumbs
       And I should see "Test Basic page root title" in the "ol" element with the "class" attribute set to "breadcrumb"
 
   @javascript
-  Scenario: Add the Test Basic page sub 2.
+  Scenario: Add the Test Basic page sub 2, then check the breadcrumb.
     Given I am a logged in user with the "test_site_admin" user
      When I go to "/node/add/page"
       And I fill in "Test Basic page sub 2 title" for "Title"
@@ -44,6 +44,3 @@ Feature: Navigational Features - Breadcrumbs - Standard breadcrumbs
       And I should see "Test Basic page sub 2 body"
       And I should see "Test Basic page sub 1 title" in the "ol" element with the "class" attribute set to "breadcrumb"
       And I should see "Test Basic page root title" in the "ol" element with the "class" attribute set to "breadcrumb"
-
-
-  # Scenario: Check if we do have standard breadcrumbs which matches all current pages
