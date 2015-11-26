@@ -703,4 +703,40 @@ class VarbaseContext extends RawDrupalContext {
     return $element->getAttribute($attributeName);
   }
 
+  /**
+   * @Then /^I should see "(?P<text>[^"]*)" in the "(?P<htmlTagName>[^"]*)" element with the "(?P<attribute>[^"]*)" attribute set to "(?P<value>[^"]*)"$/
+   */
+  public function ishouldSeeTextInTheHtmlTagElement($text, $htmlTagName, $attribute, $value) {
+
+    $elements = $this->getSession()->getPage()->findAll('css', $htmlTagName);
+    if (empty($elements)) {
+      throw new \Exception(sprintf('The element "%s" was not found in the page', $htmlTagName));
+    }
+
+    $found = FALSE;
+    foreach ($elements as $element) {
+      $actual = $this->getSession()->getPage()->getText();
+      $actual = preg_replace('/\s+/u', ' ', $actual);
+      $regex = '/'.preg_quote($text, '/').'/ui';
+
+      if (preg_match($regex, $actual)) {
+        $found = TRUE;
+        break;
+      }
+    }
+    if (!$found) {
+      throw new \Exception(sprintf('"%s" was not found in the "%s" element', $text, $htmlTagName));
+    }
+
+    if (!empty($attribute)) {
+      $attr = $element->getAttribute($attribute);
+      if (empty($attr)) {
+        throw new \Exception(sprintf('The "%s" attribute is not present on the element "%s"', $attribute, $htmlTagName));
+      }
+      if (strpos($attr, "$value") === FALSE) {
+        throw new \Exception(sprintf('The "%s" attribute does not equal "%s" on the element "%s"', $attribute, $value, $htmlTagName));
+      }
+    }
+  }
+
 }
