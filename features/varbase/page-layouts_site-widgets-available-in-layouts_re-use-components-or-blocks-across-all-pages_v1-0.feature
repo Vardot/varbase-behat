@@ -34,13 +34,13 @@ Feature: Page Layouts - Site widgets available in layouts - Re-use components or
   @javascript
   Scenario: Check that a user with a permission to customize content can add re-usabled components
     Given I am a logged in user with the "test_site_admin" user
-      When I go to "admin/content"
-      Then I should see "Content"
-      When I fill in "Test Landing page by test site admin" for "Title"
-       And I press the "Apply" button
+     When I go to "admin/content"
+     Then I should see "Content"
+     When I fill in "Test Landing page by test site admin" for "Title"
+      And I press the "Apply" button
       And I wait for AJAX to finish
-      Then I should see "Test Landing page by test site admin"
-      When I click "Test Landing page by test site admin"
+     Then I should see "Test Landing page by test site admin"
+     When I click "Test Landing page by test site admin"
       And I wait for AJAX to finish
       And I click "Customize this page"
       And I wait for AJAX to finish
