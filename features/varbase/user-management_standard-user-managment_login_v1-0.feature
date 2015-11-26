@@ -8,11 +8,13 @@ Feature: User Management - Standard User Management - Login
      When I fill in "test_authenticated" for "Username"
       And I fill in "dD.123123" for "Password"
       And I press "Log in"
+      And wait
      Then I should see "History"
       And I should see "Member for"
 
   Scenario: Check a fail to enter username or password
     Given I am on "user/login"
      When I press "Log in"
+      And wait
      Then I should see "Username field is required"
       And I should see "Password field is required"
