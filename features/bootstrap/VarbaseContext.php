@@ -504,6 +504,12 @@ class VarbaseContext extends RawDrupalContext {
     $el = $this->getSession()->getPage()->findField($locator);
     $fieldId = $el->getAttribute('id');
 
+    // If the WYSIWYG is in an ifream with no id.
+    $iFreamID = $this->_getAttributeByOtherAttributeValue('id', 'title', "Rich Text Editor, ". $el->getAttribute('id'), 'iframe');
+    if (!empty($iFreamID) && $fieldId = NULL) {
+      $fieldId = $iFreamID;
+    }
+
     if (empty($fieldId)) {
       throw new Exception('Could not find an id for the rich text editor field : ' . $locator);
     }
@@ -576,32 +582,32 @@ class VarbaseContext extends RawDrupalContext {
    *
    * @Then /^I should see image with the "([^"]*)" title text in the rich text editor field "([^"]*)"$/
    */
-  // public function iShouldSeeImageWithTheTitleTextInTheRichTextEditorField($titleText, $locator) {
-  //
-  //   $el = $this->getSession()->getPage()->findField($locator);
-  //   $fieldId = $el->getAttribute('id');
-  //
-  //   if (empty($fieldId)) {
-  //     throw new Exception('Could not find an id for the rich text editor field : ' . $locator);
-  //   }
-  //
-  //   $CKEditorContent = $this->getSession()->executeScript("return CKEDITOR.instances[\"$fieldId\"].getData();");
-  //
-  //
-  //   // Switch to the iframe.
-  //   $iFreamID = $this->_getAttributeByOtherAttributeValue('id', 'title', $filedName, 'iframe');
-  //   $this->getSession()->switchToIFrame($iFreamID);
-  //
-  //   // Find an image with the title.
-  //   $element = $this->getSession()->getPage()->findAll('xpath', "//img[contains(@title, '{$titleText}')]");
-  //
-  //   if (empty($element)) {
-  //     throw new Exception('The page dose not have an image with the [ ' . $titleText . ' ] title text under [ '. $filedName .' ].');
-  //   }
-  //
-  //   // Switch back too the page from the iframe.
-  //   $this->getSession()->switchToIFrame(null);
-  // }
+  public function iShouldSeeImageWithTheTitleTextInTheRichTextEditorField($titleText, $locator) {
+
+    $el = $this->getSession()->getPage()->findField($locator);
+    $fieldId = $el->getAttribute('id');
+
+    if (empty($fieldId)) {
+      throw new Exception('Could not find an id for the rich text editor field : ' . $locator);
+    }
+
+    $CKEditorContent = $this->getSession()->executeScript("return CKEDITOR.instances[\"$fieldId\"].getData();");
+
+
+    // Switch to the iframe.
+    $iFreamID = $this->_getAttributeByOtherAttributeValue('id', 'title', $filedName, 'iframe');
+    $this->getSession()->switchToIFrame($iFreamID);
+
+    // Find an image with the title.
+    $element = $this->getSession()->getPage()->findAll('xpath', "//img[contains(@title, '{$titleText}')]");
+
+    if (empty($element)) {
+      throw new Exception('The page dose not have an image with the [ ' . $titleText . ' ] title text under [ '. $filedName .' ].');
+    }
+
+    // Switch back too the page from the iframe.
+    $this->getSession()->switchToIFrame(null);
+  }
 
   /**
    * #varbase : To Find an image with the alt text attribute.
@@ -704,8 +710,13 @@ class VarbaseContext extends RawDrupalContext {
   }
 
   /**
-   * @Then /^I should see "(?P<text>[^"]*)" in the "(?P<htmlTagName>[^"]*)" element with the "(?P<attribute>[^"]*)" attribute set to "(?P<value>[^"]*)"$/
-   */
+  * #varbase: To check if we do have the text in the selected element.
+  *
+  * Example 1: And I should see "your text" in the "ol" element with the "class" attribute set to "breadcrumb"
+  * Example 2: And I should see "your text" in the "div" element with the "id" attribute set to "right-panel"
+  *
+  * @Then /^I should see "(?P<text>[^"]*)" in the "(?P<htmlTagName>[^"]*)" element with the "(?P<attribute>[^"]*)" attribute set to "(?P<value>[^"]*)"$/
+  */
   public function ishouldSeeTextInTheHtmlTagElement($text, $htmlTagName, $attribute, $value) {
 
     $elements = $this->getSession()->getPage()->findAll('css', $htmlTagName);
@@ -715,7 +726,7 @@ class VarbaseContext extends RawDrupalContext {
 
     $found = FALSE;
     foreach ($elements as $element) {
-      $actual = $this->getSession()->getPage()->getText();
+      $actual = $element->getText();
       $actual = preg_replace('/\s+/u', ' ', $actual);
       $regex = '/'.preg_quote($text, '/').'/ui';
 
@@ -737,6 +748,262 @@ class VarbaseContext extends RawDrupalContext {
         throw new \Exception(sprintf('The "%s" attribute does not equal "%s" on the element "%s"', $attribute, $value, $htmlTagName));
       }
     }
+  }
+
+  /**
+  * #varbase: To click on the text in the selected element.
+  *
+  * Example 1: And I click "your text" in the "ol" element with the "class" attribute set to "breadcrumb"
+  * Example 2: And I click "your text" in the "div" element with the "id" attribute set to "right-panel"
+  *
+  * @Then /^I click "(?P<text>[^"]*)" in the "(?P<htmlTagName>[^"]*)" element with the "(?P<attribute>[^"]*)" attribute set to "(?P<value>[^"]*)"$/
+  */
+  public function iClickTextInTheHtmlTagElement($text, $htmlTagName, $attribute, $value) {
+
+    $elements = $this->getSession()->getPage()->findAll('css', $htmlTagName);
+    if (empty($elements)) {
+      throw new \Exception(sprintf('The element "%s" was not found in the page', $htmlTagName));
+    }
+
+    $found = FALSE;
+    foreach ($elements as $element) {
+      $actual = $element->getText();
+      $actual = preg_replace('/\s+/u', ' ', $actual);
+      $regex = '/'.preg_quote($text, '/').'/ui';
+
+      if (preg_match($regex, $actual)) {
+        $found = TRUE;
+        $element->click();
+        break;
+      }
+    }
+    if (!$found) {
+      throw new \Exception(sprintf('"%s" was not found in the "%s" element', $text, $htmlTagName));
+    }
+
+    if (!empty($attribute)) {
+      $attr = $element->getAttribute($attribute);
+      if (empty($attr)) {
+        throw new \Exception(sprintf('The "%s" attribute is not present on the element "%s"', $attribute, $htmlTagName));
+      }
+      if (strpos($attr, "$value") === FALSE) {
+        throw new \Exception(sprintf('The "%s" attribute does not equal "%s" on the element "%s"', $attribute, $value, $htmlTagName));
+      }
+    }
+
+  }
+
+  /**
+  * #varbase: To check if we do have the text in the selected panel region.
+  *           using the code name of the panel region. or the html id.
+  *
+  * Example 1: Then I should see "Add new pane" in the "Center" panel region
+  * Example 2: Then I should see "custom pane title" in the "Right side" panel region
+  * Example 3: Then I should see "Add new pane" in the "panels-ipe-regionid-center" panel region
+  *
+  * @Then /^I should see "(?P<text>[^"]*)" in the "(?P<panleRegion>[^"]*)" panel region$/
+  */
+  public function iShouldSeeInThePanelRegion($text, $panleRegion) {
+
+    if (strpos($panleRegion, "panels-ipe-regionid-")) {
+      $panleRegionId = $panleRegion;
+    }
+    else {
+      $panleRegionId = "panels-ipe-regionid-" . str_replace(' ', '-', strtolower($panleRegion));
+    }
+
+    $elementPanelRegion = $this->getSession()->getPage()->find('xpath', "//*[contains(@id, '{$panleRegionId}')]");
+    if (empty($elementPanelRegion)) {
+      throw new Exception('The panle region [ ' . $panleRegion . ' ] is not in the page.');
+    }
+
+    $element = $this->getSession()->getPage()->find('xpath', "//*[contains(@id, '{$panleRegionId}')]//*[text()='{$text}']");
+    if (empty($element)) {
+      throw new Exception('The panle region "' . $panleRegion . '" dose not have "'. $text .'" in it.');
+    }
+  }
+
+  /**
+  * #varbase: To check if we do not have the text in the selected panel region.
+  *           using the code name of the panel region. or the html id.
+  *
+  * Example 1: Then I should not see "Add new pane" in the "Center" panel region
+  * Example 2: Then I should not see "custom pane title" in the "Right side" panel region
+  * Example 3: Then I should not see "Add new pane" in the "panels-ipe-regionid-center" panel region
+  *
+  * @Then /^I should not see "(?P<text>[^"]*)" in the "(?P<panleRegion>[^"]*)" panel region$/
+  */
+  public function iShouldNotSeeInThePanelRegion($text, $panleRegion) {
+
+    if (strpos($panleRegion, "panels-ipe-regionid-")) {
+      $panleRegionId = $panleRegion;
+    }
+    else {
+      $panleRegionId = "panels-ipe-regionid-" . str_replace(' ', '-', strtolower($panleRegion));
+    }
+
+    $elementPanelRegion = $this->getSession()->getPage()->find('xpath', "//*[contains(@id, '{$panleRegionId}')]");
+    if (empty($elementPanelRegion)) {
+      throw new Exception('The panle region [ ' . $panleRegion . ' ] is not in the page.');
+    }
+
+    $element = $this->getSession()->getPage()->find('xpath', "//*[contains(@id, '{$panleRegionId}')]//*[text()='{$text}']");
+    if (!empty($element)) {
+      throw new Exception('The panle region "' . $panleRegion . '" dose have "'. $text .'" in it.');
+    }
+  }
+
+  /**
+  * #varbase: To click on the text in the selected panel region.
+  *           using the code name of the panel region. or the html id.
+  *
+  *
+  * Example 1: When I click "Add new pane" in the "center" panel region
+  * Example 2: When I click "Region style" in the "left" panel region
+  * Example 3: When I click "Add new pane" in the "panels-ipe-regionid-center" panel region
+  *
+  * @When /^I click "(?P<text>[^"]*)" in the "(?P<panleRegion>[^"]*)" panel region$/
+  */
+  public function iClickInThePanelRegion($text, $panleRegion) {
+
+    if (strpos($panleRegion, "panels-ipe-regionid-")) {
+      $panleRegionId = $panleRegion;
+    }
+    else {
+      $panleRegionId = "panels-ipe-regionid-" . str_replace(' ', '-', strtolower($panleRegion));
+    }
+
+    $elementpanelRegion = $this->getSession()->getPage()->find('xpath', "//*[contains(@id, '{$panleRegionId}')]");
+    if (empty($elementpanelRegion)) {
+      throw new Exception('The panle region [ ' . $panleRegion . ' ] is not in the page.');
+    }
+
+    $element = $this->getSession()->getPage()->find('xpath', "//*[contains(@id, '{$panleRegionId}')]//*[text()='{$text}']");
+    if (empty($element)) {
+      throw new Exception('The panle region "' . $panleRegion . '" dose not have "'. $text .'".');
+    }
+
+    $element->click();
+  }
+
+  // Alert Functions.
+  // ===========================================================================
+
+  /**
+  * #varbase: To accept alert if present.
+  *
+  * Example 1: When I accept alert
+  * Example 2: And accept alert
+  *
+  * @when /^(?:|I )accept alert$/
+  */
+  public function acceptAlert() {
+    try {
+      $this->getSession()->getDriver()->getWebDriverSession()->accept_alert();
+    } catch(\WebDriver\Exception $e) {
+      // no-op, alert might not be present
+    }
+  }
+
+  /**
+  * #varbase: To dismiss alert if present.
+  *
+  * Example 1: When I dismiss alert
+  * Example 2: And dismiss alert
+  *
+  * @when /^(?:|I )dismiss alert$/
+  */
+  public function iDismissAlert() {
+    try {
+      $this->getSession()->getDriver()->getWebDriverSession()->dismiss_alert();
+    } catch(\WebDriver\Exception $e) {
+      // no-op, alert might not be present
+    }
+  }
+
+  /**
+  * #varbase: To print the text of the current alert message.
+  *
+  * Example 1: When I print alert text
+  * Example 2: And print alert text
+  *
+  * @When /^(?:|I ) print alert text$/
+  */
+  public function iPrintAlertText() {
+    try {
+      return $this->getSession()->getDriver()->getWebDriverSession()->getAlert_text();
+    } catch(\WebDriver\Exception $e) {
+      // no-op, alert might not be present
+    }
+  }
+
+
+  /**
+  * #varbase: To fill a text in the alert message.
+  *
+  * Example 1: When I fill "See this alert" in alert
+  * Example 2:  And fill "See this text" in alert
+  *
+  * @When /^(?:|I )fill "(?P<text>[^"]*)" in alert$/
+  */
+  public function iFillInAlert($message) {
+    try {
+      $this->getSession()->getDriver()->getWebDriverSession()->postAlert_text($message);
+    } catch(\WebDriver\Exception $e) {
+      // no-op, alert might not be present
+    }
+  }
+  // ===========================================================================
+
+  /**
+	 * Accept Alerts Before going to the next step.
+	 *
+   *  @BeforeStep @AcceptAlertsBeforStep
+   */
+   public function beforeStepAcceptAlert(BeforeStepScope $scope) {
+    try {
+    	$this->getSession()->getDriver()->getWebDriverSession()->accept_alert();
+    } catch(\WebDriver\Exception $e) {
+    	// no-op, alert might not be present
+    }
+	 }
+
+  /**
+	 * Accept Alerts After going to the next step.
+	 *
+   *  @AftereStep @AcceptAlertsAfterStep
+   */
+   public function afterStepAcceptAlert(AfterStepScope $scope) {
+      try {
+      	$this->getSession()->getDriver()->getWebDriverSession()->accept_alert();
+      } catch(\WebDriver\Exception $e) {
+      	// no-op, alert might not be present
+      }
+	}
+
+
+  /**
+  * #varbase: To fill a text in the alert message.
+  *
+  * Example 1: Given I drag and drop ".element-item" to ".target"
+  * Example 2: When I drag and drop "#panels-ipe-regionid-left .panels-ipe-portlet-wrapper" to "#panels-ipe-regionid-center .panels-ipe-sort-container"
+  *
+  * @Given /^I drag and drop "([^"]*)" to "([^"]*)"$/
+  */
+  public function iDragAndDropTo($draggedElement, $targetElement) {
+
+    $dragged = $this->getSession()->getPage()->find('css', $draggedElement);
+    if (empty($dragged)) {
+     throw new Exception('The selected dragged element [ ' . $draggedElement . ' ] is not in the page.');
+    }
+
+    $target = $this->getSession()->getPage()->find('css', $targetElement);
+    if (empty($target)) {
+     throw new Exception('The selected target element [ ' . $targetElement . ' ] is not in the page.');
+    }
+
+    $this->getSession()->getDriver()->evaluateScript("jQuery('{$draggedElement}').detach().prependTo('{$targetElement}');");
+
   }
 
 }
