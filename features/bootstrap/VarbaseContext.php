@@ -979,7 +979,34 @@ class VarbaseContext extends RawDrupalContext {
       } catch(\WebDriver\Exception $e) {
       	// no-op, alert might not be present
       }
-	}
+	 }
+
+   /**
+    * Accept Alerts Before going to the next step.
+    *
+    *  @BeforeStep @AcceptAlertsBeforStep
+    */
+    public function beforeStepDismissAlert(BeforeStepScope $scope) {
+     try {
+       $this->getSession()->getDriver()->getWebDriverSession()->dismiss_alert();
+     } catch(\WebDriver\Exception $e) {
+       // no-op, alert might not be present
+     }
+    }
+
+   /**
+    * Accept Alerts After going to the next step.
+    *
+    *  @AftereStep @DismissAlertsAfterStep
+    */
+    public function afterStepDismissAlert(AfterStepScope $scope) {
+       try {
+         $this->getSession()->getDriver()->getWebDriverSession()->dismiss_alert();
+       } catch(\WebDriver\Exception $e) {
+         // no-op, alert might not be present
+       }
+   }
+
 
 
   /**
