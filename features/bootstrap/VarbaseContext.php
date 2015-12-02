@@ -1,9 +1,7 @@
 <?php
 
-use Drupal\DrupalExtension\Context\DrupalContext;
+use Behat\Behat\Tester\Exception\PendingException;
 use Drupal\DrupalExtension\Context\RawDrupalContext;
-use Drupal\Driver\DrupalDriver;
-use Behat\MinkExtension\Context;
 use Behat\Behat\Context\SnippetAcceptingContext;
 use Behat\Gherkin\Node\PyStringNode;
 use Behat\Gherkin\Node\TableNode;
@@ -11,7 +9,7 @@ use Behat\Gherkin\Node\TableNode;
 /**
  * Defines application features from the specific context.
  */
-class VarbaseContext extends RawDrupalContext {
+class VarbaseContext extends RawDrupalContext implements SnippetAcceptingContext {
 
   /**
   * Hold the user name and password from drupal_users parameters.
