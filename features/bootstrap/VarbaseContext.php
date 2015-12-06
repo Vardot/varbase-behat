@@ -502,11 +502,14 @@ class VarbaseContext extends RawDrupalContext implements SnippetAcceptingContext
     $el = $this->getSession()->getPage()->findField($locator);
     $fieldId = $el->getAttribute('id');
 
-    // If the WYSIWYG is in an ifream with no id.
-    $iFreamID = $this->_getAttributeByOtherAttributeValue('id', 'title', "Rich Text Editor, ". $el->getAttribute('id'), 'iframe');
-    if (!empty($iFreamID) && $fieldId = NULL) {
-      $fieldId = $iFreamID;
+    if ($fieldId == NULL) {
+      // If the WYSIWYG is in an ifream with no id.
+      $iFreamID = $this->_getAttributeByOtherAttributeValue('id', 'title', "Rich Text Editor, ". $el->getAttribute('id'), 'iframe');
+      if (!empty($iFreamID)) {
+        $fieldId = $iFreamID;
+      }
     }
+
 
     if (empty($fieldId)) {
       throw new Exception('Could not find an id for the rich text editor field : ' . $locator);
