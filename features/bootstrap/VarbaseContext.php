@@ -14,12 +14,12 @@ class VarbaseContext extends RawDrupalContext implements SnippetAcceptingContext
   /**
   * Hold the user name and password from drupal_users parameters.
   */
-  protected $users;
+  protected $users = array();
 
   /**
   * Hold the user name and password from varbase_users parameters.
   */
-  protected $varbase_users;
+  protected $varbase_users = array();
 
   /**
    * Initializes context.
