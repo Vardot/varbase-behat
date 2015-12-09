@@ -17,6 +17,19 @@ default:
         - Drupal\DrupalExtension\Context\MinkContext
         - Drupal\DrupalExtension\Context\MarkupContext
         - Drupal\DrupalExtension\Context\BatchContext
+        - SelectorsContext:
+           parameters:
+             selectors:
+               css:
+                 breadcrumb: ".breadcrumb"
+                 breadcrumb first link: ".breadcrumb li:nth-child(1) a"
+                 image button in rich text editor body field: "#cke_edit-body-und-0-value .cke_button__image"
+               xpath:
+                 page title: "//h1[contains(@class, 'page-header')"
+                 textarea for body field: "//*[@id='edit-body-und-0-value']"
+                 rich text editor for body field: "//iframe[@title='Rich Text Editor, edit-body-und-0-value']"
+                 HTML editor for body field: "//*[@id='edit-body-und-0-value-aced']"
+
   extensions:
     Behat\MinkExtension:
       files_path: "%paths.base%/assets/"
@@ -39,11 +52,12 @@ default:
       drush:
         root: "/var/www/html/varbase_behat/varbase-7-x-3-0-alpha3/docroot"
       region_map:
-        content: "#content"
+        content: ".main-container"
         footer: "#footer"
         left header: "#header-left"
         right header: "#header-right"
         right sidebar: "#aside-region"
+        field body: "#edit-body"
       selectors:
         message_selector: '.messages'
         error_message_selector: '.messages.error'
