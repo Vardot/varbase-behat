@@ -20,16 +20,25 @@ default:
         - SelectorsContext:
            parameters:
              selectors:
+               ## Add all css selectors which you will use in most features.
                css:
                  breadcrumb: ".breadcrumb"
                  breadcrumb first link: ".breadcrumb li:nth-child(1) a"
                  image button in rich text editor body field: "#cke_edit-body-und-0-value .cke_button__image"
-               xpath:
-                 page title: "//h1[contains(@class, 'page-header')"
-                 textarea for body field: "//*[@id='edit-body-und-0-value']"
-                 rich text editor for body field: "//iframe[@title='Rich Text Editor, edit-body-und-0-value']"
-                 HTML editor for body field: "//*[@id='edit-body-und-0-value-aced']"
 
+               ## Add all XPath selectors which you will use in most features.
+               xpath:
+                 page title: '//h1[contains(@class, "page-header")'
+                 textarea for body field: '//*[@id="edit-body-und-0-value"]'
+                 rich text editor for body field: '//iframe[@title="Rich Text Editor, edit-body-und-0-value"]'
+                 HTML editor for body field: '//*[@id="edit-body-und-0-value-aced"]'
+
+             ## You can add list of selectorrs which you will use in most features.
+             #  But by loading them from files.
+             files_path: "%paths.base%/selectors/"
+             files:
+               - "varbase/front-end-selectors.yml"
+               - "varbase/back-end-selectors.yml"
   extensions:
     Behat\MinkExtension:
       files_path: "%paths.base%/assets/"

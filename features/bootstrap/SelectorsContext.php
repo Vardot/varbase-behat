@@ -12,13 +12,30 @@ use Behat\Mink\Exception\ExpectationException;
 
 use Behat\Behat\Hook\Scope\BeforeScenarioScope;
 
+use Symfony\Component\Yaml\Yaml;
+
 /**
  * Defines application features from the specific context.
  */
 class SelectorsContext extends RawDrupalContext implements SnippetAcceptingContext {
 
-  protected $cssSelectors;
-  protected $xpathSelectors;
+  /**
+   * Holed a list of CSS Selectors.
+   * @var array
+   */
+  protected $cssSelectors = array();
+
+  /**
+   * Holed a list of XPaht Selectors.
+   * @var array
+   */
+  protected $xpathSelectors = array();
+
+  /**
+   * Holed the file path for where we could have selector files.
+   * @var string
+   */
+  protected $filesPath = '';
 
   /**
    * Initializes context.
@@ -30,18 +47,59 @@ class SelectorsContext extends RawDrupalContext implements SnippetAcceptingConte
   public function __construct(array $parameters) {
 
     if (isset($parameters['selectors'])) {
-      if (isset($parameters['selectors']['css']) || isset($parameters['selectors']['xpath'])) {
+      if (isset($parameters['selectors']['css']) ||
+         isset($parameters['selectors']['xpath']) ||
+         (isset($parameters['files_path']) &&
+          isset($parameters['files']))) {
 
-       if (isset($parameters['selectors']['css']) && count($parameters['selectors']['css'])) {
+       if (isset($parameters['selectors']['css']) &&
+           count($parameters['selectors']['css'])) {
         $this->cssSelectors = $parameters['selectors']['css'];
        }
 
-       if (isset($parameters['selectors']['xpath']) && count($parameters['selectors']['xpath'])) {
+       if (isset($parameters['selectors']['xpath']) &&
+           count($parameters['selectors']['xpath'])) {
         $this->xpathSelectors = $parameters['selectors']['xpath'];
        }
+
+       if (isset($parameters['files_path']) &&
+           $parameters['files_path'] != '' &&
+           isset($parameters['files']) &&
+           count($parameters['files'])) {
+
+         $this->filesPath = $parameters['files_path'];
+
+         foreach ($parameters['files'] as $selectorFile) {
+
+           // Get the content of the selector file.
+           $fileContent = file_get_contents($this->filesPath . $selectorFile);
+           if (!empty($fileContent) && $fileContent != '') {
+             $fileSelectors = Yaml::parse($fileContent);
+
+             // Add all list of CSS selectors to the cssSelectors Array.
+             if (isset($fileSelectors['css']) && count($fileSelectors['css'])) {
+                foreach ($fileSelectors['css'] as $selectorName => $cssSelecter) {
+                  $this->cssSelectors[$selectorName] = $cssSelecter;
+                }
+             }
+
+             // Add all list of XPath selectors to the xpathSelectors Array.
+             if (isset($fileSelectors['xpath']) && count($fileSelectors['xpath'])) {
+               foreach ($fileSelectors['xpath'] as $selectorName => $xpathSelector) {
+                 $this->xpathSelectors[$selectorName] = $xpathSelector;
+               }
+             }
+
+           }
+           else {
+             throw new Exception('The file "' . $this->filesPath . $selectorFile . '" is empty or does not exist under SelectorsContext');
+           }
+         }
+       }
+
       }
       else {
-        throw new Exception('behat.yml should include "selectors" with css or xpath property. under SelectorsContext');
+        throw new Exception('behat.yml should include "selectors" with css, xpath, files_path, and files parametars. under SelectorsContext');
       }
     }
   }
@@ -114,6 +172,7 @@ class SelectorsContext extends RawDrupalContext implements SnippetAcceptingConte
    * Example 2:  And I add "Dashboard" selector for "//*[@id='navbar-link-admin-dashboard']" xpath selector
    * Example 3:  And I add "Vertical orientation" selector for "//*[@id='navbar-item--2-tray']/div/div[2]/div/button" xpath selector
    *
+   *
    *         You could add in the behat.yml file so that you do not need
    *         to add the most general selectors in your features.
    *          default:
@@ -126,39 +185,102 @@ class SelectorsContext extends RawDrupalContext implements SnippetAcceptingConte
    *                         css:
    *                           breadcrumb first link: ".breadcrumb li:nth-child(1) a"
    *                         xpath:
-   *                           page title: "//h1[contains(@class, 'page-header')"
+   *                           page title: '//h1[contains(@class, "page-header")'
    *
-   * @When /^I add "(?P<selectorName>[^"]*)" selector for "(?P<xpathSelecter>[^"]*)" xpath selector$/
+   * @When /^I add "(?P<selectorName>[^"]*)" selector for "(?P<xpathSelector>[^"]*)" xpath selector$/
    */
-   public function addSelectorNameForXPathSelector($selectorName, $xpathSelecter) {
-     if (!empty($selectorName) && $selectorName != '' && !empty($xpathSelecter) && $xpathSelecter != '') {
+   public function addSelectorNameForXPathSelector($selectorName, $xpathSelector) {
+     if (!empty($selectorName) && $selectorName != '' && !empty($xpathSelector) && $xpathSelector != '') {
        // Add the selector name for the XPath selector to the selectors array.
-       $this->xpathSelectors[$selectorName] = $xpathSelecter;
+       $this->xpathSelectors[$selectorName] = $xpathSelector;
 
        // Registor the name for the XPath selecor.
        $selectorHandler = $this->getSession()->getSelectorsHandler()->getSelector('named');
-       $selectorHandler->registerNamedXpath($selectorName, $xpathSelecter);
+       $selectorHandler->registerNamedXpath($selectorName, $xpathSelector);
      }
      else {
       throw new Exception('The selector name and the XPath selector must not be empty.');
      }
    }
 
+   /**
+   * #Selector : To add a new selector name with a css selector.
+   *
+   * Exmaple 1: When I load selectors from "" file
+   * Example 2:  And I add "breadcrumb" selector for ".breadcrumb" css selector
+   * Example 3:  And I add "breadcrumb first link" selector for ".breadcrumb li:nth-child(1) a" css selector
+   *
+   *
+   * @When /^I add selectors from "(?P<fileName>[^"]*)" file$/
+   */
+  public function IAddSelectorsFromFile($fileName) {
 
-  function getElements($element, $selector) {
-     try {
-         $nodes = $element->find('named', $selector);
-     } catch (Exception $e) {
-         $nodes = array();
-     }
-     if (count($nodes) == 0) {
-         $nodes = $element->find('css', $selector);
-     }
-     return $nodes;
+    if (!empty($fileName) && $fileName != '' &&
+        isset($this->filesPath) && $this->filesPath != '') {
+
+      // Get the content of the file.
+      $fileContent = file_get_contents($this->filesPath . $fileName);
+
+      if (!empty($fileContent) && $fileContent != '') {
+        $fileSelectors = Yaml::parse($fileContent);
+
+        // Register all CSS selectors in the file.
+        if (isset($fileSelectors['css']) && count($fileSelectors['css'])) {
+          foreach ($fileSelectors['css'] as $selectorName => $cssSelecter) {
+            // Add the css selector to the css selector array.
+            $this->cssSelectors[$selectorName] = $cssSelecter;
+
+            // Translate the CSS selector to XPath selector
+            $css = new CssSelector();
+            $xpathSelector = $css->translateToXPath($cssSelecter);
+
+            // Registor the name for the CSS selecor.
+            $selectorHandler = $this->getSession()->getSelectorsHandler()->getSelector('named');
+            $selectorHandler->registerNamedXpath($selectorName, $xpathSelector);
+          }
+        }
+
+        // Register all XPath selectors in the file.
+        if (isset($fileSelectors['xpath']) && count($fileSelectors['xpath'])) {
+         foreach ($fileSelectors['xpath'] as $selectorName => $xpathSelector) {
+           // Add the selector name for the XPath selector to the xpath selectors array.
+           $this->xpathSelectors[$selectorName] = $xpathSelector;
+
+           // Registor the name for the XPath selecor.
+           $selectorHandler = $this->getSession()->getSelectorsHandler()->getSelector('named');
+           $selectorHandler->registerNamedXpath($selectorName, $xpathSelector);
+         }
+        }
+
+      }
+      else {
+        throw new Exception('The file "' . $this->filesPath . $fileName . '" is empty or does not exist under SelectorsContext');
+      }
+    }
+    else {
+     throw new Exception('No file name or the file_path parameter is not right in the behat.yml file');
+    }
   }
 
-  function getPageElements($selector) {
-     return $this->getElements($this->getSession()->getPage(), $selector);
+  /**
+  * #Selector : To print list of CSS selectors which has been registered.
+  *
+  * Exmaple : When I print css selectors
+  *
+  * @Then /^(?:|I )print css selectors$/
+  */
+  public function printCssSelectors() {
+    echo Yaml::dump($this->cssSelectors);
   }
 
+   /**
+   * #Selector : To print list of XPath selectors which has been registered.
+   *
+   * Exmaple : When I print xpath selectors
+   *
+   * @Then /^(?:|I )print xpath selectors$/
+   */
+   public function printXPathSelectors() {
+     echo Yaml::dump($this->xpathSelectors);
+   }
 }
