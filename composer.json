@@ -6,16 +6,17 @@
   "license":      "GPL-2.0+",
 
   "authors": [
-      {
-          "name":      "Rajab Natshah",
-          "email":     "r.natshah@vardot.com",
-          "homepage":  "http://vardot.com"
-      }
+    {
+      "name":     "Rajab Natshah",
+      "email":    "r.natshah@vardot.com",
+      "homepage": "http://vardot.com"
+    }
   ],
   "require": {
     "behat/behat": "3.*@stable",
     "drupal/drupal-extension": "3.*@stable",
     "behat/mink-zombie-driver": "@stable",
+    "behatch/contexts": "*",
     "phpunit/phpunit": "3.*@stable"
   },
   "config": {

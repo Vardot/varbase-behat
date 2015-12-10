@@ -17,6 +17,17 @@ default:
         - Drupal\DrupalExtension\Context\MinkContext
         - Drupal\DrupalExtension\Context\MarkupContext
         - Drupal\DrupalExtension\Context\BatchContext
+        - behatch:browser:
+            timeout: 1
+        - behatch:debug:
+            screenshotDir: "."
+        - behatch:json:
+            evaluationMode: javascript
+        - behatch:rest
+        - behatch:system:
+            root: "."
+        - behatch:table
+        - behatch:xml
         - SelectorsContext:
            parameters:
              selectors:
@@ -72,6 +83,7 @@ default:
         error_message_selector: '.messages.error'
         success_message_selector: '.messages.status'
         warning_message_selector: '.messages.warning'
+    Sanpi\Behatch\Extension: ~
 drush:
   suites:
     default:
@@ -107,3 +119,4 @@ drush:
       region_map:
         left sidebar: "#sidebar-first"
         content: "#content"
+    Sanpi\Behatch\Extension: ~
