@@ -1,4 +1,4 @@
-    Varbase Behat is a set of Gherkin Features and custom Varbase Context with
+Varbase Behat is a set of Gherkin Features and custom Varbase Context with
   custom step definitions, and assets, which help in the automatic testing
   for varbase websites.
 
@@ -43,12 +43,7 @@ $ curl -sS https://getcomposer.org/installer | php
 $ php composer.phar install
 
 --------------------------------------------------------------------------------
-6. Initializes behat.
-
-   $ bin/behat --init
-
---------------------------------------------------------------------------------
-7. Open a new terminal window then start selenium2 at the port 4445. You can
+6. Open a new terminal window then start selenium2 at the port 4445. You can
    change the port number by changing the parameter.
 
     "wd_host: 127.0.0.1:4445/wd/hub" in the behat.varbase.yml file.
@@ -56,22 +51,22 @@ $ php composer.phar install
 $ java -jar selenium-server-standalone-2.48.2.jar -port 4445
 
 --------------------------------------------------------------------------------
-8. Run the behat command at /var/www/html/varbase_behat/varbase-7-x-3-0-alpha3/behat/
+7. Run the behat command at /var/www/html/varbase_behat/varbase-7-x-3-0-alpha3/behat/
 
 $ bin/behat features/example.feature
 
 --------------------------------------------------------------------------------
-9. Run this command.
+8. Run this command.
 $ bin/behat features/google/google-search.feature
 
 --------------------------------------------------------------------------------
-10. Run this command with the .feature file to run the Gherkin Script in it to the installed site.
+9. Run this command with the .feature file to run the Gherkin Script in it to the installed site.
 
 $ bin/behat features/varbase/your-gherkin-feature.feature
 $ bin/behat features/project-name/your-gherkin-feature.feature
 
 --------------------------------------------------------------------------------
-11. Run this command to print all available step definitions
+10. Run this command to print all available step definitions
 
 $ bin/behat -di
 
@@ -80,7 +75,7 @@ $ bin/behat -di
     - use -d 'needle' to find specific definitions.
 
 --------------------------------------------------------------------------------
-12. All Varbase custom step definitions are tagged with #varbase tag.
+11. All Varbase custom step definitions are tagged with #varbase tag.
 
   Example : after a run for  bin/behat -di command.
 ================================================================================
