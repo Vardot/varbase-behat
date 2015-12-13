@@ -20,12 +20,12 @@ default:
         - behatch:browser:
             timeout: 1
         - behatch:debug:
-            screenshotDir: "."
+            screenshotDir: "%paths.base%/screenshots/"
         - behatch:json:
             evaluationMode: javascript
         - behatch:rest
         - behatch:system:
-            root: "."
+            root: "/var/www/html/varbase_behat/varbase-7-x-3-0-alpha3/docroot"
         - behatch:table
         - behatch:xml
         - SelectorsContext:
