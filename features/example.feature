@@ -1,6 +1,9 @@
-Feature: Example
+Feature: Have a look at some of Vardot's team and personals.
+ As a Client
+ I want to be able to see some of Vardot's staff
+ So that I will have an idea of personals they have
 
-  Scenario: Go to about page with no visual view.
+  Scenario: Check the about page.
     Given I go to "https://www.vardot.com" website
      When I click "About"
       And wait
