@@ -536,6 +536,65 @@ class VarbaseContext extends RawDrupalContext implements SnippetAcceptingContext
 
     $this->getSession()->executeScript("CKEDITOR.instances[\"$fieldId\"].execCommand( '$selectorCommand' );");
   }
+
+
+  /**
+  * #varbase : To append text at the end of a rich text editor field  WYSIWYG with content
+  *            using the name of the field.
+  *
+  *  Example #1: When I append after the rich text editor field "Body" with "Test Body text"
+  *  Example #2: When I append the rich text editor field "Body" with "Test Body text"
+  *
+  * @When /^(?:|I )append(?:| after) the rich text editor field "([^"]*)" with "([^"]*)"$/
+  */
+  public function appendTheRichTextEditorField($locator, $value) {
+    $el = $this->getSession()->getPage()->findField($locator);
+    $fieldId = $el->getAttribute('id');
+
+    if ($fieldId == NULL) {
+      // If the WYSIWYG is in an ifream with no id.
+      $iFreamID = $this->_getAttributeByOtherAttributeValue('id', 'title', "Rich Text Editor, ". $el->getAttribute('id'), 'iframe');
+      if (!empty($iFreamID)) {
+        $fieldId = $iFreamID;
+      }
+    }
+
+
+    if (empty($fieldId)) {
+      throw new Exception('Could not find an id for the rich text editor field : ' . $locator);
+    }
+
+    $this->getSession()->executeScript("CKEDITOR.instances[\"$fieldId\"].setData(CKEDITOR.instances[\"$fieldId\"].getData()+\"$value\");");
+  }
+
+  /**
+  * #varbase : To add append text at the end of a rich text editor field  WYSIWYG with content
+  *            using the name of the field.
+  *
+  *  Example #1: When I prepend before the rich text editor field "Body" with "Test Body text"
+  *  Example #2: When I prepend the rich text editor field "Body" with "Test Body text"
+  *
+  * @When /^(?:|I )prepend(?:| before) the rich text editor field "([^"]*)" with "([^"]*)"$/
+  */
+  public function prependTheRichTextEditorField($locator, $value) {
+    $el = $this->getSession()->getPage()->findField($locator);
+    $fieldId = $el->getAttribute('id');
+
+    if ($fieldId == NULL) {
+      // If the WYSIWYG is in an ifream with no id.
+      $iFreamID = $this->_getAttributeByOtherAttributeValue('id', 'title', "Rich Text Editor, ". $el->getAttribute('id'), 'iframe');
+      if (!empty($iFreamID)) {
+        $fieldId = $iFreamID;
+      }
+    }
+
+
+    if (empty($fieldId)) {
+      throw new Exception('Could not find an id for the rich text editor field : ' . $locator);
+    }
+
+    $this->getSession()->executeScript("CKEDITOR.instances[\"$fieldId\"].setData(\"$value\"+CKEDITOR.instances[\"$fieldId\"].getData());");
+  }
   // ===========================================================================
 
 
