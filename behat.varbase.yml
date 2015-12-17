@@ -11,23 +11,6 @@ default:
                 test_content_admin: { email: 'content.admin.test@vardot.com', password: 'dD.123123' }
                 test_site_admin: { email: 'site.admin.test@vardot.com', password: 'dD.123123' }
                 test_super_admin: { email: 'super.admin.test@vardot.com', password: 'dD.123123' }
-        - Drupal\DrupalExtension\Context\DrupalContext
-        - Drupal\DrupalExtension\Context\DrushContext
-        - Drupal\DrupalExtension\Context\MessageContext
-        - Drupal\DrupalExtension\Context\MinkContext
-        - Drupal\DrupalExtension\Context\MarkupContext
-        - Drupal\DrupalExtension\Context\BatchContext
-        - behatch:browser:
-            timeout: 1
-        - behatch:debug:
-            screenshotDir: "%paths.base%/screenshots/"
-        - behatch:json:
-            evaluationMode: javascript
-        - behatch:rest
-        - behatch:system:
-            root: "/var/www/html/varbase_behat/varbase-7-x-3-0-alpha3/docroot"
-        - behatch:table
-        - behatch:xml
         - SelectorsContext:
            parameters:
              selectors:
@@ -50,6 +33,24 @@ default:
              files:
                - "varbase/front-end-selectors.yml"
                - "varbase/back-end-selectors.yml"
+        - ClipboardContext
+        - Drupal\DrupalExtension\Context\DrupalContext
+        - Drupal\DrupalExtension\Context\DrushContext
+        - Drupal\DrupalExtension\Context\MessageContext
+        - Drupal\DrupalExtension\Context\MinkContext
+        - Drupal\DrupalExtension\Context\MarkupContext
+        - Drupal\DrupalExtension\Context\BatchContext
+        - behatch:browser:
+            timeout: 1
+        - behatch:debug:
+            screenshotDir: "%paths.base%/screenshots/"
+        - behatch:json:
+            evaluationMode: javascript
+        - behatch:rest
+        - behatch:system:
+            root: "/var/www/html/varbase_behat/varbase-7-x-3-0-alpha3/docroot"
+        - behatch:table
+        - behatch:xml
   extensions:
     Behat\MinkExtension:
       files_path: "%paths.base%/assets/"
