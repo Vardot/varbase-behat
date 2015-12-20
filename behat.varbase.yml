@@ -48,7 +48,7 @@ default:
             evaluationMode: javascript
         - behatch:rest
         - behatch:system:
-            root: "/var/www/html/varbase_behat/varbase-7-x-3-0-alpha3/docroot"
+            root: "/var/www/html/varbase_behat/varbase-7-x-3-0-alpha6/docroot"
         - behatch:table
         - behatch:xml
   extensions:
@@ -62,16 +62,16 @@ default:
         capabilities:
           browser: 'firefox'
           # browser: 'chrome'
-      base_url: http://localhost/varbase_behat/varbase-7-x-3-0-alpha3/docroot
+      base_url: http://varbase-7-x-3-0-alpha6.local
       javascript_session: selenium2
     Drupal\DrupalExtension:
       blackbox: ~
       api_driver: 'drupal'
       drupal:
-        drupal_root: "/var/www/html/varbase_behat/varbase-7-x-3-0-alpha3/docroot"
+        drupal_root: "/var/www/html/varbase_behat/varbase-7-x-3-0-alpha6/docroot"
       drush_driver: "drush"
       drush:
-        root: "/var/www/html/varbase_behat/varbase-7-x-3-0-alpha3/docroot"
+        root: "/var/www/html/varbase_behat/varbase-7-x-3-0-alpha6/docroot"
       region_map:
         content: ".main-container"
         footer: "#footer"
@@ -110,12 +110,12 @@ drush:
     Behat\MinkExtension:
       files_path: "%paths.base%/assets/"
       goutte: ~
-      base_url: http://localhost/varbase_behat/varbase-7-x-3-0-alpha3/docroot
+      base_url: http://varbase-7-x-3-0-alpha6.local
     Drupal\DrupalExtension:
       api_driver: "drush"
       drush_driver: "drush"
       drush:
-        root: "/var/www/html/varbase_behat/varbase-7-x-3-0-alpha3/docroot"
+        root: "/var/www/html/varbase_behat/varbase-7-x-3-0-alpha6/docroot"
         # alias: self only if we want to use drush aliases.
       region_map:
         left sidebar: "#sidebar-first"

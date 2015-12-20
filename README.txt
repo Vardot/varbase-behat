@@ -23,20 +23,20 @@ Varbase Behat is a set of Gherkin Features and custom Varbase Context with
 
 --------------------------------------------------------------------------------
 1. If you have a Varbase testing site at this location
-/var/www/html/varbase_behat/varbase-7-x-3-0-alpha3/docroot
+/var/www/html/varbase_behat/varbase-7-x-3-0-alpha6/docroot
 
 --------------------------------------------------------------------------------
 2. Download the latest behat package from "Downloads" section in the Bitbucket
    repository, and place it in the folder as below.
-/var/www/html/varbase_behat/varbase-7-x-3-0-alpha3/behat
+/var/www/html/varbase_behat/varbase-7-x-3-0-alpha6/behat
 
 --------------------------------------------------------------------------------
 3. Edit the file behat.varbase.yml and change:
 
-  base_url:  'http://localhost/varbase_behat/varbase-7-x-3-0-alpha3/docroot'
+  base_url:  'http://localhost/varbase_behat/varbase-7-x-3-0-alpha6/docroot'
 
 --------------------------------------------------------------------------------
-5. Go to /var/www/html/varbase_behat/varbase-7-x-3-0-alpha3/behat/ Then run the
+5. Go to /var/www/html/varbase_behat/varbase-7-x-3-0-alpha6/behat/ Then run the
   following commands to install all required packages, Libraries from vendors.
 
 $ curl -sS https://getcomposer.org/installer | php
@@ -51,7 +51,7 @@ $ php composer.phar install
 $ java -jar selenium-server-standalone-2.48.2.jar -port 4445
 
 --------------------------------------------------------------------------------
-7. Run the behat command at /var/www/html/varbase_behat/varbase-7-x-3-0-alpha3/behat/
+7. Run the behat command at /var/www/html/varbase_behat/varbase-7-x-3-0-alpha6/behat/
 
 $ bin/behat features/example.feature
 
@@ -118,3 +118,26 @@ Feature: Example
 9 steps (9 passed)
 0m51.12s (47.83Mb)
 ================================================================================
+
+12. If you want to run all Gherkin Features over a new Varbase site.
+    You will need to create the list of Testing users, and Add French, and Arabic
+    languages to the site.
+
+    # You can  that manually by reading and following steps in the
+    # features/tools/users/create-default-testing-users.feature
+    # Or you can run it by the following command.
+
+    $ bin/behat features/tools/users/create-default-testing-users.feature
+
+    # You can  that manually by reading and following steps in the
+    # features/tools/languages/add-french.feature
+    # features/tools/languages/add-arabic.feature
+    # Or you can run it by the following command.
+
+    $ bin/behat features/tools/languages/add-french.feature
+    $ bin/behat features/tools/languages/add-arabic.feature
+
+
+    # After that you can run the following command:
+
+    $ bin/behat features/varbase/
