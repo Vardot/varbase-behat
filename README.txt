@@ -1,6 +1,8 @@
-Varbase Behat is a set of Gherkin Features and custom Varbase Context with
-  custom step definitions, and assets, which help in the automatic testing
-  for varbase websites.
+# Varbase Behat # 
+
+      Varbase Behat is a set of Gherkin Features and custom Varbase Context with
+ custom step definitions, and assets, which help in the automatic testing
+ for varbase websites.
 
 
    This page can help  you to have all steps, which you need to run the
@@ -11,7 +13,7 @@ Varbase Behat is a set of Gherkin Features and custom Varbase Context with
    - Apache/http/https server.
    - PHP server, and have the mod_rewrite enabled.
    - MySQL server.
-   - Configure your PHP/MySQL to work will with Varbase, Have a look at
+   - Configure your PHP/MySQL to work well with Varbase, Have a look at
      https://bitbucket.org/snippets/Vardot/8rGL/dev-tools-installs snippets.
    - Download Varbase from https://www.drupal.org/project/varbase Drupal website.
    - Install Varbase by following the  Installing Varbase 7.x-3.x
