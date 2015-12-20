@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "46d836c27e8fce88659a5bf345467af9",
-    "content-hash": "b6e7d3a6efe0e313495f35a36a549cbe",
+    "hash": "c2276af73cefe18e19a7400092347bb2",
+    "content-hash": "b09fe76b850b70cd0cf713c15e450058",
     "packages": [
         {
             "name": "behat/behat",
@@ -375,6 +375,61 @@
             "time": "2015-09-21 21:31:11"
         },
         {
+            "name": "behat/mink-sahi-driver",
+            "version": "v1.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/minkphp/MinkSahiDriver.git",
+                "reference": "a12d78e94044075e9581af8a6947b57e850f7396"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/minkphp/MinkSahiDriver/zipball/a12d78e94044075e9581af8a6947b57e850f7396",
+                "reference": "a12d78e94044075e9581af8a6947b57e850f7396",
+                "shasum": ""
+            },
+            "require": {
+                "behat/mink": "~1.7@dev",
+                "behat/sahi-client": "~1.2@dev",
+                "php": ">=5.3.1"
+            },
+            "require-dev": {
+                "symfony/phpunit-bridge": "~2.7"
+            },
+            "type": "mink-driver",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.2.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Behat\\Mink\\Driver\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Konstantin Kudryashov",
+                    "email": "ever.zet@gmail.com",
+                    "homepage": "http://everzet.com"
+                }
+            ],
+            "description": "Sahi.JS driver for Mink framework",
+            "homepage": "http://mink.behat.org/",
+            "keywords": [
+                "ajax",
+                "browser",
+                "javascript",
+                "sahi",
+                "testing"
+            ],
+            "time": "2015-09-21 21:44:50"
+        },
+        {
             "name": "behat/mink-selenium2-driver",
             "version": "v1.3.0",
             "source": {
@@ -496,6 +551,58 @@
                 "zombie"
             ],
             "time": "2015-09-21 21:07:53"
+        },
+        {
+            "name": "behat/sahi-client",
+            "version": "v1.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/minkphp/SahiClient.git",
+                "reference": "35917377e3b53e04f7bc239e24c2fb40bcb057a5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/minkphp/SahiClient/zipball/35917377e3b53e04f7bc239e24c2fb40bcb057a5",
+                "reference": "35917377e3b53e04f7bc239e24c2fb40bcb057a5",
+                "shasum": ""
+            },
+            "require": {
+                "kriswallsmith/buzz": "~0.7",
+                "php": ">=5.3.1"
+            },
+            "require-dev": {
+                "symfony/phpunit-bridge": "~2.7"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.2.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Behat\\SahiClient\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Konstantin Kudryashov",
+                    "email": "ever.zet@gmail.com",
+                    "homepage": "http://everzet.com"
+                }
+            ],
+            "description": "Sahi.js client for PHP 5.3",
+            "homepage": "http://sahi.co.in/w/",
+            "keywords": [
+                "JS",
+                "browser",
+                "testing"
+            ],
+            "time": "2015-09-21 20:47:06"
         },
         {
             "name": "behat/transliterator",
@@ -1069,6 +1176,54 @@
                 "schema"
             ],
             "time": "2015-09-08 22:28:04"
+        },
+        {
+            "name": "kriswallsmith/buzz",
+            "version": "v0.15",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/kriswallsmith/Buzz.git",
+                "reference": "d4041666c3ffb379af02a92dabe81c904b35fab8"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/kriswallsmith/Buzz/zipball/d4041666c3ffb379af02a92dabe81c904b35fab8",
+                "reference": "d4041666c3ffb379af02a92dabe81c904b35fab8",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "3.7.*"
+            },
+            "suggest": {
+                "ext-curl": "*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Buzz": "lib/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Kris Wallsmith",
+                    "email": "kris.wallsmith@gmail.com",
+                    "homepage": "http://kriswallsmith.net/"
+                }
+            ],
+            "description": "Lightweight HTTP client",
+            "homepage": "https://github.com/kriswallsmith/Buzz",
+            "keywords": [
+                "curl",
+                "http client"
+            ],
+            "time": "2015-06-25 17:26:56"
         },
         {
             "name": "phpunit/php-code-coverage",
@@ -2327,6 +2482,8 @@
         "behat/behat": 0,
         "drupal/drupal-extension": 0,
         "behat/mink-zombie-driver": 0,
+        "behat/mink-sahi-driver": 0,
+        "behat/mink-browserkit-driver": 0,
         "phpunit/phpunit": 0,
         "emuse/behat-html-formatter": 0
     },
