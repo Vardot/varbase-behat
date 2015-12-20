@@ -1,4 +1,6 @@
 vendor/*
 bin/*
+reports/*
+screenshots/*
 composer.phar
 composer.lock
