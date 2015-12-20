@@ -33,7 +33,7 @@ default:
              files:
                - "varbase/front-end-selectors.yml"
                - "varbase/back-end-selectors.yml"
-        - ClipboardContext
+        # - ClipboardContext - Still in WIP .
         - Drupal\DrupalExtension\Context\DrupalContext
         - Drupal\DrupalExtension\Context\DrushContext
         - Drupal\DrupalExtension\Context\MessageContext
