@@ -123,13 +123,20 @@ Feature: Example
     You will need to create the list of Testing users, and Add French, and Arabic
     languages to the site.
 
-    # You can  that manually by reading and following steps in the
+    # --------------------------------------------------------------------------
+    # Create default testing users.
+    # --------------------------------------------------------------------------
+    # You can do that manually by reading and following steps in the
     # features/tools/users/create-default-testing-users.feature
     # Or you can run it by the following command.
 
     $ bin/behat features/tools/users/create-default-testing-users.feature
 
-    # You can  that manually by reading and following steps in the
+    # --------------------------------------------------------------------------
+    # Add French language if we do not have it to languages in the system.
+    # Add Arabic language if we do not have it to languages in the system.
+    # --------------------------------------------------------------------------
+    # You can do that manually by reading and following steps in the
     # features/tools/languages/add-french.feature
     # features/tools/languages/add-arabic.feature
     # Or you can run it by the following command.
@@ -137,7 +144,7 @@ Feature: Example
     $ bin/behat features/tools/languages/add-french.feature
     $ bin/behat features/tools/languages/add-arabic.feature
 
-
+    # --------------------------------------------------------------------------
     # After that you can run the following command:
-
+    # --------------------------------------------------------------------------
     $ bin/behat features/varbase/
