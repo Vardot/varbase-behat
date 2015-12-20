@@ -94,12 +94,15 @@ class ClipboardContext extends RawDrupalContext implements SnippetAcceptingConte
  /**
   * #vardot : set a text value in the clipboard text
   *
-  * Example: Gavin I set "(?P<text>[^"]*) to clipboard text
+  * Example: When I set "Save this text in" to clipboard text
   *
-  * @Gavin /^(?:|I )set "(?P<text>[^"]*) to clipboard text$/
+  * @When /^(?:|I )set "(?P<text>[^"]*)" to clipboard text$/
   */
  function setTextToClipboard($text) {
-   $this->getSession()->getDriver()->evaluateScript("clipboard.setData('text/plain', '". $text ."');");
+   $this->getSession()->getDriver()->evaluateScript("
+     var copyEvent = new ClipboardEvent('copy', { dataType: 'text/plain', data: 'Data to be copied' } );
+     document.dispatchEvent(copyEvent);
+   ");
  }
 
   /**
@@ -146,8 +149,8 @@ class ClipboardContext extends RawDrupalContext implements SnippetAcceptingConte
   /**
    * #vardot : Move the focus to selected field input element.
    *
-   * Example #1: When I move focus to "Title" field
-   * Example #2:  And I move focus to "Body" field
+   * Example #1: When I move focus to "Title" rich text editor field
+   * Example #2:  And I move focus to "Body" rich text editor field
    *
    * @When /^(?:|I )move focus to "(?P<selectedField>[^"]*)" rich text editor field$/
    */
@@ -155,16 +158,11 @@ class ClipboardContext extends RawDrupalContext implements SnippetAcceptingConte
     $el = $this->getSession()->getPage()->findField($selectedField);
     $fieldid = $el->getAttribute('id');
 
-    if ($fieldid != NULL && $fieldid != '') {
-      $this->_addIDtoIFrame($fieldid, 'ifream-');
-    }
-
-
     if (empty($fieldid)) {
      throw new Exception('Could not find an id for the rich text editor field : ' . $selectedField);
     }
 
-   $this->getSession()->getDriver()->evaluateScript('CKEDITOR.instances[\"$fieldId\"].focus();');
+   $this->getSession()->getDriver()->evaluateScript("CKEDITOR.instances[\"$fieldid\"].focusManager.focus();");
   }
 
   /**
@@ -182,21 +180,62 @@ class ClipboardContext extends RawDrupalContext implements SnippetAcceptingConte
     if ($fieldid != NULL && $fieldid != '') {
       $this->_addIDtoIFrame($fieldid, 'ifream-');
     }
-
-
-    if (empty($fieldid)) {
+    else {
      throw new Exception('Could not find an id for the rich text editor field : ' . $selectedField);
     }
-
 
     // Switch to the "CKEDITOR" iframe.
     $this->getSession()->switchToIFrame('ifream-' . $fieldid);
 
 
-    $this->getSession()->getDriver()->evaluateScript('document.body.select();');
+    $this->getSession()->getDriver()->evaluateScript("
+    (function ($, Drupal, window, document, undefined) {
+
+      Drupal.behaviors.selector = {
+        attach: function (context, settings) {
+
+          function selectElementContents(el) {
+              var body = document.body, range, sel;
+              if (document.createRange && window.getSelection) {
+                  range = document.createRange();
+                  sel = window.getSelection();
+                  sel.removeAllRanges();
+                  try {
+                      range.selectNodeContents(el);
+                      sel.addRange(range);
+                  } catch (e) {
+                      range.selectNode(el);
+                      sel.addRange(range);
+                  }
+              } else if (body.createTextRange) {
+                  range = body.createTextRange();
+                  range.moveToElementText(el);
+                  range.select();
+              }
+            }
+          }
+
+          selectElementContents(document.getElementById('table-t1'));
+
+        }
+      })(jQuery, Drupal, this, this.document);
+  ");
+
+  //  $this->getSession()->getDriver()->evaluateScript("selectElementContents(document.getElementById('table-t1'));");
 
 
+
+    // var element = CKEDITOR.instances[\"$fieldId\"].editor.document.getById( 'sampleElement' );
+    // CKEDITOR.instances[\"$fieldId\"].editor.getSelection().selectElement( element );
+
+
+
+
+        // jQuery( '#{$fieldid}' ).ckeditor().editor.createRange().select();
+
+// "CKEDITOR.instances[\"$fieldId\"].editor.document.$.execCommand( 'SelectAll', false, null );"
     // Switch back too the page from the "CKEDITOR" iframe.
+
     $this->getSession()->switchToIFrame(null);
   }
 

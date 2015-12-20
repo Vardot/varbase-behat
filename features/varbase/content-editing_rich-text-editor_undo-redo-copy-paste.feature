@@ -7,24 +7,19 @@ Feature: Content Editing - Rich Text Editor - Undo, Redo, Copy, Paste
  Scenario: Check if content admin can Copy, Cut, and Paste in the rich text editor.
   Given I am a logged in user with the "test_site_admin" user
    When I go to "/node/add/page"
-    And wait
    Then I should see "Create Basic page"
-    And I should see "Body"
-    And I should see "Text format"
-
-  When I select "visual_editor" from "Text format"
-   And I fill in "Test Copy and Paste" for "Title"
-   And I fill in the rich text editor field "Body" with "Text line #1 <br />"
-   And I append the rich text editor field "Body" with "Text line #2 <br />"
-   And I append after the rich text editor field "Body" with "Text line #3 <br />"
-   And I prepend the rich text editor field "Body" with "Text line #0 <br />"
-   And I prepend before the rich text editor field "Body" with "Text line #-1 <br />"
-   And I select all text in "Body" rich text editor field
+  When I fill in "Test cut copy and paste" for "Title"
+   And I select "English" from "Language"
+   And I select "Visual editor" from "Text format"
+   And I fill in the rich text editor field "Body" with "<p>Test bold text #1</p>"
+   And I append the rich text editor field "Body" with "<p>Test Italic text #2</p>"
+   And I append after the rich text editor field "Body" with "<p>Test under line text #3</p>"
+   And I append after the rich text editor field "Body" with "<p>Test text to copy #4</p>"
+   And I append after the rich text editor field "Body" with "<p>Test text to cut #5</p>"
+   And I append after the rich text editor field "Body" with "<p>Test text #6</p>"
+   And I prepend the rich text editor field "Body" with "<p>Test text #0</p>"
+   And I prepend before the rich text editor field "Body" with "<p>Text text #-1</p>"
+   And I append after the rich text editor field "Body" with "<table id='table-t1'><thead><tr><th>Heading</th><th>Heading</th></tr></thead><tbody><tr><td>cell</td><td>cell</td></tr></tbody></table>"
+   And I move focus to "Body" rich text editor field
+   And I select all text in "Body" field
    And break
-   And I copy selected text to clipboard text
-   And wait 10s
-
-
-  #  And I fill in "Title" from clipboard text
-  #  And I fill in "Title" from clipboard text
-  #  And I fill in "Title" from clipboard text
