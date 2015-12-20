@@ -119,7 +119,21 @@ Feature: Example
 0m51.12s (47.83Mb)
 ================================================================================
 
-12. If you want to run all Gherkin Features over a new Varbase site.
+12. To see the report in HTML. Go and open this file in a browser.
+    /var/www/html/varbase_behat/varbase-7-x-3-0-alpha6/behat/reports/index.html
+    You will see the latest report for latest run.
+
+    if you want to custom a report you can add
+    --format pretty --out std
+    --format html  --out reports/report-$( date '+%Y-%m-%d_%H-%M-%S' )
+
+    to format and select your output.
+
+    Example:
+
+    $ bin/behat features/example.feature --format pretty --out std --format html --out reports/report-$( date '+%Y-%m-%d_%H-%M-%S' )
+
+13. If you want to run all Gherkin Features over a new Varbase site.
     You will need to create the list of Testing users, and Add French, and Arabic
     languages to the site.
 
@@ -147,4 +161,7 @@ Feature: Example
     # --------------------------------------------------------------------------
     # After that you can run the following command:
     # --------------------------------------------------------------------------
-    $ bin/behat features/varbase/
+    $ bin/behat features/varbase/ --format pretty --out std  --format html  --out reports/report-$( date '+%Y-%m-%d_%H-%M-%S' )
+
+    then after that you can see the report in the
+    /var/www/html/varbase_behat/varbase-7-x-3-0-alpha6/behat/reports

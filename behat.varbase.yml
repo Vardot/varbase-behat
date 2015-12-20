@@ -51,6 +51,10 @@ default:
             root: "/var/www/html/varbase_behat/varbase-7-x-3-0-alpha6/docroot"
         - behatch:table
         - behatch:xml
+  formatters:
+    pretty:
+    html:
+      output_path: "%paths.base%/reports/"
   extensions:
     Behat\MinkExtension:
       files_path: "%paths.base%/assets/"
@@ -85,6 +89,13 @@ default:
         success_message_selector: '.messages.status'
         warning_message_selector: '.messages.warning'
     Sanpi\Behatch\Extension: ~
+    emuse\BehatHTMLFormatter\BehatHTMLFormatterExtension:
+      name: html
+      renderer: Twig,Behat2
+      file_name: index
+      print_args: false
+      print_outp: false
+      loop_break: false
 drush:
   suites:
     default:

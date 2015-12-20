@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "62a87a587be41f0832be2622accb44b5",
-    "content-hash": "eeb2c59101a903c4c560e90ecc767c2a",
+    "hash": "46d836c27e8fce88659a5bf345467af9",
+    "content-hash": "b6e7d3a6efe0e313495f35a36a549cbe",
     "packages": [
         {
             "name": "behat/behat",
@@ -539,16 +539,16 @@
         },
         {
             "name": "behatch/contexts",
-            "version": "2.3",
+            "version": "2.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Behatch/contexts.git",
-                "reference": "2920b61209f3627305637c172ce4dc716423a58f"
+                "reference": "5df15c4dfa9e79f328bf8871d3b958e1c520e0de"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Behatch/contexts/zipball/2920b61209f3627305637c172ce4dc716423a58f",
-                "reference": "2920b61209f3627305637c172ce4dc716423a58f",
+                "url": "https://api.github.com/repos/Behatch/contexts/zipball/5df15c4dfa9e79f328bf8871d3b958e1c520e0de",
+                "reference": "5df15c4dfa9e79f328bf8871d3b958e1c520e0de",
                 "shasum": ""
             },
             "require": {
@@ -556,7 +556,7 @@
                 "behat/mink-extension": "~2.0",
                 "justinrainbow/json-schema": "~1.4",
                 "php": ">=5.4",
-                "symfony/property-access": "~2.3"
+                "symfony/property-access": "~2.3|~3.0"
             },
             "replace": {
                 "sanpi/behatch-contexts": "self.version"
@@ -584,25 +584,25 @@
                 "Context",
                 "Symfony2"
             ],
-            "time": "2015-11-13 16:09:26"
+            "time": "2015-12-08 21:27:27"
         },
         {
             "name": "drupal/drupal-driver",
-            "version": "v1.1.4",
+            "version": "v1.1.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/jhedstrom/DrupalDriver.git",
-                "reference": "b27fc8a2002ee36338d8288961d78f581e1812c0"
+                "reference": "6c5e04c6a310316bcefc4588bb1c0765b6bad478"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jhedstrom/DrupalDriver/zipball/b27fc8a2002ee36338d8288961d78f581e1812c0",
-                "reference": "b27fc8a2002ee36338d8288961d78f581e1812c0",
+                "url": "https://api.github.com/repos/jhedstrom/DrupalDriver/zipball/6c5e04c6a310316bcefc4588bb1c0765b6bad478",
+                "reference": "6c5e04c6a310316bcefc4588bb1c0765b6bad478",
                 "shasum": ""
             },
             "require": {
-                "symfony/dependency-injection": "~2.6",
-                "symfony/process": "~2.5"
+                "symfony/dependency-injection": "~2.6|~3.0",
+                "symfony/process": "~2.5|~3.0"
             },
             "require-dev": {
                 "drupal/coder": "~8.2.0",
@@ -635,7 +635,7 @@
                 "test",
                 "web"
             ],
-            "time": "2015-11-30 18:32:52"
+            "time": "2015-12-14 18:30:01"
         },
         {
             "name": "drupal/drupal-extension",
@@ -690,6 +690,41 @@
                 "web"
             ],
             "time": "2015-11-30 22:04:10"
+        },
+        {
+            "name": "emuse/behat-html-formatter",
+            "version": "v0.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/dutchiexl/BehatHtmlFormatterPlugin.git",
+                "reference": "c7a51a1013c0ee6fdc4a00e93842d5f9c8bc98ec"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/dutchiexl/BehatHtmlFormatterPlugin/zipball/c7a51a1013c0ee6fdc4a00e93842d5f9c8bc98ec",
+                "reference": "c7a51a1013c0ee6fdc4a00e93842d5f9c8bc98ec",
+                "shasum": ""
+            },
+            "require": {
+                "behat/behat": "~3.0",
+                "php": ">=5.3.0",
+                "twig/twig": "~1.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "emuse\\BehatHTMLFormatter\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "authors": [
+                {
+                    "name": "Neal Vanmeert",
+                    "email": "neal@emuse.be"
+                }
+            ],
+            "description": "This will create a html formatter for Behat.",
+            "time": "2015-05-27 15:09:34"
         },
         {
             "name": "fabpot/goutte",
@@ -2052,25 +2087,25 @@
         },
         {
             "name": "symfony/property-access",
-            "version": "v2.8.0",
+            "version": "v3.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/property-access.git",
-                "reference": "8820a541404c43838c113d6d7580bd02e0ba198a"
+                "reference": "b0bb5a89be1d405212fb67195f201f4954d5e835"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/property-access/zipball/8820a541404c43838c113d6d7580bd02e0ba198a",
-                "reference": "8820a541404c43838c113d6d7580bd02e0ba198a",
+                "url": "https://api.github.com/repos/symfony/property-access/zipball/b0bb5a89be1d405212fb67195f201f4954d5e835",
+                "reference": "b0bb5a89be1d405212fb67195f201f4954d5e835",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3.9"
+                "php": ">=5.5.9"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.8-dev"
+                    "dev-master": "3.0-dev"
                 }
             },
             "autoload": {
@@ -2108,7 +2143,7 @@
                 "property path",
                 "reflection"
             ],
-            "time": "2015-11-18 13:45:00"
+            "time": "2015-11-18 13:48:51"
         },
         {
             "name": "symfony/translation",
@@ -2222,6 +2257,67 @@
             "description": "Symfony Yaml Component",
             "homepage": "https://symfony.com",
             "time": "2015-11-30 12:35:10"
+        },
+        {
+            "name": "twig/twig",
+            "version": "v1.23.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/twigphp/Twig.git",
+                "reference": "d9b6333ae8dd2c8e3fd256e127548def0bc614c6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/twigphp/Twig/zipball/d9b6333ae8dd2c8e3fd256e127548def0bc614c6",
+                "reference": "d9b6333ae8dd2c8e3fd256e127548def0bc614c6",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.2.7"
+            },
+            "require-dev": {
+                "symfony/debug": "~2.7",
+                "symfony/phpunit-bridge": "~2.7"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.23-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Twig_": "lib/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com",
+                    "homepage": "http://fabien.potencier.org",
+                    "role": "Lead Developer"
+                },
+                {
+                    "name": "Armin Ronacher",
+                    "email": "armin.ronacher@active-4.com",
+                    "role": "Project Founder"
+                },
+                {
+                    "name": "Twig Team",
+                    "homepage": "http://twig.sensiolabs.org/contributors",
+                    "role": "Contributors"
+                }
+            ],
+            "description": "Twig, the flexible, fast, and secure template language for PHP",
+            "homepage": "http://twig.sensiolabs.org",
+            "keywords": [
+                "templating"
+            ],
+            "time": "2015-11-05 12:49:06"
         }
     ],
     "packages-dev": [],
@@ -2231,7 +2327,8 @@
         "behat/behat": 0,
         "drupal/drupal-extension": 0,
         "behat/mink-zombie-driver": 0,
-        "phpunit/phpunit": 0
+        "phpunit/phpunit": 0,
+        "emuse/behat-html-formatter": 0
     },
     "prefer-stable": false,
     "prefer-lowest": false,
