@@ -283,4 +283,82 @@ class SelectorsContext extends RawDrupalContext implements SnippetAcceptingConte
    public function printXPathSelectors() {
      echo Yaml::dump($this->xpathSelectors);
    }
+
+   /**
+    * #vardot : Move the focus to selected field input element.
+    *
+    * Example #1: When I move focus to "Title" field
+    * Example #2:  And I move focus to "Body" field
+    *
+    * @When /^(?:|I )move focus to "(?P<selectedField>[^"]*)" field$/
+    */
+   function moveFocusToField($selectedField) {
+     $field = $this->getSession()->getPage()->findField($selectedField);
+     $fieldid = $field->getAttribute('id');
+     $this->getSession()->getDriver()->evaluateScript("jQuery('#{$fieldid}').focus();");
+   }
+
+  /**
+   * #vardot : Select all text in selected field input element.
+   *
+   * Example #1: When I select all text in "Title" field
+   * Example #2:  And I select all text in "Description" field
+   *
+   * @When /^(?:|I )select all text in "(?P<selectedField>[^"]*)" field$/
+   */
+  function selectAllTextInField($selectedField) {
+    $field = $this->getSession()->getPage()->findField($selectedField);
+    $fieldid = $field->getAttribute('id');
+    $this->getSession()->getDriver()->evaluateScript('document.getElementById("'. $fieldid .'").select();');
+  }
+
+  /**
+   * #vardot : Select part of the text in selected field input element.
+   *
+   * Example #1: When I select from 0 to 5 text in "Title" field
+   * Example #2:  And I select from 0 to 5 text in "Description" field
+   *
+   * @When /^(?:|I )select from (?P<from>\d+) to (?P<to>\d+) text in "(?P<selectedField>[^"]*)" field$/
+   */
+  function setSelectionRangeFromField($from, $to, $selectedField) {
+    $field = $this->getSession()->getPage()->findField($selectedField);
+    $fieldid = $field->getAttribute('id');
+
+    if ($from < 0) {
+      $from = 0;
+    }
+
+    if ($to === 0) {
+      $to = $field->getValue()->length();
+    }
+
+    $this->getSession()->getDriver()->evaluateScript('document.getElementById("'. $fieldid .'").setSelectionRange(' . $from . ',' . $to . ');');
+  }
+
+  /**
+   * #vardot : Select a part text in selected field input element.
+   *
+   * Example #1: When I select "title name" text in "Title" field
+   * Example #2:  And I select "some content" text in "Description" field
+   *
+   * @When /^(?:|I )select "(?P<selectedText>[^"]*)" text in "(?P<selectedField>[^"]*)" field$/
+   */
+  function selectTextInField($selectedText, $selectedField) {
+    $field = $this->getSession()->getPage()->findField($selectedField);
+    $fieldid = $field->getAttribute('id');
+
+    // Get the value of the selected field.
+    $fieldValue = $field->getValue();
+
+    // Have the $selectionStart.
+    $selectionStart = strpos($fieldValue, $selectedText);
+    if (empty($selectionStart)) {
+      throw new Exception(sprintf('We do not have "%s" in the "%s" field.', $selectedText, $selectedField));
+    }
+
+    // Have the selectionEnd.
+    $selectionEnd = $selectionStart + strlen($selectedText);
+
+    $this->getSession()->getDriver()->evaluateScript('document.getElementById("'. $fieldid .'").setSelectionRange(' . $selectionStart . ',' . $selectionEnd . ');');
+  }
 }

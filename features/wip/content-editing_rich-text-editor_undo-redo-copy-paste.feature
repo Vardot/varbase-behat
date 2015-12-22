@@ -13,11 +13,17 @@ Feature: Content Editing - Rich Text Editor - Undo, Redo, Copy, Paste
    And I select "Visual editor" from "Text format"
    And I fill in the rich text editor field "Body" with "<p id='bold-text'>Test bold text #1</p>"
    And I move focus to "Body" rich text editor field
+   And I select all text in "Body" rich text editor field
+   And I press the "ctrl" + "c" keys in the "Body" field
+   And I move focus to "Title" field
+   And I press the "ctrl" + "v" keys in the "Body" field
+   And I move focus to "Title" field
+   And I press the "ctrl" + "v" keys in the "Body" field
+   And I move focus to "Title" field
+   And I press the "ctrl" + "v" keys in the "Body" field
    And break
-   And I select all text in "Body" field
-   And break
-   And I click on "bold" command button in the rich text editor field "Body"
-   And break
+
+
 
 
   #  And I append the rich text editor field "Body" with "<p>Test Italic text #2</p>"

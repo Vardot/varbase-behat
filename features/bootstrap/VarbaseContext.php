@@ -595,6 +595,48 @@ class VarbaseContext extends RawDrupalContext implements SnippetAcceptingContext
 
     $this->getSession()->executeScript("CKEDITOR.instances[\"$fieldId\"].setData(\"$value\"+CKEDITOR.instances[\"$fieldId\"].getData());");
   }
+
+  /**
+   * #vardot : Move the focus to selected rich text editor field.
+   *
+   * Example #1: When I move focus to "Title" rich text editor field
+   * Example #2:  And I move focus to "Body" rich text editor field
+   *
+   * @When /^(?:|I )move focus to "(?P<selectedField>[^"]*)" rich text editor field$/
+   */
+  function moveFocusToTheRichTextEditorField($selectedField) {
+    $el = $this->getSession()->getPage()->findField($selectedField);
+    $fieldid = $el->getAttribute('id');
+
+    if (empty($fieldid)) {
+     throw new Exception('Could not find an id for the rich text editor field : ' . $selectedField);
+    }
+
+   $this->getSession()->getDriver()->evaluateScript("CKEDITOR.instances[\"$fieldid\"].focus();");
+  }
+
+  /**
+  * #vardot : Select all text in selected field input element.
+  *
+  * Example #1: When I select all text in "Body" field
+  * Example #2:  And I select all text in "Body" field
+  *
+  * @When /^(?:|I )select all text in "(?P<selectedField>[^"]*)" rich text editor field$/
+  */
+  function selectAllTextInTheRichTextEditorField($selectedField) {
+    $el = $this->getSession()->getPage()->findField($selectedField);
+    $fieldid = $el->getAttribute('id');
+
+    if (empty($fieldid)) {
+     throw new Exception('Could not find an id for the rich text editor field : ' . $selectedField);
+    }
+
+   $this->getSession()->getDriver()->evaluateScript("CKEDITOR.instances[\"$fieldid\"].execCommand('selectAll', false, null);");
+   $this->getSession()->getDriver()->evaluateScript("CKEDITOR.instances[\"$fieldid\"].forceNextSelectionCheck();");
+   $this->getSession()->getDriver()->evaluateScript("CKEDITOR.instances[\"$fieldid\"].selectionChange();");
+
+  }
+
   // ===========================================================================
 
 
@@ -748,26 +790,6 @@ class VarbaseContext extends RawDrupalContext implements SnippetAcceptingContext
     }
   }
   // ===========================================================================
-
-
-  public function cleanUsers() {
-
-  }
-
-  /**
-   * Helper function to let you get the value of an attribute name for
-   * an HTML tag by other Attribute name and value
-   *
-   * @param  string $attributeName       The attribute name.
-   * @param  string $otherAttributeName  other attribute name.
-   * @param  string $otherAttributeValue other attribute value.
-   * @param  string $htmlTagName         the HTML tag name you are filtring with.
-   * @return string                      Attribute value for the first matching element.
-   */
-  private function _getAttributeByOtherAttributeValue($attributeName, $otherAttributeName, $otherAttributeValue, $htmlTagName = "*") {
-    $element = $this->getSession()->getPage()->find('xpath', "//{$htmlTagName}[contains(@{$otherAttributeName}, '{$otherAttributeValue}')]");
-    return $element->getAttribute($attributeName);
-  }
 
   /**
   * #varbase: To check if we do have the text in the selected element.
@@ -1015,6 +1037,68 @@ class VarbaseContext extends RawDrupalContext implements SnippetAcceptingContext
   }
   // ===========================================================================
 
+
+ /**
+  * @When I press the :firstKey + :otherKey keys in the :field field
+  */
+  public function iPressTheKeysInTheField($firstKey, $otherKey, $field) {
+    static $keys = array(
+      'backspace' => 8,
+      'tab' => 9,
+      'enter' => 13,
+      'shift' => 16,
+      'ctrl' =>  17,
+      'alt' => 18,
+      'pause' => 19,
+      'break' => 19,
+      'escape' =>  27,
+      'esc' =>  27,
+      'end' => 35,
+      'home' =>  36,
+      'left' => 37,
+      'up' => 38,
+      'right' =>39,
+      'down' => 40,
+      'insert' =>  45,
+      'delete' =>  46,
+      'pageup' => 33,
+      'pagedown' => 34,
+      'capslock' => 20,
+    );
+
+    if (is_string($firstKey)) {
+      if (strlen($firstKey) < 1) {
+        throw new \Exception('VarbaseContext->pressKeyAndOtherKey($firstKey, $otherKey, $field) was invoked but the $firstKey parameter was empty.');
+      }
+      elseif (strlen($firstKey) > 1) {
+        // Support for all variations, e.g. ESC, Esc, page up, pageup.
+        $firstKey = $keys[strtolower(str_replace(' ', '', $firstKey))];
+      }
+    }
+
+    if (is_string($otherKey)) {
+      if (strlen($otherKey) < 1) {
+        throw new \Exception('VarbaseContext->pressKeyAndOtherKey($firstKey, $otherKey, $field) was invoked but the $otherKey parameter was empty.');
+      }
+      elseif (strlen($otherKey) > 1) {
+        // Support for all variations, e.g. ESC, Esc, page up, pageup.
+        $otherKey = $keys[strtolower(str_replace(' ', '', $otherKey))];
+      }
+    }
+
+    $element = $this->getSession()->getPage()->findField($field);
+    if (!$element) {
+      throw new \Exception("Field '$field' not found");
+    }
+
+    $driver = $this->getSession()->getDriver();
+    $driver->keyDown($element->getXpath(), $firstKey);
+    $driver->keyDown($element->getXpath(), $otherKey);
+
+    $driver->keyUp($element->getXpath(), $firstKey);
+    $driver->keyUp($element->getXpath(), $otherKey);
+  }
+
   /**
 	 * Accept Alerts Before going to the next step.
 	 *
@@ -1091,6 +1175,54 @@ class VarbaseContext extends RawDrupalContext implements SnippetAcceptingContext
 
     $this->getSession()->getDriver()->evaluateScript("jQuery('{$draggedElement}').detach().prependTo('{$targetElement}');");
 
+  }
+
+
+  public function cleanUsers() {
+
+  }
+
+  /**
+   * Helper function to let you get the value of an attribute name for
+   * an HTML tag by other Attribute name and value
+   *
+   * @param  string $attributeName       The attribute name.
+   * @param  string $otherAttributeName  other attribute name.
+   * @param  string $otherAttributeValue other attribute value.
+   * @param  string $htmlTagName         the HTML tag name you are filtring with.
+   * @return string                      Attribute value for the first matching element.
+   */
+  private function _getAttributeByOtherAttributeValue($attributeName, $otherAttributeName, $otherAttributeValue, $htmlTagName = "*") {
+    $element = $this->getSession()->getPage()->find('xpath', "//{$htmlTagName}[contains(@{$otherAttributeName}, '{$otherAttributeValue}')]");
+    return $element->getAttribute($attributeName);
+  }
+
+  /**
+   *  Helper function to update a selected element id attribute by css.
+   * @param  string $htmlTagCSS
+   * @param  string $htmlTagID
+   * @param  string $prefix
+   */
+  private function _updateIDByCSS($htmlTagCSS, $htmlTagID, $prefix = '') {
+    $this->getSession()->getDriver()->evaluateScript('jQuery("' . $htmlTagCSS . '").attr("id", "'. $prefix . $htmlTagID. '");');
+  }
+
+  /**
+   * Helper function to add an ID to an IFream.
+   * @param string $fieldid field id in drupal.
+   * @param string $prefix  a prefix which needed for the id.
+   */
+  private function _addIDtoIFrame($fieldid, $prefix = "ifream-") {
+    // If the WYSIWYG is in an ifream with no id.
+    $iFreamID = $this->_getAttributeByOtherAttributeValue('id', 'title', "Rich Text Editor, ". $fieldid, 'iframe');
+    if (empty($iFreamID)) {
+      $ifreamcss = $this->_getAttributeByOtherAttributeValue('class', 'title', "Rich Text Editor, ". $fieldid, 'iframe');
+      $ifreamcss = str_replace(" ", ".", $ifreamcss);
+      if (strpos($ifreamcss, ".") > 1) {
+        $ifreamcss = '.' . $ifreamcss;
+      }
+      $this->_updateIDByCSS($ifreamcss, $fieldid, $prefix);
+    }
   }
 
 }
