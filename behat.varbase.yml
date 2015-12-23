@@ -135,3 +135,10 @@ drush:
         left sidebar: "#sidebar-first"
         content: "#content"
     Sanpi\Behatch\Extension: ~
+    emuse\BehatHTMLFormatter\BehatHTMLFormatterExtension:
+      name: html
+      renderer: Twig,Behat2
+      file_name: index
+      print_args: false
+      print_outp: false
+      loop_break: false
