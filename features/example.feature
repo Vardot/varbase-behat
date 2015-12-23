@@ -10,21 +10,21 @@ Feature: Have a look at some of Vardot's team and personals.
      Then I should see "the team"
 
    @mink:goutte
-   Scenario: Go to about page using goutte. Check if we can use it.
+   Scenario: Go to about page using BrowserKit/Goutte. Check if we can use it.
       Given I go to "https://www.vardot.com" website
        When I click "About"
         And wait
        Then I should see "the team"
 
   @mink:selenium2
-  Scenario: Go to about page using mink selenium2. Check if we can use it.
+  Scenario: Go to about page using mink Selenium2. Check if we can use it.
      Given I go to "https://www.vardot.com" website
       When I click "About"
        And wait
       Then I should see "the team"
 
   @mink:zombie
-  Scenario: Go to about page using mink zombie. Check if we can use it.
+  Scenario: Go to about page using mink Zombie. Check if we can use it.
      Given I go to "https://www.vardot.com" website
       When I click "About"
        And wait
@@ -32,7 +32,7 @@ Feature: Have a look at some of Vardot's team and personals.
 
 
   @mink:sahi
-  Scenario: Go to about page using mink sahi. Check if we can use it.
+  Scenario: Go to about page using mink Sahi. Check if we can use it.
      Given I go to "https://www.vardot.com" website
       When I click "About"
        And wait
