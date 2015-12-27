@@ -454,11 +454,6 @@ class VarbaseContext extends RawDrupalContext implements SnippetAcceptingContext
     $this->getSession()->switchToIFrame(null);
   }
 
-  /**
-   * @Then /^I should not see "([^"]*)" under the media browser style selector$/
-   */
-
-
    /**
    * #varbase : To check if we can NOT see a text
    *            under the media browser style selector.
@@ -1037,67 +1032,120 @@ class VarbaseContext extends RawDrupalContext implements SnippetAcceptingContext
   }
   // ===========================================================================
 
+  /**
+   * #WIP#vardot: To press a modifier and other key
+   *          Modifier options: { ctrl, shift, alt }
+   *          Key options:
+   *
+   * Example #1: When I press "ctrl" and "v"
+   * Example #2: When I press "alt" and "f"
+   * Example #3: When I press "ctrl" and "r"
+   *
+   * @When I press :modifier and :key in :field field
+   */
+  public function iPressModifierAndKeys($modifier, $key, $field) {
 
- /**
-  * @When I press the :firstKey + :otherKey keys in the :field field
-  */
-  public function iPressTheKeysInTheField($firstKey, $otherKey, $field) {
-    static $keys = array(
-      'backspace' => 8,
-      'tab' => 9,
-      'enter' => 13,
-      'shift' => 16,
-      'ctrl' =>  17,
-      'alt' => 18,
-      'pause' => 19,
-      'break' => 19,
-      'escape' =>  27,
-      'esc' =>  27,
-      'end' => 35,
-      'home' =>  36,
-      'left' => 37,
-      'up' => 38,
-      'right' =>39,
-      'down' => 40,
-      'insert' =>  45,
-      'delete' =>  46,
-      'pageup' => 33,
-      'pagedown' => 34,
-      'capslock' => 20,
-    );
+      static $keys = array(
+        'backspace' => 8,
+        'tab' => 9,
+        'enter' => 13,
+        'shift' => 16,
+        'ctrl' =>  17,
+        'alt' => 18,
+        'pause' => 19,
+        'break' => 19,
+        'escape' =>  27,
+        'esc' =>  27,
+        'end' => 35,
+        'home' =>  36,
+        'left' => 37,
+        'up' => 38,
+        'right' =>39,
+        'down' => 40,
+        'insert' =>  45,
+        'delete' =>  46,
+        'pageup' => 33,
+        'pagedown' => 34,
+        'capslock' => 20,
+      );
 
-    if (is_string($firstKey)) {
-      if (strlen($firstKey) < 1) {
-        throw new \Exception('VarbaseContext->pressKeyAndOtherKey($firstKey, $otherKey, $field) was invoked but the $firstKey parameter was empty.');
+      static $modifiers = array(
+        'shift' => 16,
+        'ctrl' =>  17,
+        'alt' => 18,
+      );
+
+      $key = is_numeric($key) ? $key : ord($key);
+      $isCtrlKeyArg  = ($modifier == 'ctrl')  ? "true" : "false";
+      $isAltKeyArg   = ($modifier == 'alt')   ? "true" : "false";
+      $isShiftKeyArg = ($modifier == 'shift') ? "true" : "false";
+      $isMetaKeyArg  = ($modifier == 'meta')  ? "true" : "false";
+
+      // Validate the modifier keys.
+      if (is_string($modifier)) {
+        if (strlen($modifier) < 1) {
+          throw new \Exception('Modifier parameter was empty. one of \'shift\', \'alt\', \'ctrl\'');
+        }
+        elseif (strlen($modifier) > 1) {
+          // one of 'shift', 'alt', 'ctrl'.
+          $filteredModifier = strtolower(str_replace(' ', '', $modifier));
+          if (isset($modifiers[$filteredModifier])) {
+            $modifier = $modifiers[$filteredModifier];
+          }
+          else {
+            throw new \Exception('Modifier parameter must be one of \'shift\', \'alt\', \'ctrl\'');
+          }
+
+        }
       }
-      elseif (strlen($firstKey) > 1) {
-        // Support for all variations, e.g. ESC, Esc, page up, pageup.
-        $firstKey = $keys[strtolower(str_replace(' ', '', $firstKey))];
+
+      // Validate the other key.
+      if (is_string($key)) {
+        if (strlen($key) < 1) {
+          throw new \Exception('Key parameter was empty.');
+        }
+        elseif (strlen($key) > 1) {
+          // Support for all variations, e.g. ESC, Esc, page up, pageup.
+          $filteredKey = strtolower(str_replace(' ', '', $key));
+          if (isset($keys[$filteredKey])) {
+            $key = $keys[$filteredKey];
+          }
+          else {
+            throw new \Exception('Key parameter must a keyboard key');
+          }
+        }
       }
+
+        $elementField = $this->getSession()->getPage()->findField($field);
+        if (!$elementField) {
+          throw new \Exception("Field '{$field}' not found");
+        }
+
+        $fieldid = $elementField->getAttribute('id');
+
+
+
+        $js = <<<JS
+var node = document.getElementById("{$fieldid}");
+var keyEvent = document.createEvent('KeyboardEvent');
+keyEvent.initKeyEvent('keypress',        // typeArg,
+                       true,             // canBubbleArg,
+                       true,             // cancelableArg,
+                       window,             // viewArg,
+                       {$isCtrlKeyArg},             // ctrlKeyArg,
+                       {$isAltKeyArg},            // altKeyArg,
+                       {$isShiftKeyArg},            // shiftKeyArg,
+                       false,            // metaKeyArg,
+                       {$key},       // keyCodeArg,
+                       {$key}      // charCodeArg);
+                     );
+node.dispatchEvent(keyEvent);
+JS;
+
+
+
+        $this->getSession()->executeScript($js);
     }
-
-    if (is_string($otherKey)) {
-      if (strlen($otherKey) < 1) {
-        throw new \Exception('VarbaseContext->pressKeyAndOtherKey($firstKey, $otherKey, $field) was invoked but the $otherKey parameter was empty.');
-      }
-      elseif (strlen($otherKey) > 1) {
-        // Support for all variations, e.g. ESC, Esc, page up, pageup.
-        $otherKey = $keys[strtolower(str_replace(' ', '', $otherKey))];
-      }
-    }
-
-    $element = $this->getSession()->getPage()->findField($field);
-    if (!$element) {
-      throw new \Exception("Field '$field' not found");
-    }
-
-    $driver = $this->getSession()->getDriver();
-    $driver->keyDown($element->getXpath(), $firstKey);
-    $driver->keyDown($element->getXpath(), $otherKey);
-
-    $driver->keyUp($element->getXpath(), $firstKey);
-    $driver->keyUp($element->getXpath(), $otherKey);
-  }
 
   /**
 	 * Accept Alerts Before going to the next step.
@@ -1150,8 +1198,6 @@ class VarbaseContext extends RawDrupalContext implements SnippetAcceptingContext
          // no-op, alert might not be present
        }
    }
-
-
 
   /**
   * #varbase: To fill a text in the alert message.

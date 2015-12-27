@@ -66,6 +66,7 @@ default:
           browser: 'firefox'
           # browser: 'chrome'
           # browser: 'phantomjs'
+          nativeEvents: true
       base_url: http://varbase-7-x-3-0-alpha6.local
       browser_name: 'firefox'
       # browser_name: 'chrome'
