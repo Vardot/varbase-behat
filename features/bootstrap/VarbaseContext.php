@@ -22,12 +22,20 @@ class VarbaseContext extends RawDrupalContext implements SnippetAcceptingContext
   protected $varbase_users = array();
 
   /**
+  * Hold all passed parameters.
+  */
+  protected $parameters = array();
+
+  /**
    * Initializes context.
    *
    * @param array $parameters .
    *   Context parameters (set them up through behat.yml or behat.local.yml).
    */
   public function __construct(array $parameters) {
+
+    // Set the list of parameters.
+    $this->parameters = $parameters;
 
     if (isset($parameters['varbase_users'])) {
       $this->varbase_users = $parameters['varbase_users'];
@@ -36,7 +44,7 @@ class VarbaseContext extends RawDrupalContext implements SnippetAcceptingContext
       }
     }
     else {
-      throw new Exception('behat.varbase.yml should include "varbase_users" property.');
+      throw new Exception('behat.yml config files should include "varbase_users" property.');
     }
   }
 
@@ -1221,6 +1229,63 @@ JS;
 
     $this->getSession()->getDriver()->evaluateScript("jQuery('{$draggedElement}').detach().prependTo('{$targetElement}');");
 
+  }
+
+  /**
+  * #varbase: To select a radio button.
+  *
+  * Example 1: When I select the "Male" radio button
+  *
+  * @When /^I select the "([^"]*)" radio button$/
+  */
+  public function iSelectTheRadioButton($labelText) {
+      // Find the label by its text, then use that to get the radio item's ID
+      $radioId = null;
+
+      /** @var $label NodeElement */
+      foreach ($this->getSession()->getPage()->findAll('css', 'label') as $label) {
+          if ($labelText === $label->getText()) {
+              if ($label->hasAttribute('for')) {
+                  $radioId = $label->getAttribute('for');
+                  break;
+              } else {
+                  throw new \Exception("Radio button's label needs the 'for' attribute to be set");
+              }
+          }
+      }
+      if (!$radioId) {
+          throw new \InvalidArgumentException("Label '$labelText' not found.");
+      }
+
+      // Now use the ID to retrieve the button and click it
+      /** @var NodeElement $radioButton */
+      $radioButton = $this->getSession()->getPage()->find('css', "#$radioId");
+      if (!$radioButton) {
+          throw new \Exception("$labelText radio button not found.");
+      }
+
+      $this->getSession()->getPage()->fillField($radioId, $radioButton->getAttribute('value'));
+  }
+
+   /**
+   * #varbase: To click on the lable with the for attribute value linked to
+   *           to the an ID of a radio button with a value to select the radio option
+   *           we need to use this when we do have a list of radio buttons
+   *           but we do have the label with extra html tags like images or the
+   *           actual radio button is hidden.
+   *
+   * Example 1: I click on the radio label for "right_sidebar_layout" value
+   *
+   * @Given /^I click on the radio label for "([^"]*)" value$/
+   */
+  public function iClickOnTheRadioLabelForValue($value) {
+    $radio_label = $this->getSession()->getPage()->find('xpath', "//label[contains(@for, '{$value}')]");
+    if ($radio_label) {
+        $radio_label->click();
+    }
+    else {
+        throw new \Exception("No label with the value of for='" . $value . "' radio button not found.");
+    }
   }
 
 
