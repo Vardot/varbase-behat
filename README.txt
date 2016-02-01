@@ -1,7 +1,7 @@
 # Varbase Behat #
 
-      Varbase Behat is a set of Gherkin Features and custom Varbase Context with
- custom step definitions, and assets, which help in the automatic testing
+  Varbase Behat is a set of Gherkin Features and custom Varbase Context with
+ Custom step definitions, and assets, which help with the automatic testing
  for varbase websites.
 
 
@@ -25,20 +25,20 @@
 
 --------------------------------------------------------------------------------
 1. If you have a Varbase testing site at this location
-/var/www/html/varbase_behat/varbase/docroot
+/var/www/html/varbase_behat/docroot
 
 --------------------------------------------------------------------------------
 2. Download the latest behat package from "Downloads" section in the Bitbucket
    repository, and place it in the folder as below.
-/var/www/html/varbase_behat/varbase/behat
+/var/www/html/varbase_behat/behat
 
 --------------------------------------------------------------------------------
 3. Edit the file behat.varbase.yml and change:
 
-  base_url:  'http://localhost/varbase_behat/varbase/docroot'
+  base_url:  'http://varbase.local'
 
 --------------------------------------------------------------------------------
-5. Go to /var/www/html/varbase_behat/varbase/behat/ Then run the
+5. Go to /var/www/html/varbase_bhat/behat/ Then run the
   following commands to install all required packages, Libraries from vendors.
 
 $ curl -sS https://getcomposer.org/installer | php
@@ -53,7 +53,7 @@ $ php composer.phar install
 $ java -jar selenium-server-standalone-2.48.2.jar -port 4445
 
 --------------------------------------------------------------------------------
-7. Run the behat command at /var/www/html/varbase_behat/varbase/behat/
+7. Run the behat command at /var/www/html/varbase_behat/behat/
 
 $ bin/behat features/example.feature
 
