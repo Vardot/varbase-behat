@@ -7,8 +7,11 @@ Feature: Installation - Varbase - Default installation to initiate a site for a 
  Scenario: Installation or Varbase
   Given I go to "/install.php"
    Then I should see "Select an installation profile"
-   When I select the "Varbase" radio button
+   When I select the "Vardot Base" radio button
     And I press "Save and continue"
+    And wait
+   Then I should see "Choose language"
+   When I press "Save and continue"
     And wait
    Then I should see "Database configuration"
    When I press "Save and continue"
@@ -17,7 +20,7 @@ Feature: Installation - Varbase - Default installation to initiate a site for a 
     And I wait for the batch job to finish
    Then I should see "Configure site"
     And wait
-   When I fill in "Site name" with "Uber Publisher"
+   When I fill in "Site name" with "Varbase"
     And I fill in "Site e-mail address" with "vardot.com"
     And I fill in "Username" with "webmaster"
     And I fill in "E-mail address" with "webmaster@vardot.com"
