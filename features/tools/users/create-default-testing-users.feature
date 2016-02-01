@@ -16,7 +16,6 @@ Feature: Create default testing users.
       And I press "Create new account"
       And wait
      Then I should not see "The name test_authenticated is already taken."
-      And I should see "Created a new user account for test_authenticated."
      When I go to "/admin/people"
       And I fill in "test_authenticated" for "Username"
       And I press "Apply"
@@ -39,7 +38,6 @@ Feature: Create default testing users.
       And I press "Create new account"
       And wait
      Then I should not see "The name test_editor is already taken."
-      And I should see "Created a new user account for test_editor."
      When I go to "/admin/people"
       And I fill in "test_editor" for "Username"
       And I press "Apply"
@@ -61,7 +59,6 @@ Feature: Create default testing users.
       And I press "Create new account"
       And wait
      Then I should not see "The name test_content_admin is already taken."
-      And I should see "Created a new user account for test_content_admin."
      When I go to "/admin/people"
       And I fill in "test_content_admin" for "Username"
       And I press "Apply"
@@ -83,7 +80,6 @@ Feature: Create default testing users.
       And I press "Create new account"
       And wait
      Then I should not see "The name test_site_admin is already taken."
-      And I should see "Created a new user account for test_site_admin."
      When I go to "/admin/people"
       And I fill in "test_site_admin" for "Username"
       And I press "Apply"
@@ -106,7 +102,6 @@ Feature: Create default testing users.
       And I press "Create new account"
       And wait
      Then I should not see "The name test_super_admin is already taken."
-      And I should see "Created a new user account for test_super_admin."
      When I go to "/admin/people"
       And I fill in "test_super_admin" for "Username"
       And I press "Apply"
