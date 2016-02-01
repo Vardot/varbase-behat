@@ -25,20 +25,20 @@
 
 --------------------------------------------------------------------------------
 1. If you have a Varbase testing site at this location
-/var/www/html/varbase_behat/varbase-7-x-3-0-alpha6/docroot
+/var/www/html/varbase_behat/varbase/docroot
 
 --------------------------------------------------------------------------------
 2. Download the latest behat package from "Downloads" section in the Bitbucket
    repository, and place it in the folder as below.
-/var/www/html/varbase_behat/varbase-7-x-3-0-alpha6/behat
+/var/www/html/varbase_behat/varbase/behat
 
 --------------------------------------------------------------------------------
 3. Edit the file behat.varbase.yml and change:
 
-  base_url:  'http://localhost/varbase_behat/varbase-7-x-3-0-alpha6/docroot'
+  base_url:  'http://localhost/varbase_behat/varbase/docroot'
 
 --------------------------------------------------------------------------------
-5. Go to /var/www/html/varbase_behat/varbase-7-x-3-0-alpha6/behat/ Then run the
+5. Go to /var/www/html/varbase_behat/varbase/behat/ Then run the
   following commands to install all required packages, Libraries from vendors.
 
 $ curl -sS https://getcomposer.org/installer | php
@@ -53,7 +53,7 @@ $ php composer.phar install
 $ java -jar selenium-server-standalone-2.48.2.jar -port 4445
 
 --------------------------------------------------------------------------------
-7. Run the behat command at /var/www/html/varbase_behat/varbase-7-x-3-0-alpha6/behat/
+7. Run the behat command at /var/www/html/varbase_behat/varbase/behat/
 
 $ bin/behat features/example.feature
 
@@ -102,19 +102,19 @@ Feature: Example
  Scenario: Go to about page with no visual view.  # features/example.feature:3
    Given I go to "https://www.vardot.com" website # VarbaseContext::iGoToWebsite()
    When I click "About"                           # Drupal\DrupalExtension\Context\MinkContext::assertClick()
-   Then I should see "the team"                   # Drupal\DrupalExtension\Context\MinkContext::assertPageContainsText()
+   Then I should see "meet the team"              # Drupal\DrupalExtension\Context\MinkContext::assertPageContainsText()
 
  @mink:selenium2
  Scenario: Go to about page using mink selenium2  # features/example.feature:9
    Given I go to "https://www.vardot.com" website # VarbaseContext::iGoToWebsite()
    When I click "About"                           # Drupal\DrupalExtension\Context\MinkContext::assertClick()
-   Then I should see "the team"                   # Drupal\DrupalExtension\Context\MinkContext::assertPageContainsText()
+   Then I should see "meet the team"                   # Drupal\DrupalExtension\Context\MinkContext::assertPageContainsText()
 
  @javascript
  Scenario: To search in Google about Varbase.     # features/example.feature:15
    Given I go to "https://www.vardot.com" website # VarbaseContext::iGoToWebsite()
    When I click "About"                           # Drupal\DrupalExtension\Context\MinkContext::assertClick()
-   Then I should see "the team"                   # Drupal\DrupalExtension\Context\MinkContext::assertPageContainsText()
+   Then I should see "meet the team"              # Drupal\DrupalExtension\Context\MinkContext::assertPageContainsText()
 
 3 scenarios (3 passed)
 9 steps (9 passed)
@@ -122,7 +122,7 @@ Feature: Example
 ================================================================================
 
 12. To see the report in HTML. Go and open this file in a browser.
-    /var/www/html/varbase_behat/varbase-7-x-3-0-alpha6/behat/reports/index.html
+    /var/www/html/varbase_behat/varbase/behat/reports/index.html
     You will see the latest report for latest run.
 
     if you want to custom a report you can add
@@ -166,4 +166,10 @@ Feature: Example
     $ bin/behat features/varbase/ --format pretty --out std  --format html  --out reports/report-$( date '+%Y-%m-%d_%H-%M-%S' )
 
     then after that you can see the report in the
-    /var/www/html/varbase_behat/varbase-7-x-3-0-alpha6/behat/reports
+    /var/www/html/varbase_behat/varbase/behat/reports
+
+
+    14. To test installation features you will need to use the varbase
+        Install config file, as you can see in the following command.
+
+        $ bin/behat --config=behat.varbase-install-config.yml features/install/installation_varbase_default-installation-to-initiate-a-site-for-a-client.feature

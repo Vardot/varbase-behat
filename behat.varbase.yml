@@ -47,7 +47,7 @@ default:
             evaluationMode: javascript
         - behatch:rest
         - behatch:system:
-            root: "/var/www/html/varbase_behat/varbase-7-x-3-0-alpha6/docroot"
+            root: "/var/www/html/varbase_behat/docroot"
         - behatch:table
         - behatch:xml
   formatters:
@@ -67,7 +67,7 @@ default:
           # browser: 'chrome'
           # browser: 'phantomjs'
           nativeEvents: true
-      base_url: http://varbase-7-x-3-0-alpha6.local
+      base_url: http://varbase.local
       browser_name: 'firefox'
       # browser_name: 'chrome'
       # browser_name: 'phantomjs'
@@ -76,10 +76,10 @@ default:
       blackbox: ~
       api_driver: 'drupal'
       drupal:
-        drupal_root: "/var/www/html/varbase_behat/varbase-7-x-3-0-alpha6/docroot"
+        drupal_root: "/var/www/html/varbase_behat/docroot"
       drush_driver: "drush"
       drush:
-        root: "/var/www/html/varbase_behat/varbase-7-x-3-0-alpha6/docroot"
+        root: "/var/www/html/varbase_behat/docroot"
       region_map:
         content: ".main-container"
         footer: "#footer"
@@ -125,12 +125,12 @@ drush:
     Behat\MinkExtension:
       files_path: "%paths.base%/assets/"
       goutte: ~
-      base_url: http://varbase-7-x-3-0-alpha6.local
+      base_url: http://varbase.local
     Drupal\DrupalExtension:
       api_driver: "drush"
       drush_driver: "drush"
       drush:
-        root: "/var/www/html/varbase_behat/varbase-7-x-3-0-alpha6/docroot"
+        root: "/var/www/html/varbase_behat/docroot"
         # alias: self only if we want to use drush aliases.
       region_map:
         left sidebar: "#sidebar-first"
