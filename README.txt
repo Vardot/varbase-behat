@@ -49,7 +49,7 @@ $ php composer.phar install
    change the port number by changing the parameter.
 
     "wd_host: 127.0.0.1:4445/wd/hub" in the behat.varbase.yml file.
-$ cd /var/www/html/uber_publisher_behat/behat/selenium
+$ cd /var/www/html/varbase_behat/behat/selenium
 $ java -jar selenium-server-standalone.jar -port 4445
 
 --------------------------------------------------------------------------------
