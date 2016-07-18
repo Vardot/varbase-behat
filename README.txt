@@ -38,7 +38,7 @@
   base_url:  'http://[PROJECT_NAME].local'
 
 --------------------------------------------------------------------------------
-5. Go to /var/www/html/varbase_bhat/behat/ Then run the
+5. Go to /var/www/html/[PROJECT_NAME]/behat/ Then run the
   following commands to install all required packages, Libraries from vendors.
 
 $ curl -sS https://getcomposer.org/installer | php
@@ -49,7 +49,7 @@ $ php composer.phar install
    change the port number by changing the parameter.
 
     "wd_host: 127.0.0.1:4445/wd/hub" in the behat.varbase.yml file.
-$ cd /var/www/html/varbase_behat/behat/selenium
+$ cd /var/www/html/[PROJECT_NAME]/behat/selenium
 $ java -jar selenium-server-standalone.jar -port 4445
 
 --------------------------------------------------------------------------------
@@ -122,7 +122,7 @@ Feature: Example
 ================================================================================
 
 12. To see the report in HTML. Go and open this file in a browser.
-    /var/www/html/varbase_behat/varbase/behat/reports/index.html
+    /var/www/html/[PROJECT_NAME]/varbase/behat/reports/index.html
     You will see the latest report for latest run.
 
     if you want to custom a report you can add
@@ -166,7 +166,7 @@ Feature: Example
     $ bin/behat features/varbase/ --format pretty --out std  --format html  --out reports/report-$( date '+%Y-%m-%d_%H-%M-%S' )
 
     then after that you can see the report in the
-    /var/www/html/varbase_behat/varbase/behat/reports
+    /var/www/html/[PROJECT_NAME]/varbase/behat/reports
 
 
     14. To test installation features you will need to use the varbase

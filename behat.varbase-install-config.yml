@@ -25,7 +25,7 @@ default:
             evaluationMode: javascript
         - behatch:rest
         - behatch:system:
-            root: "/var/www/html/varbase_behat/docroot"
+            root: "/var/www/html/[PROJECT_NAME]/docroot"
         - behatch:table
         - behatch:xml
       filters:
@@ -47,7 +47,7 @@ default:
           # browser: 'chrome'
           # browser: 'phantomjs'
           nativeEvents: true
-      base_url: http://varbase.local
+      base_url: http://[PROJECT_NAME].local
       browser_name: 'firefox'
       # browser_name: 'chrome'
       # browser_name: 'phantomjs'
