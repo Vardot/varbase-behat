@@ -19,23 +19,23 @@
    - Install Varbase by following the  Installing Varbase 7.x-3.x
      https://www.drupal.org/node/2570843 documentation page.
    - Download Varbase Behat:
-     https://bitbucket.org/Vardot/varbase-behat/downloads/#tag-downloads
+     https://github.com/Vardot/varbase-behat/releases
 
  After that you can go through the following steps.
 
 --------------------------------------------------------------------------------
 1. If you have a Varbase testing site at this location
-/var/www/html/varbase_behat/docroot
+/var/www/html/[PROJECT_NAME]/docroot
 
 --------------------------------------------------------------------------------
-2. Download the latest behat package from "Downloads" section in the Bitbucket
+2. Download the latest Behat package from https://github.com/Vardot/varbase-behat
    repository, and place it in the folder as below.
-/var/www/html/varbase_behat/behat
+/var/www/html/[PROJECT_NAME]/behat
 
 --------------------------------------------------------------------------------
 3. Edit the file behat.varbase.yml and change:
 
-  base_url:  'http://varbase.local'
+  base_url:  'http://[PROJECT_NAME].local'
 
 --------------------------------------------------------------------------------
 5. Go to /var/www/html/varbase_bhat/behat/ Then run the
@@ -53,7 +53,7 @@ $ cd /var/www/html/varbase_behat/behat/selenium
 $ java -jar selenium-server-standalone.jar -port 4445
 
 --------------------------------------------------------------------------------
-7. Run the behat command at /var/www/html/varbase_behat/behat/
+7. Run the behat command at /var/www/html/[PROJECT_NAME]/behat/
 
 $ bin/behat features/example.feature
 
