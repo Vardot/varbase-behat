@@ -49,7 +49,7 @@ class VarbaseContext extends RawDrupalContext implements SnippetAcceptingContext
   }
 
   /**
-   * #varbase : To authenticat a user with password from varbase configuration.
+   * #varbase : To authenticate a user with password from varbase configuration.
    *            If you want to see the list of users or add yours you can go and
    *            edit the behat.varbase.yml file under the varbase_users list.
    *
@@ -78,7 +78,7 @@ class VarbaseContext extends RawDrupalContext implements SnippetAcceptingContext
   }
 
   /**
-   * #varbase : To authenticat a user with a gavin username and password on the spot.
+   * #varbase : To authenticate a user with a gavin username and password on the spot.
    *
    * Example: I am a logged in user with the username "testing" and password "testing user password"
    *

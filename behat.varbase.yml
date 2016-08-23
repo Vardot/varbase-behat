@@ -47,7 +47,7 @@ default:
             evaluationMode: javascript
         - behatch:rest
         - behatch:system:
-            root: "/var/www/html/[PROJECT_NAME]/docroot"
+            root: "../docroot"
         - behatch:table
         - behatch:xml
   formatters:
@@ -63,23 +63,23 @@ default:
       selenium2:
         wd_host: 127.0.0.1:4445/wd/hub
         capabilities:
-          browser: 'firefox'
-          # browser: 'chrome'
+          # browser: 'firefox'
+          browser: 'chrome'
           # browser: 'phantomjs'
           nativeEvents: true
       base_url: http://varbase.local
-      browser_name: 'firefox'
-      # browser_name: 'chrome'
+      # browser_name: 'firefox'
+      browser_name: 'chrome'
       # browser_name: 'phantomjs'
       javascript_session: selenium2
     Drupal\DrupalExtension:
       blackbox: ~
       api_driver: 'drupal'
       drupal:
-        drupal_root: "/var/www/html/[PROJECT_NAME]/docroot"
+        drupal_root: "../docroot"
       drush_driver: "drush"
       drush:
-        root: "/var/www/html/[PROJECT_NAME]/docroot"
+        root: "../docroot"
       region_map:
         content: ".main-container"
         footer: "#footer"
@@ -125,12 +125,12 @@ drush:
     Behat\MinkExtension:
       files_path: "%paths.base%/assets/"
       goutte: ~
-      base_url: http://[PROJECT_NAME].local
+      base_url: http://varbase.local
     Drupal\DrupalExtension:
       api_driver: "drush"
       drush_driver: "drush"
       drush:
-        root: "/var/www/html/[PROJECT_NAME]/docroot"
+        root: "../docroot"
         # alias: self only if we want to use drush aliases.
       region_map:
         left sidebar: "#sidebar-first"

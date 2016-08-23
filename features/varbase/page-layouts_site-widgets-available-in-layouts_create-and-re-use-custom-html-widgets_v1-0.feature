@@ -3,20 +3,20 @@ Feature: Page Layouts - Site Widgets Available In Layouts - Create and re-use cu
   I want to be able to use reusable custom HTML widgets
   So that the site can show up the same custom HTML widget pan in other Landing pages
 
-  Scenario: Check if In-Place Editor to Allows privileged users to update and rearrange the content while viewing.
+  Scenario: Check if In-Place Editor to allow privileged users to update and rearrange the content while viewing.
     Given I am a logged in user with the "webmaster" user
      When I go to "/admin/structure/types/manage/landing-page/panelizer"
       And the "New Custom content" checkbox should be checked
       And the "New Rendered entity" checkbox should be checked
       And the "New Fielded custom content" checkbox should be checked
 
-  Scenario: Check if In-Place Editor to Allows privileged users to update and rearrange the content while viewing.
+  Scenario: Check if In-Place Editor to allow privileged users to update and rearrange the content while viewing.
     Given I am a logged in user with the "webmaster" user
      When I go to "/admin/structure/types/manage/landing-page/panelizer/page_manager"
      Then the "In-Place Editor" checkbox should be checked
 
   @javascript
-  Scenario: Check if a user with parmission to administer landing page content can create a custom reusable HTML widget.
+  Scenario: Check if a user with permission to administer landing page content can create a custom reusable HTML widget.
     Given I am a logged in user with the "test_site_admin" user
      When I go to "/node/add/landing-page"
      Then I should see "Create Landing page"
@@ -58,7 +58,7 @@ Feature: Page Layouts - Site Widgets Available In Layouts - Create and re-use cu
      Then I should not see "Add new pane"
 
   @javascript
-  Scenario: Check if a user with parmission to administer landing page content can add a ready reusable HTML widget.
+  Scenario: Check if a user with permission to administer landing page content can add a ready reusable HTML widget.
     Given I am a logged in user with the "test_site_admin" user
      When I go to "/node/add/landing-page"
      Then I should see "Create Landing page"

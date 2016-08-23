@@ -21,7 +21,7 @@ Feature: Website Base Requirements - Website Languages - All content translatabl
 
   @javascript
   Scenario: Check if site admin can translate an existing English Basic Page
-  to an Arabic verstion.
+  to an Arabic version.
     Given I am a logged in user with the "test_site_admin" user
      When I go to "/node/add/page"
       And I fill in "Test English Basic page" for "Title"
@@ -68,8 +68,8 @@ Feature: Website Base Requirements - Website Languages - All content translatabl
      Then the "Enabled, with translation" checkbox should be checked
 
   @javascript
-  Scenario: Check if site admin can translate an existing English Basic Page
-  to an Arabic verstion.
+  Scenario: Check if site admins can translate an existing English Basic Page
+  to an Arabic version.
     Given I am a logged in user with the "test_site_admin" user
      When I go to "/node/add/landing-page"
       And I fill in "Test English Landing page" for "Title"

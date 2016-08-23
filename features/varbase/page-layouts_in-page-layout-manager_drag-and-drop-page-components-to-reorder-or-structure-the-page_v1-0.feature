@@ -3,13 +3,13 @@ Feature: Page Layouts - In-page layout manager - Drag-and-drop page components t
   I want to be able to see "Customize this page" for the current "Landing page"
   So that I will be able to Customize content, drag and drop page components to reorder or change the structure of the page
 
-  Scenario: Check if In-Place Editor to Allows privileged users to update and rearrange the content while viewing.
+  Scenario: Check if In-Place Editor to Allow privileged users to update and rearrange the content while viewing.
     Given I am a logged in user with the "webmaster" user
      When I go to "/admin/structure/types/manage/landing-page/panelizer/page_manager"
      Then the "In-Place Editor" checkbox should be checked
 
   @javascript @AcceptAlertsBeforStep&&@AcceptAlertsAfterStep
-  Scenario: Add a "Test Landing page" and add number of panle panes to the page.
+  Scenario: Add a "Test Landing page" and add number of panel panes to the page.
     Given I am a logged in user with the "test_site_admin" user
      When I go to "node/add/landing-page"
       And I fill in "Test Landing page" for "Title"

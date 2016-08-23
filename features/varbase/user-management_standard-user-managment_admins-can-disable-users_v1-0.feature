@@ -4,7 +4,7 @@ Feature: User Management - Standard User Management - Admins can disable users
   So that they will be disabled and not be able to use the site.
 
 @javascript
-  Scenario: Check if the test_authenticated user is not blocked. and can login.
+  Scenario: Check if the "test_authenticated" user is not blocked. and can login.
     Given I am on "user/login"
      When I fill in "test_authenticated" for "Username"
       And I fill in "dD.123123" for "Password"

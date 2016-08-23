@@ -4,27 +4,27 @@ Feature: Content Structure Features - Basic Pages - Basic page
   So that the "Basic page" will show up in the structured menu under it's parent page
 
 # Check if users with the ( "authenticated user", "Editor", "Content Admin", "Site Admin", or "Super Admin" ) role can add [Basic page]
-  Scenario: Check if [authenticated user]s can add content of "Basic page" type.
+  Scenario: Check if [authenticated user] can add content of "Basic page" type.
     Given I am a logged in user with the "test_authenticated" user
      When I go to "/node/add"
      Then I should not see "Basic page"
 
-  Scenario: Check if [Editor]s can add content of "Basic page" type.
+  Scenario: Check if [Editor] can add content of "Basic page" type.
     Given I am a logged in user with the "test_editor" user
      When I go to "/node/add"
      Then I should not see "Basic page"
 
-  Scenario: Check if [Content Admin]s can add content of "Basic page" type.
+  Scenario: Check if [Content Admin] can add content of "Basic page" type.
     Given I am a logged in user with the "test_content_admin" user
      When I go to "/node/add"
      Then I should not see "Basic page"
 
-  Scenario: Check if [Site Admin]s can add content of "Basic page" type.
+  Scenario: Check if [Site Admin] can add content of "Basic page" type.
     Given I am a logged in user with the "test_site_admin" user
      When I go to "/node/add"
      Then I should not see "Basic page"
 
-  Scenario: Check if [Super Admin]s can add content of "Basic page" type.
+  Scenario: Check if [Super Admin] can add content of "Basic page" type.
     Given I am a logged in user with the "test_super_admin" user
      When I go to "/node/add"
      Then I should see "Basic page"

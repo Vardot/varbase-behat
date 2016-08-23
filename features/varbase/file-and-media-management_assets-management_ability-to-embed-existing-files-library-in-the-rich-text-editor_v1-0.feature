@@ -35,7 +35,7 @@ Feature: File & Media Management - Assets Management - Ability to embed existing
   #-----------------------------------------------------------------------------
 
   @javascript
-  Scenario: Check we are able to embed existing files library in the rich text editor.
+  Scenario: Check if we are able to embed existing files library in the rich text editor.
      When I go to "admin/content"
      Then I should see "Content"
      When I fill in "Test Basic page to embed existing files" for "Title"

@@ -4,7 +4,7 @@ Feature: Navigational Features - Breadcrumbs - Standard breadcrumbs
   So that I can see path I followed to locate the current page usually near the top of the page
 
   @javascript
-  Scenario: Add the Test Basic page root.
+  Scenario: Add the Test Basic page root page to the main menu.
     Given I am a logged in user with the "test_site_admin" user
      When I go to "/node/add/page"
       And I fill in "Test Basic page root title" for "Title"

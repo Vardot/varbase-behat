@@ -3,7 +3,7 @@ Feature: Page Layouts -  In-Page Layout Manager - Change the layout of a page fr
   I want to be able to see "Change layout" for the current "Landing page"
   So that I will be able to Change the layout of the page to use one of the predefined templates
 
-  Scenario: Check if In-Place Editor to Allows privileged users to update and rearrange the content while viewing.
+  Scenario: Check if In-Place Editor to Allow privileged users to update and rearrange the content while viewing.
     Given I am a logged in user with the "webmaster" user
      When I go to "/admin/structure/types/manage/landing-page/panelizer/page_manager"
      Then the "In-Place Editor" checkbox should be checked

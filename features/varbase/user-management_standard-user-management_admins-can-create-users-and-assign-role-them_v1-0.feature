@@ -7,7 +7,7 @@ Feature: User Management - Standard User Management - Admins can create users an
     Given I am a logged in user with the "webmaster" user
 
   @javascript
-  Scenario: Can see "Add user" button under people administration.
+  Scenario: Check if admins can see "Add user" button under people administration.
     Given I go to "/admin/people"
      When I click "Add user"
       And  I should see "People"
@@ -15,7 +15,7 @@ Feature: User Management - Standard User Management - Admins can create users an
       And  I should see "E-mail address"
 
   @javascript
-  Scenario: Create new user account as an (authenticated user)
+  Scenario: Check if admins can create new user account as an (authenticated user)
     Given I go to "/admin/people/create"
      When I fill in "Tester" for "Username"
       And I fill in "tester@vardot.com" for "E-mail address"
