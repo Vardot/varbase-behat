@@ -67,7 +67,7 @@ default:
           browser: 'chrome'
           # browser: 'phantomjs'
           nativeEvents: true
-      base_url: http://varbase.local
+      base_url: http://localhost/testing/docroot
       # browser_name: 'firefox'
       browser_name: 'chrome'
       # browser_name: 'phantomjs'
@@ -125,7 +125,7 @@ drush:
     Behat\MinkExtension:
       files_path: "%paths.base%/assets/"
       goutte: ~
-      base_url: http://varbase.local
+      base_url: http://localhost/testing/docroot
     Drupal\DrupalExtension:
       api_driver: "drush"
       drush_driver: "drush"

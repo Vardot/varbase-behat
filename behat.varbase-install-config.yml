@@ -25,7 +25,7 @@ default:
             evaluationMode: javascript
         - behatch:rest
         - behatch:system:
-            root: "/var/www/html/[PROJECT_NAME]/docroot"
+            root: "/var/www/html/testing/docroot"
         - behatch:table
         - behatch:xml
       filters:
@@ -43,13 +43,13 @@ default:
       selenium2:
         wd_host: 127.0.0.1:4445/wd/hub
         capabilities:
-          browser: 'firefox'
-          # browser: 'chrome'
+          # browser: 'firefox'
+          browser: 'chrome'
           # browser: 'phantomjs'
           nativeEvents: true
-      base_url: http://[PROJECT_NAME].local
-      browser_name: 'firefox'
-      # browser_name: 'chrome'
+      base_url: http://localhost/testing/docroot
+      # browser_name: 'firefox'
+      browser_name: 'chrome'
       # browser_name: 'phantomjs'
       javascript_session: selenium2
     Drupal\DrupalExtension:

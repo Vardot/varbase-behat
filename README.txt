@@ -25,50 +25,78 @@
 
 --------------------------------------------------------------------------------
 1. If you have a Varbase testing site at this location
-/var/www/html/[PROJECT_NAME]/docroot
+/var/www/html/testing/docroot
 
 --------------------------------------------------------------------------------
 2. Download the latest Behat package from https://github.com/Vardot/varbase-behat
    repository, and place it in the folder as below.
-/var/www/html/[PROJECT_NAME]/behat
+/var/www/html/testing/behat
 
 --------------------------------------------------------------------------------
-3. Edit the file behat.varbase.yml and change:
+3. Change the base url value in behat.varbase.yml file, to the domain or the
+   local virtual domain.
 
-  base_url:  'http://[PROJECT_NAME].local'
+  base_url:  'http://localhost/testing/docroot'
 
 --------------------------------------------------------------------------------
-5. Go to /var/www/html/[PROJECT_NAME]/behat/ Then run the
+4. Go to ../behat/ Then run the
   following commands to install all required packages, Libraries from vendors.
 
 $ curl -sS https://getcomposer.org/installer | php
 $ php composer.phar install
 
 --------------------------------------------------------------------------------
-6. Open a new terminal window then start selenium2 at the port 4445. You can
-   change the port number by changing the parameter.
+5. Open a new terminal window then start selenium2 at the port 4445. You can
+   change the worker selenium robot server and the port number by changing the parameter.
 
-    "wd_host: 127.0.0.1:4445/wd/hub" in the behat.varbase.yml file.
-$ cd /var/www/html/[PROJECT_NAME]/behat/selenium
-$ java -jar selenium-server-standalone.jar -port 4445
+    "wd_host: 127.0.0.1:4445/wd/hub"
 
---------------------------------------------------------------------------------
-7. Run the behat command at /var/www/html/[PROJECT_NAME]/behat/
+  in the behat.varbase.yml file.
+  or you can get the selenium stand alone server from
+  http://www.seleniumhq.org/download/ 
+  then you could run this command in the same location in the terminal
 
-$ bin/behat features/example.feature
-
---------------------------------------------------------------------------------
-8. Run this command.
-$ bin/behat features/google/google-search.feature
+$ java -jar selenium-*.jar -port 4445
 
 --------------------------------------------------------------------------------
-9. Run this command with the .feature file to run the Gherkin Script in it to the installed site.
+6. Run the behat command at ../behat/
+
+$ bin/behat features/varbase/website-base-requirements_user-registration_only-admins-login_v1-0.feature
+
+================================================================================
+Feature: Website Base Requirements - User Registration - Only admins login
+  As an anonymous user
+  I will not be able to register as a user in the website
+  So that I will need a site admin or super admin to add me to the website
+
+  Background: 
+    Given I am an anonymous user
+
+  Scenario: Check if a not logged in user can create an account
+    When I go to "/user"
+    Then I should not see "Create new account"
+
+  Scenario: Check if a not logged in user can register an account
+    When I go to "/user/register"
+    Then I should see "Access denied"
+
+  Scenario: Check if a not logged in user can access administration pages
+    When I go to "/admin"
+    Then I should see "Access denied"
+
+3 scenarios (3 passed)
+9 steps (9 passed)
+0m2.21s (59.89Mb)
+================================================================================
+
+--------------------------------------------------------------------------------
+7. Run this command with the .feature file to run the Gherkin Script in it to the installed site.
 
 $ bin/behat features/varbase/your-gherkin-feature.feature
 $ bin/behat features/project-name/your-gherkin-feature.feature
 
 --------------------------------------------------------------------------------
-10. Run this command to print all available step definitions
+8. Run this command to print all available step definitions
 
 $ bin/behat -di
 
@@ -76,8 +104,7 @@ $ bin/behat -di
     - use -di to show definitions with extended info.
     - use -d 'needle' to find specific definitions.
 
---------------------------------------------------------------------------------
-11. All Varbase custom step definitions are tagged with #varbase tag.
+ All Varbase custom step definitions are tagged with #varbase tag.
 
   Example : after a run for  bin/behat -di command.
 ================================================================================
@@ -92,37 +119,9 @@ $ bin/behat -di
           | at `VarbaseContext::iShouldSeeImageWithTheAltText()`
 ================================================================================
 
---------------------------------------------------------------------------------
-Example :
-================================================================================
-$ bin/behat features/example.feature
 
-Feature: Example
-
- Scenario: Go to about page with no visual view.  # features/example.feature:3
-   Given I go to "https://www.vardot.com" website # VarbaseContext::iGoToWebsite()
-   When I click "About"                           # Drupal\DrupalExtension\Context\MinkContext::assertClick()
-   Then I should see "meet the team"              # Drupal\DrupalExtension\Context\MinkContext::assertPageContainsText()
-
- @mink:selenium2
- Scenario: Go to about page using mink selenium2  # features/example.feature:9
-   Given I go to "https://www.vardot.com" website # VarbaseContext::iGoToWebsite()
-   When I click "About"                           # Drupal\DrupalExtension\Context\MinkContext::assertClick()
-   Then I should see "meet the team"                   # Drupal\DrupalExtension\Context\MinkContext::assertPageContainsText()
-
- @javascript
- Scenario: To search in Google about Varbase.     # features/example.feature:15
-   Given I go to "https://www.vardot.com" website # VarbaseContext::iGoToWebsite()
-   When I click "About"                           # Drupal\DrupalExtension\Context\MinkContext::assertClick()
-   Then I should see "meet the team"              # Drupal\DrupalExtension\Context\MinkContext::assertPageContainsText()
-
-3 scenarios (3 passed)
-9 steps (9 passed)
-0m51.12s (47.83Mb)
-================================================================================
-
-12. To see the report in HTML. Go and open this file in a browser.
-    /var/www/html/[PROJECT_NAME]/varbase/behat/reports/index.html
+9. To see the report in HTML. Go and open this file in a browser.
+    ../behat/reports/index.html
     You will see the latest report for latest run.
 
     if you want to custom a report you can add
@@ -135,41 +134,19 @@ Feature: Example
 
     $ bin/behat features/example.feature --format pretty --out std --format html --out reports/report-$( date '+%Y-%m-%d_%H-%M-%S' )
 
-13. If you want to run all Gherkin Features over a new Varbase site.
+10. If you want to run all Gherkin Features over a new Varbase site.
     You will need to create the list of Testing users, and Add French, and Arabic
     languages to the site.
 
     # --------------------------------------------------------------------------
-    # Create default testing users.
-    # --------------------------------------------------------------------------
-    # You can do that manually by reading and following steps in the
-    # features/tools/users/create-default-testing-users.feature
-    # Or you can run it by the following command.
-
-    $ bin/behat features/tools/users/create-default-testing-users.feature
-
-    # --------------------------------------------------------------------------
-    # Add French language if we do not have it to languages in the system.
-    # Add Arabic language if we do not have it to languages in the system.
-    # --------------------------------------------------------------------------
-    # You can do that manually by reading and following steps in the
-    # features/tools/languages/add-french.feature
-    # features/tools/languages/add-arabic.feature
-    # Or you can run it by the following command.
-
-    $ bin/behat features/tools/languages/add-french.feature
-    $ bin/behat features/tools/languages/add-arabic.feature
-
-    # --------------------------------------------------------------------------
-    # After that you can run the following command:
+    # You can run the following command:
     # --------------------------------------------------------------------------
     $ bin/behat features/varbase/ --format pretty --out std  --format html  --out reports/report-$( date '+%Y-%m-%d_%H-%M-%S' )
 
-    then after that you can see the report in the
-    /var/www/html/[PROJECT_NAME]/varbase/behat/reports
+    After that you can see the report in the ../behat/reports folder.
 
 
-    14. To test installation features you will need to use the varbase
-        Install config file, as you can see in the following command.
+11. If you are want to to test the installation process feature, you will need to use the varbase
+    Install config file, as you can see in the following command.
 
-        $ bin/behat --config=behat.varbase-install-config.yml features/install/installation_varbase_default-installation-to-initiate-a-site-for-a-client.feature
+    $ bin/behat --config=behat.varbase-install-config.yml tools/install/installation_varbase_default-installation-to-initiate-a-site-for-a-client.feature
