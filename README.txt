@@ -58,6 +58,11 @@ $ php composer.phar install
 
 $ java -jar selenium-*.jar -port 4445
 
+You can Install and configure selenium server to run on the selenium worker
+server  by using our command.
+
+$ sh ./tools/install-selenium-server/install-selenium-server-2.53.1.sh
+
 --------------------------------------------------------------------------------
 6. Run the behat command at ../behat/
 
@@ -149,4 +154,4 @@ $ bin/behat -di
 11. If you are want to to test the installation process feature, you will need to use the varbase
     Install config file, as you can see in the following command.
 
-    $ bin/behat --config=behat.varbase-install-config.yml tools/install/installation_varbase_default-installation-to-initiate-a-site-for-a-client.feature
+    $ bin/behat --config=behat.varbase-install-config.yml tools/install-varbase/installation_varbase_default-installation-to-initiate-a-site-for-a-client.feature
