@@ -7,12 +7,12 @@ case "${1:-''}" in
             echo "Selenium is already running."
         else
             java -jar /usr/lib/selenium/selenium-server-standalone.jar -port 4445 > /var/log/selenium/output.log 2> /var/log/selenium/error.log & echo $! > /tmp/selenium.pid
-            echo "Starting Selenium..."
+            echo "[  OK  ] Starting Selenium on the 4445 port ..."
 
             error=$?
             if test $error -gt 0
             then
-                echo "${bon}Error $error! Couldn't start Selenium!${boff}"
+                echo "[ Error ] ${bon}Error $error! Could not start Selenium!${boff}"
             fi
         fi
     ;;
@@ -27,10 +27,10 @@ case "${1:-''}" in
                     sleep 2
                     test -f /tmp/selenium.pid && rm -f /tmp/selenium.pid
                 else
-                    echo "Selenium could not be stopped..."
+                    echo "[ Error ] Selenium could not be stopped ..."
                 fi
         else
-            echo "Selenium is not running."
+            echo "[ Error ] Selenium is not running."
         fi
         ;;
     'restart')
@@ -40,9 +40,9 @@ case "${1:-''}" in
             test -f /tmp/selenium.pid && rm -f /tmp/selenium.pid
             sleep 1
             java -jar /usr/lib/selenium/selenium-server-standalone.jar -port 4445 > /var/log/selenium/output.log 2> /var/log/selenium/error.log & echo $! > /tmp/selenium.pid
-            echo "Reload Selenium..."
+            echo "[  OK  ] Reload Selenium on the 4445 port ..."
         else
-            echo "Selenium isn't running..."
+            echo "[ Error ] Selenium isn't running..."
         fi
         ;;
     *)      # no parameter specified
