@@ -1,6 +1,8 @@
 default:
   suites:
     default:
+      autoload:
+        '': %paths.base%/features/bootstrap
       contexts:
         - VarbaseContext:
             parameters:
@@ -30,6 +32,9 @@ default:
         - behatch:xml
       filters:
         tags: "@install"
+      paths:
+        features: %paths.base%/features
+        bootstrap: %paths.base%/features/bootstrap
   formatters:
     pretty:
     html:

@@ -1,4 +1,6 @@
 default:
+  autoload:
+    '': %paths.base%/features/bootstrap
   suites:
     default:
       contexts:
@@ -50,6 +52,9 @@ default:
             root: "../docroot"
         - behatch:table
         - behatch:xml
+      paths:
+        features: %paths.base%/features
+        bootstrap: %paths.base%/features/bootstrap
   formatters:
     pretty:
     html:
@@ -101,6 +106,8 @@ default:
       print_outp: false
       loop_break: false
 drush:
+  autoload:
+    '': %paths.base%/features/bootstrap
   suites:
     default:
       contexts:
@@ -121,6 +128,9 @@ drush:
         - Drupal\DrupalExtension\Context\BatchContext
       filters:
         tags: "@drushTest"
+      paths:
+        features: %paths.base%/features
+        bootstrap: %paths.base%/features/bootstrap
   extensions:
     Behat\MinkExtension:
       files_path: "%paths.base%/assets/"
