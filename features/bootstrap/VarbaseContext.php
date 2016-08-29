@@ -106,7 +106,7 @@ class VarbaseContext extends RawDrupalContext implements SnippetAcceptingContext
    *
    * @When /^I logout$/
    */
-   public function logout() {
+   public function iLogout() {
      // Logout if I am logged in.
      if ($this->loggedIn()) {
        $this->logout();
