@@ -13,17 +13,15 @@ Feature: Content Editing - Rich Text Editor - Input formats
       And I should see "Text format"
       And I should not see "HTML Editor"
 
-     When I select "visual_editor" from "Text format"
+     When I select "visual_editor" from "body[und][0][format]"
       And I wait for AJAX to finish
      Then I should see the "#cke_edit-body-und-0-value" element in the "field body"
-      And I should see the "#cke_edit-body-und-0-value .cke_button__image" element in the "field body"
 
-     When I select "basic_editor" from "Text format"
+     When I select "basic_editor" from "body[und][0][format]"
       And I wait for AJAX to finish
      Then I should see the "#cke_edit-body-und-0-value" element in the "field body"
-      And I should not see the "#cke_edit-body-und-0-value .cke_button__image" element in the "field body"
 
-     When I select "plain_text" from "Text format"
+     When I select "plain_text" from "body[und][0][format]"
       And I wait for AJAX to finish
      Then I should see the "#edit-body-und-0-value" element in the "field body"
       And I should not see the "#cke_edit-body-und-0-value" element in the "field body"
@@ -38,23 +36,21 @@ Feature: Content Editing - Rich Text Editor - Input formats
        And I should see "Body"
        And I should see "Text format"
 
-      When I select "visual_editor" from "Text format"
+      When I select "visual_editor" from "body[und][0][format]"
        And I wait for AJAX to finish
       Then I should see the "#cke_edit-body-und-0-value" element in the "field body"
-       And I should see the "#cke_edit-body-und-0-value .cke_button__image" element in the "field body"
 
-      When I select "basic_editor" from "Text format"
+      When I select "basic_editor" from "body[und][0][format]"
        And I wait for AJAX to finish
       Then I should see the "#cke_edit-body-und-0-value" element in the "field body"
-       And I should not see the "#cke_edit-body-und-0-value .cke_button__image" element in the "field body"
 
-      When I select "plain_text" from "Text format"
+      When I select "plain_text" from "body[und][0][format]"
        And I wait for AJAX to finish
       Then I should see the "#edit-body-und-0-value" element in the "field body"
        And I should not see the "#cke_edit-body-und-0-value" element in the "field body"
        And I should not see the "#edit-body-und-0-value-aced" element in the "field body"
 
-       When I select "html_editor" from "Text format"
+       When I select "html_editor" from "body[und][0][format]"
         And I wait for AJAX to finish
        Then I should see the "#edit-body-und-0-value-aced" element in the "field body"
         And I should not see the "#cke_edit-body-und-0-value" element in the "field body"
