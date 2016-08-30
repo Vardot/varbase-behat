@@ -10,7 +10,7 @@ Feature: Content Editing - Rich Text Editor - Easy linking to internal content b
      When I go to "/node/add/page"
       And wait
      Then I should see "Create Basic page"
-     When I select "visual_editor" from "Text format"
+     When I select "visual_editor" from "body[und][0][format]"
       And I fill in "Linking to internal content #1 title" for "Title"
       And I fill in the rich text editor field "Body" with "Linking to internal content #1 body"
      Then I press "Save"
@@ -20,22 +20,21 @@ Feature: Content Editing - Rich Text Editor - Easy linking to internal content b
      When I go to "/node/add/page"
       And wait
      Then I should see "Create Basic page"
-     When I select "visual_editor" from "Text format"
+     When I select "visual_editor" from "body[und][0][format]"
       And I fill in "Linking to internal content #2 title" for "Title"
       And I fill in the rich text editor field "Body" with "   Linking to internal content #2 body  "
       And I click on "linkit" command button in the rich text editor field "Body"
       And I wait for AJAX to finish
      Then I should see "Search for content."
-
-      And I press the "enter" key in the "Body" field
      When I fill in "Linking to internal content #1" for "Search for content."
       And I wait for AJAX to finish
       And I press the "enter" key in the "Search for content." field
       And I wait for AJAX to finish
       And I press "Insert link"
       And I wait for AJAX to finish
+      And wait 5s
 
-     Then I press "Save"
+     When I press "Save"
       And wait
       And I should see "Linking to internal content #2 body"
       And I should see "Linking to internal content #1 title"
