@@ -12,17 +12,17 @@ Feature: Content Structure Features - Basic Pages - Basic page
   Scenario: Check if [Editor] can add content of "Basic page" type.
     Given I am a logged in user with the "test_editor" user
      When I go to "/node/add"
-     Then I should not see "Basic page"
+     Then I should see "Basic page"
 
   Scenario: Check if [Content Admin] can add content of "Basic page" type.
     Given I am a logged in user with the "test_content_admin" user
      When I go to "/node/add"
-     Then I should not see "Basic page"
+     Then I should see "Basic page"
 
   Scenario: Check if [Site Admin] can add content of "Basic page" type.
     Given I am a logged in user with the "test_site_admin" user
      When I go to "/node/add"
-     Then I should not see "Basic page"
+     Then I should see "Basic page"
 
   Scenario: Check if [Super Admin] can add content of "Basic page" type.
     Given I am a logged in user with the "test_super_admin" user
