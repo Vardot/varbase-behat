@@ -8,8 +8,8 @@ Feature: Page Layouts - In-page layout manager - Drag-and-drop page components t
      When I go to "/admin/structure/types/manage/landing-page/panelizer/page_manager"
      Then the "In-Place Editor" checkbox should be checked
 
-  @javascript @AcceptAlertsBeforStep&&@AcceptAlertsAfterStep
-  Scenario: Add a "Test Landing page" and add number of panel panes to the page.
+  @javascript
+  Scenario: Add a "Test Landing page" And check the layout to "Left sidebar" Basic Layout.
     Given I am a logged in user with the "test_site_admin" user
      When I go to "node/add/landing-page"
       And I fill in "Test Landing page" for "Title"
@@ -32,8 +32,11 @@ Feature: Page Layouts - In-page layout manager - Drag-and-drop page components t
      When I press "Save"
       And I wait for AJAX to finish
 
+  @javascript
+  Scenario: Add Test 1 custom content pane to the "Test Landing page".
+    Given I am a logged in user with the "test_site_admin" user
      When I go to "/admin/content"
-      And I wait for AJAX to finish
+      And I wait
      Then I should see "Content"
      When I fill in "Test Landing page" for "Title"
       And I press the "Apply" button
@@ -62,21 +65,19 @@ Feature: Page Layouts - In-page layout manager - Drag-and-drop page components t
      When I press "Save"
       And I wait for AJAX to finish
      Then I should see "Test 1 HTML content title"
-
-     When I click "Customize this page"
-      And I wait for AJAX to finish
-      And I press "Save"
-      And I wait for AJAX to finish
-
+  
+  @javascript
+  Scenario: Add Test 2 custom content pane to the "Test Landing page".
+    Given I am a logged in user with the "test_site_admin" user
      When I go to "/admin/content"
-      And I wait for AJAX to finish
+      And I wait
      Then I should see "Content"
      When I fill in "Test Landing page" for "Title"
       And I press "Apply"
       And I wait for AJAX to finish
      Then I should see "Test Landing page"
      When I click "Test Landing page"
-      And wait 5s
+      And I wait 5s
       And I wait for AJAX to finish
      Then I should see "Customize this page"
       And I should see "Test 1 HTML content title"
@@ -97,33 +98,16 @@ Feature: Page Layouts - In-page layout manager - Drag-and-drop page components t
       And I press "Finish"
       And I wait for AJAX to finish
      When I press "Save"
-      And wait 5s
+      And I wait for AJAX to finish
+     Then I should see "Test 2 HTML content title"
+      And I should see "Test 1 HTML content title"
 
-     When I click "Customize this page"
-      And I wait for AJAX to finish
-     Then I should see "Add new pane" in the "left" panel region
-      And I should see "Add new pane" in the "bottom" panel region
-     When I press "Save"
-      And I wait for AJAX to finish
-
-     When I go to "/admin/content"
-      And I wait for AJAX to finish
-     Then I should see "Content"
-     When I fill in "Test Landing page" for "Title"
-      And I press "Apply"
-      And I wait for AJAX to finish
-     Then I should see "Test Landing page"
-     When I click "Test Landing page"
-      And I wait for AJAX to finish
-     Then I should see "Test 1 HTML content title"
-      And I should see "Test 2 HTML content title"
-
-  @javascript @AcceptAlertsBeforStep&&@AcceptAlertsAfterStep
+  @javascript
   Scenario: Check that a user with a permission to customize content can drag
   Drop panes then save.
     Given I am a logged in user with the "test_site_admin" user
      When I go to "/admin/content"
-      And I wait for AJAX to finish
+      And I wait
      Then I should see "Content"
      When I fill in "Test Landing page" for "Title"
       And I press "Apply"
@@ -131,8 +115,8 @@ Feature: Page Layouts - In-page layout manager - Drag-and-drop page components t
      Then I should see "Test Landing page"
      When I click "Test Landing page"
       And I wait for AJAX to finish
-     Then I should see "Test 1 HTML content title"
-      And I should see "Test 2 HTML content title"
+     Then I should see "Test 1 HTML content title" in the "left" panel region
+      And I should see "Test 2 HTML content title" in the "left" panel region
 
      When I click "Customize this page"
       And I wait for AJAX to finish
@@ -140,7 +124,9 @@ Feature: Page Layouts - In-page layout manager - Drag-and-drop page components t
 
      When I drag and drop "#panels-ipe-regionid-left .panels-ipe-portlet-wrapper" to "#panels-ipe-regionid-center .panels-ipe-sort-container"
      Then I wait for AJAX to finish
-      And wait 5s
+      And I wait 5s
      When I press "Save"
       And I wait for AJAX to finish
      Then I should not see "Add new pane"
+      And I should see "Test 1 HTML content title" in the "center" panel region
+      And I should see "Test 2 HTML content title" in the "center" panel region
