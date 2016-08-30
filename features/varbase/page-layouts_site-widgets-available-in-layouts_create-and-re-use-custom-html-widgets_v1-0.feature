@@ -42,13 +42,15 @@ Feature: Page Layouts - Site Widgets Available In Layouts - Create and re-use cu
      When I click "HTML"
       And I wait for AJAX to finish
      Then I should see "Configure new HTML"
-      And I should see "Make this entity reusable"
+      And I should see "Reusability"
      When I fill in "Test reusable HTML widget" for "Title"
       And I fill in the rich text editor field "HTML" with "Content of the Test  reusable HTML widget"
-      And I check the box "Make this entity reusable"
-      And I fill in "Testing Page elements" for "Category"
       And I fill in "Test reusable HTML widget admin title" for "Administrative title"
       And I fill in "Test reusable HTML widget admin description." for "Administrative description"
+      And I click "Reusability"
+      And I check "Make this entity reusable"
+      And I fill in "Testing Page elements" for "Category"
+      And I click "Admin"
       And I press "Finish"
       And wait
      Then I should see "Test reusable HTML widget"
