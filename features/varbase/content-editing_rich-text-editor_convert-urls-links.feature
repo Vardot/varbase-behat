@@ -10,7 +10,7 @@ Feature: Content Editing - Rich Text Editor - Convert URLs into links
      When I go to "/node/add/page"
       And wait
      Then I should see "Create Basic page"
-     When I select "visual_editor" from "Text format"
+     When I select "visual_editor" from "body[und][0][format]"
       And I fill in "Test convert URLs" for "Title"
       And I fill in the rich text editor field "Body" with "<p>Test line #1 <br /> Test line #2 http://drupal.org <br /> Test line #3</p>"
      Then I press "Save"
