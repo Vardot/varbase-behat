@@ -13,13 +13,13 @@ Feature: Website Base Requirements - Website Languages - All content translatabl
 # bin/behat features/tools/languages/delete-arabic.feature
 # bin/behat features/tools/languages/delete-french.feature
 
-@javascript
+  @javascript @DEV @STG @PROD
   Scenario: Check if the Content Type "Basic page" is translatable.
     Given I am a logged in user with the "webmaster" user
      When I go to "/admin/structure/types/manage/page"
      Then the "Enabled, with translation" checkbox should be checked
 
-  @javascript
+  @javascript @DEV @STG @PROD
   Scenario: Check if site admin can translate an existing English Basic Page
   to an Arabic version.
     Given I am a logged in user with the "test_site_admin" user
@@ -60,6 +60,7 @@ Feature: Website Base Requirements - Website Languages - All content translatabl
       And wait
      Then I should see "Test English Basic page"
 
+  @DEV @STG @PROD
   Scenario: Check if the Content Type "Landing page" Translatable, and has
   got Multilingual support selected value of Enabled,
   with translation.
@@ -67,7 +68,7 @@ Feature: Website Base Requirements - Website Languages - All content translatabl
      When I go to "/admin/structure/types/manage/landing-page"
      Then the "Enabled, with translation" checkbox should be checked
 
-  @javascript
+  @javascript @DEV @STG @PROD
   Scenario: Check if site admins can translate an existing English Basic Page
   to an Arabic version.
     Given I am a logged in user with the "test_site_admin" user

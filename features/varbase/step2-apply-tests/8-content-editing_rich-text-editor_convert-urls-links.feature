@@ -3,7 +3,7 @@ Feature: Content Editing - Rich Text Editor - Convert URLs into links
   I want to add raw URLs and links in the rich text editor
   So that they will be converted to links and visitors can click on them.
 
-  @javascript
+  @javascript @DEV @STG @PROD
   Scenario: Check if inserted raw URL will convert into a link when we save when
   We are using the "Visual editor" text format.
     Given I am a logged in user with the "test_site_admin" user

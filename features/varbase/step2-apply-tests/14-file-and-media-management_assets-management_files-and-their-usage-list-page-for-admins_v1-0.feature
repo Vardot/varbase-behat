@@ -6,26 +6,21 @@ Feature: File & Media Management - Assets Management - Files and their usage lis
   Background:
     Given I am a logged in user with the "test_site_admin" user
 
-  @javascript
+  @javascript @DEV @STG @PROD
   Scenario: Check if content admins can access the content files page.
      When I go to "admin/content/file"
      Then I should see "Add file"
       And I should not see "Access denied"
 
-  @javascript
+  @javascript @DEV @STG @PROD
   Scenario: Check if content admins can access the Thumbnails view of files.
      When I go to "admin/content/file/thumbnails"
      Then I should see "Add file"
       And I should not see "Access denied"
 
-  @javascript
+  @javascript @DEV @STG @PROD
   Scenario: Check if we do have a file named "Flag Earth" , if not then upload the file dependently.
      When I go to "admin/content/file"
-     Then I should see "Add file"
-     When I fill in "Flag Earth" for "Name"
-      And I press the "Apply" button
-     Then I should not see "Flag Earth"
-     When I press the "Reset" button
      Then I should see "Add file"
      When I click "Add file"
      Then I should see "Upload a new file"
@@ -42,7 +37,7 @@ Feature: File & Media Management - Assets Management - Files and their usage lis
      Then I should see "Add file"
       And I should see the "Edit" in the "Flag Earth" row
 
-  @javascript
+  @javascript @DEV @STG @PROD
   Scenario: Check if content admins can edit files.
      When I go to "admin/content/file"
      Then I should see "Add file"
@@ -56,7 +51,7 @@ Feature: File & Media Management - Assets Management - Files and their usage lis
      Then I should see "Image Flag Earth after edit has been updated."
       And I should see "Edit" in the "Flag Earth after edit" row
 
-  @javascript
+  @javascript @DEV @STG @PROD
   Scenario: Check if content admins can delete files.
      When I go to "admin/content/file"
      Then I should see "Add file"

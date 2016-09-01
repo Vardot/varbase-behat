@@ -3,6 +3,7 @@ Feature: Page Layouts - Site Widgets Available In Layouts - Create and re-use cu
   I want to be able to use reusable custom HTML widgets
   So that the site can show up the same custom HTML widget pan in other Landing pages
 
+  @DEV @STG @PROD
   Scenario: Check if In-Place Editor to allow privileged users to update and rearrange the content while viewing.
     Given I am a logged in user with the "webmaster" user
      When I go to "/admin/structure/types/manage/landing-page/panelizer"
@@ -10,12 +11,13 @@ Feature: Page Layouts - Site Widgets Available In Layouts - Create and re-use cu
       And the "New Rendered entity" checkbox should be checked
       And the "New Fielded custom content" checkbox should be checked
 
+  @DEV @STG @PROD
   Scenario: Check if In-Place Editor to allow privileged users to update and rearrange the content while viewing.
     Given I am a logged in user with the "webmaster" user
      When I go to "/admin/structure/types/manage/landing-page/panelizer/page_manager"
      Then the "In-Place Editor" checkbox should be checked
 
-  @javascript
+  @javascript @DEV @STG @PROD
   Scenario: Check if a user with permission to administer landing page content can create a custom reusable HTML widget.
     Given I am a logged in user with the "test_site_admin" user
      When I go to "/node/add/landing-page"
@@ -59,7 +61,7 @@ Feature: Page Layouts - Site Widgets Available In Layouts - Create and re-use cu
       And wait
      Then I should not see "Add new pane"
 
-  @javascript
+  @javascript @DEV @STG @PROD
   Scenario: Check if a user with permission to administer landing page content can add a ready reusable HTML widget.
     Given I am a logged in user with the "test_site_admin" user
      When I go to "/node/add/landing-page"

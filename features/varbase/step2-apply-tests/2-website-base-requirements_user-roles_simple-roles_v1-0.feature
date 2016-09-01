@@ -3,6 +3,7 @@ Feature: Website Base Requirements - User Roles - Simple Roles
   I want to be able to see the list of User Roles
   So that they must be (Editor, Site Admin, Content Admin, Super Admin)
 
+  @DEV @STG @PROD
   Scenario: Check the list of Roles under people permissions.
     Given I am a logged in user with the "webmaster" user
      When I go to "/admin/people/permissions/roles"

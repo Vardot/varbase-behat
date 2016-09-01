@@ -4,36 +4,43 @@ Feature: Content Structure Features - Basic Pages - Basic page
   So that the "Basic page" will show up in the structured menu under it's parent page
 
 # Check if users with the ( "authenticated user", "Editor", "Content Admin", "Site Admin", or "Super Admin" ) role can add [Basic page]
+  @DEV @STG @PROD
   Scenario: Check if [authenticated user] can add content of "Basic page" type.
     Given I am a logged in user with the "test_authenticated" user
      When I go to "/node/add"
      Then I should not see "Basic page"
 
+  @DEV @STG @PROD
   Scenario: Check if [Editor] can add content of "Basic page" type.
     Given I am a logged in user with the "test_editor" user
      When I go to "/node/add"
      Then I should see "Basic page"
 
+  @DEV @STG @PROD
   Scenario: Check if [Content Admin] can add content of "Basic page" type.
     Given I am a logged in user with the "test_content_admin" user
      When I go to "/node/add"
      Then I should see "Basic page"
 
+  @DEV @STG @PROD
   Scenario: Check if [Site Admin] can add content of "Basic page" type.
     Given I am a logged in user with the "test_site_admin" user
      When I go to "/node/add"
      Then I should see "Basic page"
 
+  @DEV @STG @PROD
   Scenario: Check if [Super Admin] can add content of "Basic page" type.
     Given I am a logged in user with the "test_super_admin" user
      When I go to "/node/add"
      Then I should see "Basic page"
 
+  @DEV @STG @PROD
   Scenario: Check if the webmaster can add content of "Basic page" type.
     Given I am a logged in user with the "webmaster" user
      When I go to "/node/add"
      Then I should see "Basic page"
 
+  @DEV @STG @PROD
   Scenario: Check if a user with a permission to manage "Basic page" content type can create Basic pages content
     Given I am a logged in user with the "test_super_admin" user
      When I go to "/node/add/page"
@@ -42,6 +49,7 @@ Feature: Content Structure Features - Basic Pages - Basic page
       And I should see "Title"
       And I should see "Body"
 
+  @DEV @STG @PROD
   Scenario: Check if we can create a Test Basic page we can see Change layout floating button to change the layout.
     Given I am a logged in user with the "test_super_admin" user
      When I go to "node/add/page"
@@ -50,6 +58,7 @@ Feature: Content Structure Features - Basic Pages - Basic page
       And I press "Save"
      Then I should see "Basic page Test Basic page has been created."
 
+  @DEV @STG @PROD
   Scenario: Check if a user with a permission to manage "Basic page" content type
     Given I am a logged in user with the "test_super_admin" user
      When I go to "admin/content"
@@ -62,6 +71,7 @@ Feature: Content Structure Features - Basic Pages - Basic page
      When I click "Edit"
      Then I should see "Edit Basic page Test Basic page"
 
+  @DEV @STG @PROD
   Scenario: Check that we did not Allow content of "Basic page" type to have its display controlled by Panelizer.
     Given I am a logged in user with the "webmaster" user
      When I go to "/admin/structure/types/manage/page"

@@ -3,6 +3,7 @@ Feature: User Management - Standard User Management - Login
   I want to be able to login to the site
   So that I will be able to view/add/edit/ or delete content in the site
 
+  @DEV @STG @PROD
   Scenario: Check if the a visitor can login with a valid username and password.
     Given I am on "user/login"
      When I fill in "test_authenticated" for "Username"
@@ -12,6 +13,7 @@ Feature: User Management - Standard User Management - Login
      Then I should see "History"
       And I should see "Member for"
 
+  @DEV @STG @PROD
   Scenario: Check a failed response after not entering to enter username or password when we login.
     Given I am on "user/login"
      When I press "Log in"

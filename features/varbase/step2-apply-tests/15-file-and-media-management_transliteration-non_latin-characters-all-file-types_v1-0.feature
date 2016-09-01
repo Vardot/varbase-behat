@@ -3,7 +3,7 @@ Feature: File & Media Management - Transliteration - Transliteration of non-Lati
 	I want have non Latin uploaded files transliterated to Latin character set
 	So that files will have a better look in the URL and easier access for all browsers and robots
 
-  @javascript
+  @javascript @DEV @STG @PROD
   Scenario: Check if Transliteration options are checked for the transliteration configurations.
 	  Given I am a logged in user with the "webmaster" user
      When I go to "admin/config/media/file-system"
@@ -12,7 +12,7 @@ Feature: File & Media Management - Transliteration - Transliteration of non-Lati
       And I check "Transliterate the displayed file name."
       And I check "Lowercase transliterated file names."
 
-  @javascript @DismissAlertsBeforStep @DismissAlertsAfterStep
+  @javascript @DEV @STG @PROD @DismissAlertsBeforStep @DismissAlertsAfterStep
   Scenario: Check if "English file with spaces and CAPITAL Letters.pdf" will be transliterated.
 	  Given I am a logged in user with the "test_site_admin" user
      When I go to "/admin/content/file"
@@ -32,7 +32,7 @@ Feature: File & Media Management - Transliteration - Transliteration of non-Lati
      Then I should see "english_file_with_spaces_and_capital_letters.pdf"
 
 
-  @javascript @DismissAlertsBeforStep @DismissAlertsAfterStep
+  @javascript @DEV @STG @PROD @DismissAlertsBeforStep @DismissAlertsAfterStep
   Scenario: Check if "ملف عربي مع مسافات.pdf" will be transliterated.
 	  Given I am a logged in user with the "test_site_admin" user
      When I go to "/admin/content/file"

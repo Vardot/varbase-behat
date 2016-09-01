@@ -26,7 +26,7 @@ Feature: Delete default testing users.
      Then I should see "Are you sure you want to cancel the account test_authenticated?"
      When I select the radio button "Delete the account and its content."
       And I press "Cancel account"
-      And wait
+     And I wait for the batch job to finish
      Then I should see "test_authenticated has been deleted."
 
   @javascript @DEV @STG
@@ -46,7 +46,7 @@ Feature: Delete default testing users.
      Then I should see "Are you sure you want to cancel the account test_editor?"
      When I select the radio button "Delete the account and its content."
       And I press "Cancel account"
-      And wait
+      And I wait for the batch job to finish
      Then I should see "test_editor has been deleted."
 
   @javascript @DEV @STG
@@ -66,7 +66,7 @@ Feature: Delete default testing users.
      Then I should see "Are you sure you want to cancel the account test_content_admin?"
      When I select the radio button "Delete the account and its content."
       And I press "Cancel account"
-      And wait
+      And I wait for the batch job to finish
      Then I should see "test_content_admin has been deleted."
 
   @javascript @DEV @STG
@@ -85,7 +85,7 @@ Feature: Delete default testing users.
      Then I should see "Are you sure you want to cancel the account test_site_admin?"
      When I select the radio button "Delete the account and its content."
       And I press "Cancel account"
-      And wait
+      And I wait for the batch job to finish
      Then I should see "test_site_admin has been deleted."
 
   @javascript @DEV @STG
@@ -104,5 +104,5 @@ Feature: Delete default testing users.
      Then I should see "Are you sure you want to cancel the account test_super_admin?"
      When I select the radio button "Delete the account and its content."
       And I press "Cancel account"
-      And wait
+      And I wait for the batch job to finish
      Then I should see "test_super_admin has been deleted."

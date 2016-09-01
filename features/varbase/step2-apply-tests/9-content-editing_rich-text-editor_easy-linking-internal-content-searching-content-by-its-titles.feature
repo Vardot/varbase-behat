@@ -3,7 +3,7 @@ Feature: Content Editing - Rich Text Editor - Easy linking to internal content b
   I want to be able to add internal links searching the title of an internal content
   So that will ease the work of adding internal links in the rich text editor fields.
 
-@javascript
+@javascript @DEV @STG @PROD
   Scenario: Check if inserted raw URL will convert into a link when we save when
   We are using the "Visual editor" text format.
     Given I am a logged in user with the "test_site_admin" user

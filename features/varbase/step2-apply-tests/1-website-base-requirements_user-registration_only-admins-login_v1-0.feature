@@ -6,14 +6,17 @@ Feature: Website Base Requirements - User Registration - Only admins login
   Background:
     Given I am an anonymous user
 
+  @DEV @STG @PROD
   Scenario: Check if a not logged in user can create an account
      When I go to "/user"
      Then I should not see "Create new account"
 
+  @DEV @STG @PROD
   Scenario: Check if a not logged in user can register an account
      When I go to "/user/register"
      Then I should see "Access denied"
 
+  @DEV @STG @PROD
   Scenario: Check if a not logged in user can access administration pages
      When I go to "/admin"
      Then I should see "Access denied"

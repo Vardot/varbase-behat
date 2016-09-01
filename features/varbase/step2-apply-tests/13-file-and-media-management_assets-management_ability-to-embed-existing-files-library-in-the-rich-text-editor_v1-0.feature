@@ -8,7 +8,7 @@ Feature: File & Media Management - Assets Management - Ability to embed existing
 
   # Create the Basic page and upload the file to the library before the test case.
   # ----------------------------------------------------------------------------
-  @javascript
+  @javascript @DEV @STG @PROD
   Scenario: Create the "Test Basic page to embed existing files" content.
      When I go to "node/add/page"
       And I fill in "Test Basic page to embed existing files" for "Title"
@@ -16,6 +16,7 @@ Feature: File & Media Management - Assets Management - Ability to embed existing
       And I press the "Save" button
      Then I should see "Basic page Test Basic page to embed existing files has been created."
 
+  @DEV @STG @PROD
   Scenario: Upload the "Embed Flag Earth" file.
      When I go to "admin/content/file"
      Then I should see "Add file"
@@ -34,7 +35,7 @@ Feature: File & Media Management - Assets Management - Ability to embed existing
       And I should see the "Edit" in the "Embed Flag Earth" row
   #-----------------------------------------------------------------------------
 
-  @javascript
+  @javascript @DEV @STG @PROD
   Scenario: Check if we are able to embed existing files library in the rich text editor.
      When I go to "admin/content"
      Then I should see "Content"

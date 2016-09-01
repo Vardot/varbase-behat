@@ -3,11 +3,13 @@ Feature: Page Layouts -  In-Page Layout Manager - Change the layout of a page fr
   I want to be able to see "Change layout" for the current "Landing page"
   So that I will be able to Change the layout of the page to use one of the predefined templates
 
+  @DEV @STG @PROD
   Scenario: Check if In-Place Editor to Allow privileged users to update and rearrange the content while viewing.
     Given I am a logged in user with the "webmaster" user
      When I go to "/admin/structure/types/manage/landing-page/panelizer/page_manager"
      Then the "In-Place Editor" checkbox should be checked
 
+  @DEV @STG @PROD
   Scenario: Check if we create a Test Landing page we can see Change layout floating button to change the layout.
     Given I am a logged in user with the "test_site_admin" user
      When I go to "node/add/landing-page"
@@ -17,7 +19,7 @@ Feature: Page Layouts -  In-Page Layout Manager - Change the layout of a page fr
      Then I should see "Landing page Test landing page by test site admin has been created."
       And I should see "Change Layout"
 
-  @javascript
+  @javascript @DEV @STG @PROD
   Scenario: Check that a user with the editor role which has NO permission to change layouts can not see Change Layout for published landing pages.
     Given I am a logged in user with the "test_editor" user
      When I go to "admin/content"
@@ -30,8 +32,8 @@ Feature: Page Layouts -  In-Page Layout Manager - Change the layout of a page fr
      Then I should see "Test landing page by test site admin"
       And I should not see "Change layout"
 
-  @javascript
-  Scenario: Check that a user with the content admin role which has NO permission to change layouts can not see Change Layout for published landing pages.
+  @javascript @DEV @STG @PROD
+  Scenario: Check that a user with the content admin role which has permission to change layouts can see Change Layout for published landing pages.
     Given I am a logged in user with the "test_content_admin" user
      When I go to "admin/content"
      Then I should see "Content"
@@ -41,9 +43,9 @@ Feature: Page Layouts -  In-Page Layout Manager - Change the layout of a page fr
      When I click "Test landing page by test site admin"
       And I wait
      Then I should see "Test landing page by test site admin"
-      And I should not see "Change layout"
+      And I should see "Change layout"
 
-  @javascript
+  @javascript @DEV @STG @PROD
   Scenario: Check if a user with permission to Administer Panelizer layout can change the layout of a landing page.
     Given I am a logged in user with the "test_site_admin" user
      When I go to "admin/content"
