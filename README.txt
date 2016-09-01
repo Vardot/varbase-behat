@@ -66,7 +66,7 @@ $ sh ./tools/install-selenium-server/install-selenium-server-2.53.1.sh
 --------------------------------------------------------------------------------
 6. Run the behat command at ../behat/
 
-$ bin/behat features/varbase/website-base-requirements_user-registration_only-admins-login_v1-0.feature
+$ bin/behat features/varbase/step2-apply-tests/1-website-base-requirements_user-registration_only-admins-login_v1-0.feature
 
 ================================================================================
 Feature: Website Base Requirements - User Registration - Only admins login
@@ -124,6 +124,33 @@ $ bin/behat -di
           | at `VarbaseContext::iShouldSeeImageWithTheAltText()`
 ================================================================================
 
+ Scenarios are tagged with the Behat tags of:
+   @DEV = Development 
+   @STG = Staging
+   @PROD = Production
+
+   So that we only run bin/behat --tags with the right tag for the environment.
+
+   Example:
+================================================================================
+    
+    $ bin/behat --tags '@DEV' features/varbase/
+
+    Which it will run Scenarios which has got the @DEV tag.
+
+================================================================================
+
+    $ bin/behat --tags '@STG' features/varbase/
+
+    Which it will run Scenarios which has got the @STG tag.
+
+================================================================================
+
+    $ bin/behat --tags '@PROD' features/varbase/
+
+    Which it will run Scenarios which has got the @PROD tag.
+
+================================================================================
 
 9. To see the report in HTML. Go and open this file in a browser.
     ../behat/reports/index.html
@@ -151,7 +178,7 @@ $ bin/behat -di
     After that you can see the report in the ../behat/reports folder.
 
 
-11. If you are want to to test the installation process feature, you will need to use the varbase
+11. If you want to test the installation process feature, you will need to use the varbase
     Install config file, as you can see in the following command.
 
     $ bin/behat --config=behat.varbase-install-config.yml tools/install-varbase/installation_varbase_default-installation-to-initiate-a-site-for-a-client.feature
