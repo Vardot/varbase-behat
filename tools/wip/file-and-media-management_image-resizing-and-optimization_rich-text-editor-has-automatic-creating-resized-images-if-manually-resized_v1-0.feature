@@ -8,14 +8,14 @@ Feature: File & Media Management - Image Resizing and Optimization - Rich text e
 
   # Create the Basic page and upload the file to the library before the test case.
   # ----------------------------------------------------------------------------
-  # @javascript
+  # @wip @javascript @local @development @staging @production
   # Scenario: Create the "Test Basic page" content.
   #    When I go to "node/add/page"
   #     And I fill in "Test Basic page" for "Title"
   #     And I fill in the rich text editor field "Body" with "Test Basic page body"
   #     And I press the "Save" button
   #    Then I should see "Basic page Test Basic page has been created."
-  #
+  # @wip @local @development @staging @production
   # Scenario: Upload the "Flag Earth" file.
   #   When I go to "admin/content/file"
   #   Then I should see "Add file"
@@ -34,7 +34,7 @@ Feature: File & Media Management - Image Resizing and Optimization - Rich text e
   #    And I should see the "Edit" in the "Flag Earth" row
   # #-----------------------------------------------------------------------------
   #
-  #   @javascript
+  #   @wip @javascript @local @development @staging @production
   #   Scenario: Check we are able to embed existing files library in the rich text editor.
   #     When I go to "admin/content"
   #     Then I should see "Content"
@@ -64,7 +64,7 @@ Feature: File & Media Management - Image Resizing and Optimization - Rich text e
   #     Then I should see image with the "Flag Earth" title text
 
 
-  @wip @javascript
+  @wip @javascript @local @development @staging @production
   Scenario: Check if changing the size of an embedded image in the rich text dose bring a resized image to the loaded page.
       When I go to "admin/content"
       Then I should see "Content"

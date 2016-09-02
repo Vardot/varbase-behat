@@ -1,22 +1,22 @@
 Feature: File & Media Management - Assets Management - Ability to embed existing files library in the rich text editor
-  As a content admin
-  I want to be able to embed existing files from the library of files in the CKEditor
-  So that it will show up under that rich text field without having to upload the image for each content
+As a content admin
+I want to be able to embed existing files from the library of files in the CKEditor
+So that it will show up under that rich text field without having to upload the image for each content
 
-  Background:
+  Background: 
     Given I am a logged in user with the "test_super_admin" user
-
+  
   # Create the Basic page and upload the file to the library before the test case.
   # ----------------------------------------------------------------------------
-  @javascript @DEV @STG @PROD
+  @javascript @local @development @staging @production
   Scenario: Create the "Test Basic page to embed existing files" content.
      When I go to "node/add/page"
       And I fill in "Test Basic page to embed existing files" for "Title"
       And I fill in the rich text editor field "Body" with "Test Basic page body to embed existing files"
       And I press the "Save" button
      Then I should see "Basic page Test Basic page to embed existing files has been created."
-
-  @DEV @STG @PROD
+  
+  @local @development @staging @production
   Scenario: Upload the "Embed Flag Earth" file.
      When I go to "admin/content/file"
      Then I should see "Add file"
@@ -34,8 +34,8 @@ Feature: File & Media Management - Assets Management - Ability to embed existing
      Then I should see "Add file"
       And I should see the "Edit" in the "Embed Flag Earth" row
   #-----------------------------------------------------------------------------
-
-  @javascript @DEV @STG @PROD
+  
+  @javascript @local @development @staging @production
   Scenario: Check if we are able to embed existing files library in the rich text editor.
      When I go to "admin/content"
      Then I should see "Content"
@@ -63,3 +63,4 @@ Feature: File & Media Management - Assets Management - Ability to embed existing
      When I click "Submit" button under the media browser style selector
       And I press the "Save" button
      Then I should see image with the "Embed Flag Earth" title text
+  

@@ -1,9 +1,9 @@
 Feature: Content Editing - Rich Text Editor - Convert URLs into links
-  As a logged in user with a permission to use the rich text editor
-  I want to add raw URLs and links in the rich text editor
-  So that they will be converted to links and visitors can click on them.
+As a logged in user with a permission to use the rich text editor
+I want to add raw URLs and links in the rich text editor
+So that they will be converted to links and visitors can click on them.
 
-  @javascript @DEV @STG @PROD
+  @javascript @local @development @staging @production
   Scenario: Check if inserted raw URL will convert into a link when we save when
   We are using the "Visual editor" text format.
     Given I am a logged in user with the "test_site_admin" user
@@ -18,7 +18,8 @@ Feature: Content Editing - Rich Text Editor - Convert URLs into links
       And I should see "Test line #1"
       And I should see "Test line #2 http://drupal.org"
       And I should see "Test line #3"
-      # But the ".field.field-name-body .field-item" element should contain "Test line #1 <br /> Test line #2 <a href=\"http://drupal.org\" target=\"_blank\">http://drupal.org</a> <br /> Test line #3</p>"
+  # But the ".field.field-name-body .field-item" element should contain "Test line #1 <br /> Test line #2 <a href=\"http://drupal.org\" target=\"_blank\">http://drupal.org</a> <br /> Test line #3</p>"
      When I click "http://drupal.org" in the "a" element with the "href" attribute set to "http://drupal.org"
       And wait
      Then I should see "Drupal"
+  

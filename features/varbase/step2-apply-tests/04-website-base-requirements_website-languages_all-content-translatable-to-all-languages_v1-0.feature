@@ -1,25 +1,25 @@
 Feature: Website Base Requirements - Website Languages - All content translatable to all languages
-  As a logged in user with a permission to translate content
-  I want to be able to check if all content types are translatable
-  So that I will be able to create a content then I will have the option to translate the content to other languages in the site
+As a logged in user with a permission to translate content
+I want to be able to check if all content types are translatable
+So that I will be able to create a content then I will have the option to translate the content to other languages in the site
 
 # Run the following Gherkin Features to add Arabic and French languages.
-# bin/behat features/tools/languages/add-arabic.feature
-# bin/behat features/tools/languages/add-french.feature
+# bin/behat features/varbase/step1-init-tests/2-add-arabic.feature
+# bin/behat features/varbase/step1-init-tests/3-add-french.feature
 
 # Run the following Gherkin Features After you finish work
 # So that you can delete Arabic and French languages.
 #
-# bin/behat features/tools/languages/delete-arabic.feature
-# bin/behat features/tools/languages/delete-french.feature
+# bin/behat features/varbase/step3-cleanup-tests/2-delete-arabic.feature
+# bin/behat features/varbase/step3-cleanup-tests/3-delete-french.feature
 
-  @javascript @DEV @STG @PROD
+  @javascript @local @development @staging @production
   Scenario: Check if the Content Type "Basic page" is translatable.
     Given I am a logged in user with the "webmaster" user
      When I go to "/admin/structure/types/manage/page"
      Then the "Enabled, with translation" checkbox should be checked
-
-  @javascript @DEV @STG @PROD
+  
+  @javascript @local @development @staging @production
   Scenario: Check if site admin can translate an existing English Basic Page
   to an Arabic version.
     Given I am a logged in user with the "test_site_admin" user
@@ -59,16 +59,16 @@ Feature: Website Base Requirements - Website Languages - All content translatabl
      When I click "Translate"
       And wait
      Then I should see "Test English Basic page"
-
-  @DEV @STG @PROD
+  
+  @local @development @staging @production
   Scenario: Check if the Content Type "Landing page" Translatable, and has
   got Multilingual support selected value of Enabled,
   with translation.
     Given I am a logged in user with the "webmaster" user
      When I go to "/admin/structure/types/manage/landing-page"
      Then the "Enabled, with translation" checkbox should be checked
-
-  @javascript @DEV @STG @PROD
+  
+  @javascript @local @development @staging @production
   Scenario: Check if site admins can translate an existing English Basic Page
   to an Arabic version.
     Given I am a logged in user with the "test_site_admin" user
@@ -104,3 +104,4 @@ Feature: Website Base Requirements - Website Languages - All content translatabl
      When I click "Translate"
       And wait
      Then I should see "Test English Landing page"
+  

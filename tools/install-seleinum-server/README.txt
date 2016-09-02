@@ -1,6 +1,8 @@
 
 # Install and configure selenium server #
 
+You will need to have Java first.
+
   run the command:
 
 ================================================================================

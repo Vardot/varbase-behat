@@ -1,9 +1,9 @@
 Feature: Page Layouts - Site widgets available in layouts - Re-use components or blocks across all pages
-  As a logged in user with a permission to Administer Panelizer content for "landing page" content type
-  I want to be able to use reusable components, blocks across all pages in the site
-  So that the site can show up pans, blocks, or site widgets in any selected page
+As a logged in user with a permission to Administer Panelizer content for "landing page" content type
+I want to be able to use reusable components, blocks across all pages in the site
+So that the site can show up pans, blocks, or site widgets in any selected page
 
-  @DEV @STG @PROD
+  @local @development @staging @production
   Scenario: Check if In-Place Editor to allow privileged users to update and rearrange the content while viewing.
     Given I am a logged in user with the "webmaster" user
      When I go to "/admin/structure/types/manage/landing-page/panelizer"
@@ -17,14 +17,14 @@ Feature: Page Layouts - Site widgets available in layouts - Re-use components or
       And the "New All views" checkbox should be checked
       And the "New View panes" checkbox should be checked
       And the "New content of other types" checkbox should be checked
-
-  @DEV @STG @PROD
+  
+  @local @development @staging @production
   Scenario: Check if In-Place Editor to allow privileged users to update and rearrange the content while viewing.
     Given I am a logged in user with the "webmaster" user
      When I go to "/admin/structure/types/manage/landing-page/panelizer/page_manager"
      Then the "In-Place Editor" checkbox should be checked
-
-  @DEV @STG @PROD
+  
+  @local @development @staging @production
   Scenario: Check if we create a Test Landing page we can see Customize this page floating button.
     Given I am a logged in user with the "test_site_admin" user
      When I go to "node/add/landing-page"
@@ -33,8 +33,8 @@ Feature: Page Layouts - Site widgets available in layouts - Re-use components or
       And wait
      Then I should see "Landing page Test Landing page by test site admin has been created."
       And I should see "Customize this page"
-
-  @javascript @DEV @STG @PROD
+  
+  @javascript @local @development @staging @production
   Scenario: Check that a user with a permission to customize content can add reusable components
     Given I am a logged in user with the "test_site_admin" user
      When I go to "admin/content"
@@ -59,3 +59,4 @@ Feature: Page Layouts - Site widgets available in layouts - Re-use components or
       And I should see "Page elements"
       And I should see "Views"
       And I should see "Widgets"
+  

@@ -1,7 +1,7 @@
 Feature: Test screenshot example
-  As a QA
-  I want to be able to save a screenshot on demand
-  So that I will be able to save the status of the page at that time.
+As a QA
+I want to be able to save a screenshot on demand
+So that I will be able to save the status of the page at that time.
 
   @javascript
   Scenario: To have a screenshot for the Vardot's the team page.
@@ -9,5 +9,6 @@ Feature: Test screenshot example
      When I click "About"
       And wait
       And wait
-     Then I should see "the team"
+     Then I should see "Meet the team"
       And I save a screenshot in "vardot_the-team-page.png"
+  

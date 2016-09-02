@@ -1,17 +1,17 @@
 Feature: User Management - Standard User Management - Request new password
-  As a user with a ready user account
-  I will want to be able to Request new password
-  So that I can reset my password for the account
+As a user with a ready user account
+I will want to be able to Request new password
+So that I can reset my password for the account
 
-  Background:
+  Background: 
     Given I am not logged in
-
-  @DEV @STG @PROD
+  
+  @local @development @staging @production
   Scenario: Check if a non logged in user can reset the password.
      When I go to "/user/login"
      Then I should see "Request new password"
-
-  @DEV @STG @PROD
+  
+  @local @development @staging @production
   Scenario: Check if the email has been used to rest the password is not existing email.
      When I go to "/user/password"
      Then I should see "User Account"

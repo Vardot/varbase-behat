@@ -3,9 +3,7 @@ Feature: Content Editing - Rich Text Editor - Undo, Redo, Copy, Paste
   I want to be able to Undo, Redo, Copy, Paste in the rich text editor
   So that I will be able to manage the work as we do in normal Desktop editors
 
-
-
- @javascript @wip
+ @wip @javascript @local @development @staging @production
  Scenario: Check if content admin can Copy, Cut, and Paste in the rich text editor.
   Given I am a logged in user with the "test_site_admin" user
    When I go to "/node/add/page"

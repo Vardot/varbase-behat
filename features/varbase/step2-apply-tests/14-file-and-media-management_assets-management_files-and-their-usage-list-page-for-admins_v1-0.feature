@@ -1,24 +1,24 @@
 Feature: File & Media Management - Assets Management - Files and their usage list page for admins
-  As a user with permission to manage files in the site
-  I want to be able to see the list of files
-  So that I will be able to manage files, see where they have been used in contents.
+As a user with permission to manage files in the site
+I want to be able to see the list of files
+So that I will be able to manage files, see where they have been used in contents.
 
-  Background:
+  Background: 
     Given I am a logged in user with the "test_site_admin" user
-
-  @javascript @DEV @STG @PROD
+  
+  @javascript @local @development @staging @production
   Scenario: Check if content admins can access the content files page.
      When I go to "admin/content/file"
      Then I should see "Add file"
       And I should not see "Access denied"
-
-  @javascript @DEV @STG @PROD
+  
+  @javascript @local @development @staging @production
   Scenario: Check if content admins can access the Thumbnails view of files.
      When I go to "admin/content/file/thumbnails"
      Then I should see "Add file"
       And I should not see "Access denied"
-
-  @javascript @DEV @STG @PROD
+  
+  @javascript @local @development @staging @production
   Scenario: Check if we do have a file named "Flag Earth" , if not then upload the file dependently.
      When I go to "admin/content/file"
      Then I should see "Add file"
@@ -36,8 +36,8 @@ Feature: File & Media Management - Assets Management - Files and their usage lis
       And I press the "Save" button
      Then I should see "Add file"
       And I should see the "Edit" in the "Flag Earth" row
-
-  @javascript @DEV @STG @PROD
+  
+  @javascript @local @development @staging @production
   Scenario: Check if content admins can edit files.
      When I go to "admin/content/file"
      Then I should see "Add file"
@@ -50,8 +50,8 @@ Feature: File & Media Management - Assets Management - Files and their usage lis
       And I press the "Save" button
      Then I should see "Image Flag Earth after edit has been updated."
       And I should see "Edit" in the "Flag Earth after edit" row
-
-  @javascript @DEV @STG @PROD
+  
+  @javascript @local @development @staging @production
   Scenario: Check if content admins can delete files.
      When I go to "admin/content/file"
      Then I should see "Add file"
@@ -62,3 +62,4 @@ Feature: File & Media Management - Assets Management - Files and their usage lis
      Then I should see "Are you sure you want to delete the file Flag Earth after edit?"
      When I press the "Delete" button
      Then I should see "Image Flag Earth after edit has been deleted."
+  

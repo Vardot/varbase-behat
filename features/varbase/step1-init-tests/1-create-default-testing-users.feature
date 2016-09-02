@@ -6,10 +6,10 @@ Feature: Create default testing users.
 # test_site_admin: { email: 'site.admin.test@vardot.com', password: 'dD.123123' }
 # test_super_admin: { email: 'super.admin.test@vardot.com', password: 'dD.123123' }
 
-  Background:
+  Background: 
     Given I am a logged in user with the "webmaster" user
-
-  @javascript @DEV @STG
+  
+  @javascript @local @development @staging
   Scenario: Create the test_authenticated user.
      When I go to "/admin/people/create"
       And I fill in "test_authenticated" for "Username"
@@ -30,8 +30,8 @@ Feature: Create default testing users.
       And I fill in "dD.123123" for "Password"
       And I fill in "dD.123123" for "Confirm password"
      Then I press "Save"
-
-  @javascript @DEV @STG
+  
+  @javascript @local @development @staging
   Scenario: Create the test_editor user.
      When I go to "/admin/people/create"
       And I fill in "test_editor" for "Username"
@@ -52,8 +52,8 @@ Feature: Create default testing users.
       And I fill in "dD.123123" for "Password"
       And I fill in "dD.123123" for "Confirm password"
      Then I press "Save"
-
-  @javascript @DEV @STG
+  
+  @javascript @local @development @staging
   Scenario: Create the test_content_admin user.
      When I go to "/admin/people/create"
       And I fill in "test_content_admin" for "Username"
@@ -74,8 +74,8 @@ Feature: Create default testing users.
       And I fill in "dD.123123" for "Password"
       And I fill in "dD.123123" for "Confirm password"
      Then I press "Save"
-
-  @javascript @DEV @STG
+  
+  @javascript @local @development @staging
   Scenario: Create the test_site_admin user.
      When I go to "/admin/people/create"
       And I fill in "test_site_admin" for "Username"
@@ -97,8 +97,8 @@ Feature: Create default testing users.
       And I fill in "dD.123123" for "Password"
       And I fill in "dD.123123" for "Confirm password"
      Then I press "Save"
-
-  @javascript @DEV @STG
+  
+  @javascript @local @development @staging
   Scenario: Create the test_super_admin user.
      When I go to "/admin/people/create"
       And I fill in "test_super_admin" for "Username"
@@ -119,3 +119,4 @@ Feature: Create default testing users.
       And I fill in "dD.123123" for "Password"
       And I fill in "dD.123123" for "Confirm password"
      Then I press "Save"
+

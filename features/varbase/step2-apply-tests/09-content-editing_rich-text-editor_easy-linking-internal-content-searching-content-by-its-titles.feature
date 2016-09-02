@@ -1,9 +1,9 @@
 Feature: Content Editing - Rich Text Editor - Easy linking to internal content by searching for content by its titles
-  As a content admin
-  I want to be able to add internal links searching the title of an internal content
-  So that will ease the work of adding internal links in the rich text editor fields.
+As a content admin
+I want to be able to add internal links searching the title of an internal content
+So that will ease the work of adding internal links in the rich text editor fields.
 
-@javascript @DEV @STG @PROD
+  @javascript @local @development @staging @production
   Scenario: Check if inserted raw URL will convert into a link when we save when
   We are using the "Visual editor" text format.
     Given I am a logged in user with the "test_site_admin" user
@@ -16,7 +16,7 @@ Feature: Content Editing - Rich Text Editor - Easy linking to internal content b
      Then I press "Save"
       And wait
       And I should see "Linking to internal content #1 body"
-
+  
      When I go to "/node/add/page"
       And wait
      Then I should see "Create Basic page"
@@ -33,12 +33,13 @@ Feature: Content Editing - Rich Text Editor - Easy linking to internal content b
       And I press "Insert link"
       And I wait for AJAX to finish
       And wait 5s
-
+  
      When I press "Save"
       And wait
       And I should see "Linking to internal content #2 body"
       And I should see "Linking to internal content #1 title"
-
+  
      When I click "Linking to internal content #1 title"
       And wait
      Then I should see "Linking to internal content #1 body"
+  
