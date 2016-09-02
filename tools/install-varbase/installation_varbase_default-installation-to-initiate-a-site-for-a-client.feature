@@ -3,7 +3,7 @@ Feature: Installation - Varbase - Default installation to initiate a site for a 
   I want to be able to install Varbase for a selected client
   So that I will be able to initiate the site with the default installation
 
- @javascript @install
+ @javascript @install @DEV
  Scenario: Installation or Varbase
   Given I go to "/install.php"
    Then I should see "Select an installation profile"
