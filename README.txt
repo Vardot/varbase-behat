@@ -66,7 +66,7 @@ $ sh ./tools/install-selenium-server/install-selenium-server-2.53.1.sh
 --------------------------------------------------------------------------------
 6. Run the behat command at ../behat/
 
-$ bin/behat features/varbase/step2-apply-tests/1-website-base-requirements_user-registration_only-admins-login_v1-0.feature
+$ bin/behat features/varbase/step2-apply-tests/01-website-base-requirements_user-registration_only-admins-login_v1-0.feature
 
 ================================================================================
 Feature: Website Base Requirements - User Registration - Only admins login
@@ -176,6 +176,13 @@ $ bin/behat -di
     $ bin/behat features/varbase/ --format pretty --out std  --format html  --out reports/report-$( date '+%Y-%m-%d_%H-%M-%S' )
 
     After that you can see the report in the ../behat/reports folder.
+
+    If you want to run the test in steps, if you are not interested in the
+    initialization and cleaning up after the test.
+
+    $ bin/behat features/varbase/step1-init-tests
+    $ bin/behat features/varbase/step2-apply-tests
+    $ bin/behat features/varbase/step3-cleanup-tests
 
 
 11. If you want to test the installation process feature, you will need to use the varbase
