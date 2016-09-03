@@ -4,7 +4,7 @@ the full test.
 We do have some examples or how to use some of the extra behat features and
 added step definitions.
 
-To use any of the tools features, you will need to copy them to the features
-folder.
+If you want to test the any of the tools features, you will need to use the
+ varbase tools config file, as you can see in the following command.
 
-varbase_behat/features/
+$ bin/behat --config=behat.varbase-tools.yml tools/example.feature
