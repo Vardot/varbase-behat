@@ -3,8 +3,8 @@ As an Application site Builder
 I want to be able to install Varbase for a selected client
 So that I will be able to initiate the site with the default installation
 
-  @javascript @install @local @development
-  Scenario: Installation or Varbase
+  @javascript @tools @install @local @development
+  Scenario: Installation for Varbase 7.x-3.x
     Given I go to "/install.php"
      Then I should see "Select an installation profile"
      When I select the "Vardot Base" radio button
