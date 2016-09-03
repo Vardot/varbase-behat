@@ -7,17 +7,17 @@ So that I will need a site admin or super admin to add me to the website
     Given I am an anonymous user
   
   @local @development @staging @production 
-  Scenario: Check if a not logged in user can create an account
+  Scenario: Check if not logged in users can create an account.
      When I go to "/user"
      Then I should not see "Create new account"
   
   @local @development @staging @production
-  Scenario: Check if a not logged in user can register an account
+  Scenario: Check if not logged in users can register for a new account.
      When I go to "/user/register"
      Then I should see "Access denied"
   
   @local @development @staging @production
-  Scenario: Check if a not logged in user can access administration pages
+  Scenario: Check if not logged in users can access administration pages.
      When I go to "/admin"
      Then I should see "Access denied"
   

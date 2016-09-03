@@ -4,7 +4,7 @@ I want to be able to see the list of User Roles
 So that they must be (Editor, Site Admin, Content Admin, Super Admin)
 
   @local @development @staging @production
-  Scenario: Check the list of Roles under people permissions.
+  Scenario: Check If all default list of user roles are present under people permissions.
     Given I am a logged in user with the "webmaster" user
      When I go to "/admin/people/permissions/roles"
      Then I should see "Editor"

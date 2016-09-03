@@ -7,7 +7,7 @@ So that I can reset my password for the account
     Given I am not logged in
   
   @local @development @staging @production
-  Scenario: Check if a non logged in user can reset the password.
+  Scenario: Check if a non logged in users can reset their passwords.
      When I go to "/user/login"
      Then I should see "Request new password"
   
