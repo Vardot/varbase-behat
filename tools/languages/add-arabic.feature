@@ -1,6 +1,6 @@
 Feature: Add Arabic language if we do not have it to languages in the system.
 
-  @javascript @arabic @local
+  @javascript @tools @arabic @local
   Scenario: Add Arabic language if we do not have it to languages in the system.
     Given I am a logged in user with the "webmaster" user
      When I go to "/admin/config/regional/language"

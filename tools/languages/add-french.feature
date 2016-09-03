@@ -1,6 +1,6 @@
 Feature: Add French language if we do not have it to languages in the system.
 
-  @javascript @french @local
+  @javascript @tools @french @local
   Scenario: Add French language if we do not have it to languages in the system.
     Given I am a logged in user with the "webmaster" user
      When I go to "/admin/config/regional/language"

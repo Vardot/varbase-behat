@@ -1,6 +1,6 @@
 Feature: Check the inbox for emails using the testing@vardot.com email
 
-  @javascript @googel
+  @javascript @tools @google
   Scenario: Login to the testing@vardot.com email.
     Given I go to "https://accounts.google.com" website
      When I fill in "testing@vardot.com" for "Email"

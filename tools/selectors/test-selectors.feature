@@ -8,7 +8,8 @@ So that I will be able to pass registored selectors to other feaures.
     Given print css selectors
       And print xpath selectors
   
-  Scenario: Check if
+  @tools @local @development @stanging @production
+  Scenario: Check if we add selectors from a yml file, that we are able to use them.
   # Add selectors from the xample-selectors.yml file then print list of selectors.
      When I add selectors from "example-selectors.yml" file
      Then print css selectors

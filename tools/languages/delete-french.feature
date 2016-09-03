@@ -1,6 +1,6 @@
 Feature: Delete French language from the system.
 
-  @javascript @feanch @local
+  @javascript @tools @feanch @local
   Scenario: Delete French language from the system.
     Given I am a logged in user with the "webmaster" user
      When I go to "/admin/config/regional/language/delete/fr"

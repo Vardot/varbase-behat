@@ -1,6 +1,6 @@
 Feature: Search google
 
-  @javascript @google
+  @javascript @tools @google
   Scenario: To search in Google about Varbase.
     Given I go to "http://google.com" website
       And wait
