@@ -8,17 +8,17 @@ So that will ease the work of adding internal links in the rich text editor fiel
   We are using the "Visual editor" text format.
     Given I am a logged in user with the "test_site_admin" user
      When I go to "/node/add/page"
-      And wait
+      And I wait
      Then I should see "Create Basic page"
      When I select "visual_editor" from "body[und][0][format]"
       And I fill in "Linking to internal content #1 title" for "Title"
       And I fill in the rich text editor field "Body" with "Linking to internal content #1 body"
      Then I press "Save"
-      And wait
+      And I wait
       And I should see "Linking to internal content #1 body"
   
      When I go to "/node/add/page"
-      And wait
+      And I wait
      Then I should see "Create Basic page"
      When I select "visual_editor" from "body[und][0][format]"
       And I fill in "Linking to internal content #2 title" for "Title"
@@ -32,14 +32,14 @@ So that will ease the work of adding internal links in the rich text editor fiel
       And I wait for AJAX to finish
       And I press "Insert link"
       And I wait for AJAX to finish
-      And wait 5s
+      And I wait 5s
   
      When I press "Save"
-      And wait
+      And I wait
       And I should see "Linking to internal content #2 body"
       And I should see "Linking to internal content #1 title"
   
      When I click "Linking to internal content #1 title"
-      And wait
+      And I wait
      Then I should see "Linking to internal content #1 body"
   

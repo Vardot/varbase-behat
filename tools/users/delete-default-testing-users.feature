@@ -12,17 +12,18 @@ Feature: Delete default testing users.
   @javascript @tools @local @development @staging
   Scenario: Delete the test_authenticated user.
      When I go to "/admin/people"
+      And I wait
       And I fill in "test_authenticated" for "Username"
       And I press "Apply"
-      And wait
+      And I wait
      Then I should see "test_authenticated"
      When I click "test_authenticated"
-      And wait
+      And I wait
      Then I should see "History"
      When I click "Edit"
-      And wait
+      And I wait
       And I press "Cancel account"
-      And wait
+      And I wait
      Then I should see "Are you sure you want to cancel the account test_authenticated?"
      When I select the radio button "Delete the account and its content."
       And I press "Cancel account"
@@ -34,15 +35,15 @@ Feature: Delete default testing users.
      When I go to "/admin/people"
       And I fill in "test_editor" for "Username"
       And I press "Apply"
-      And wait
+      And I wait
      Then I should see "test_editor"
      When I click "test_editor"
-      And wait
+      And I wait
      Then I should see "History"
      When I click "Edit"
-      And wait
+      And I wait
       And I press "Cancel account"
-      And wait
+      And I wait
      Then I should see "Are you sure you want to cancel the account test_editor?"
      When I select the radio button "Delete the account and its content."
       And I press "Cancel account"
@@ -54,15 +55,15 @@ Feature: Delete default testing users.
      When I go to "/admin/people"
       And I fill in "test_content_admin" for "Username"
       And I press "Apply"
-      And wait
+      And I wait
      Then I should see "test_content_admin"
      When I click "test_content_admin"
-      And wait
+      And I wait
      Then I should see "History"
      When I click "Edit"
-      And wait
+      And I wait
       And I press "Cancel account"
-      And wait
+      And I wait
      Then I should see "Are you sure you want to cancel the account test_content_admin?"
      When I select the radio button "Delete the account and its content."
       And I press "Cancel account"
@@ -74,14 +75,14 @@ Feature: Delete default testing users.
      When I go to "/admin/people"
       And I fill in "test_site_admin" for "Username"
       And I press "Apply"
-      And wait
+      And I wait
      Then I should see "test_site_admin"
      When I click "test_site_admin"
-      And wait
+      And I wait
      Then I should see "History"
      When I click "Edit"
       And I press "Cancel account"
-      And wait
+      And I wait
      Then I should see "Are you sure you want to cancel the account test_site_admin?"
      When I select the radio button "Delete the account and its content."
       And I press "Cancel account"
@@ -93,14 +94,14 @@ Feature: Delete default testing users.
      When I go to "/admin/people"
       And I fill in "test_super_admin" for "Username"
       And I press "Apply"
-      And wait
+      And I wait
      Then I should see "test_super_admin"
      When I click "test_super_admin"
-      And wait
+      And I wait
      Then I should see "History"
      When I click "Edit"
       And I press "Cancel account"
-      And wait
+      And I wait
      Then I should see "Are you sure you want to cancel the account test_super_admin?"
      When I select the radio button "Delete the account and its content."
       And I press "Cancel account"

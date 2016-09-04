@@ -12,6 +12,7 @@ Feature: Create default testing users.
   @javascript @tools @local @development @staging
   Scenario: Create the test_authenticated user.
      When I go to "/admin/people/create"
+      And I wait
       And I fill in "test_authenticated" for "Username"
       And I fill in "authenticated.test@vardot.com" for "E-mail address"
       And I press "Create new account"
@@ -34,6 +35,7 @@ Feature: Create default testing users.
   @javascript @tools @local @development @staging
   Scenario: Create the test_editor user.
      When I go to "/admin/people/create"
+      And I wait
       And I fill in "test_editor" for "Username"
       And I fill in "editor.test@vardot.com" for "E-mail address"
       And I check the box "Editor"
@@ -56,6 +58,7 @@ Feature: Create default testing users.
   @javascript @tools @local @development @staging
   Scenario: Create the test_content_admin user.
      When I go to "/admin/people/create"
+      And I wait
       And I fill in "test_content_admin" for "Username"
       And I fill in "content.admin.test@vardot.com" for "E-mail address"
       And I check the box "Content Admin"
@@ -78,6 +81,7 @@ Feature: Create default testing users.
   @javascript @tools @local @development @staging
   Scenario: Create the test_site_admin user.
      When I go to "/admin/people/create"
+      And I wait
       And I fill in "test_site_admin" for "Username"
       And I fill in "site.admin.test@vardot.com" for "E-mail address"
       And I check the box "Site Admin"
@@ -101,6 +105,7 @@ Feature: Create default testing users.
   @javascript @tools @local @development @staging
   Scenario: Create the test_super_admin user.
      When I go to "/admin/people/create"
+      And I wait
       And I fill in "test_super_admin" for "Username"
       And I fill in "super.admin.test@vardot.com" for "E-mail address"
       And I check the box "Super Admin"

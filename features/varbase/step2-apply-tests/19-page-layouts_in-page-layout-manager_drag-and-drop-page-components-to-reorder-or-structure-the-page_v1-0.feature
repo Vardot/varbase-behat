@@ -7,12 +7,14 @@ So that I will be able to Customize content, drag and drop page components to re
   Scenario: Check if In-Place Editor to Allow privileged users to update and rearrange the content while viewing.
     Given I am a logged in user with the "webmaster" user
      When I go to "/admin/structure/types/manage/landing-page/panelizer/page_manager"
+      And I wait
      Then the "In-Place Editor" checkbox should be checked
   
   @javascript @local @development @staging @production
   Scenario: Add a "Test Landing page" And check the layout to "Left sidebar" Basic Layout.
     Given I am a logged in user with the "test_site_admin" user
      When I go to "node/add/landing-page"
+      And I wait
       And I fill in "Test Landing page" for "Title"
       And I press "Save"
       And I wait for AJAX to finish
@@ -44,7 +46,7 @@ So that I will be able to Customize content, drag and drop page components to re
       And I wait for AJAX to finish
      Then I should see "Test Landing page"
      When I click "Test Landing page"
-      And wait 5s
+      And I wait
       And I wait for AJAX to finish
      Then I should see "Customize this page"
   

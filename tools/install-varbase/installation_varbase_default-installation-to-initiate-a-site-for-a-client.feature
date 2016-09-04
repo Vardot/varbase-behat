@@ -9,17 +9,17 @@ So that I will be able to initiate the site with the default installation
      Then I should see "Select an installation profile"
      When I select the "Vardot Base" radio button
       And I press "Save and continue"
-      And wait
+      And I wait
      Then I should see "Choose language"
      When I press "Save and continue"
-      And wait
+      And I wait
      Then I should see "Database configuration"
      When I press "Save and continue"
       And I wait for the batch job to finish
       And I wait for the batch job to finish
       And I wait for the batch job to finish
      Then I should see "Configure site"
-      And wait
+      And I wait
      When I fill in "Site name" with "Varbase"
       And I fill in "Site e-mail address" with "vardot.com"
       And I fill in "Username" with "webmaster"

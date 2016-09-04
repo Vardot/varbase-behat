@@ -9,24 +9,29 @@ So that I will be able to place the custom menu in regions, and positions
   @javascript @local @development @staging @production
   Scenario: Add new custom menu
     Given I go to "/admin/structure/menu/add"
+      And I wait
      When I fill in "Test custom Menu" for "Title"
       And I press "Save"
+      And I wait
      Then I should see "Test custom Menu"
       And I should see "Add link"
   
   @javascript @local @development @staging @production
   Scenario: Add a list of Menu links to Test custom Menu
     Given I go to "/admin/structure/menu/manage/menu-test-custom-menu/"
+      And I wait
      When I click "Add link"
       And I fill in "Test link 1" for "Menu link title"
       And I fill in "<front>" for "Path"
       And I press "Save"
+      And I wait
      Then I should see "Your configuration has been saved."
      When I go to "admin/structure/menu/manage/menu-test-custom-menu"
      When I click "Add link"
       And I fill in "Test link 2" for "Menu link title"
       And I fill in "<front>" for "Path"
       And I press "Save"
+      And I wait
      Then I should see "Your configuration has been saved."
   
   @javascript @local @development @staging @production

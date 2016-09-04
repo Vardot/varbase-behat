@@ -7,7 +7,8 @@ So that the site can show up the same custom HTML widget pan in other Landing pa
   Scenario: Check if In-Place Editor to allow privileged users to update and rearrange the content while viewing.
     Given I am a logged in user with the "webmaster" user
      When I go to "/admin/structure/types/manage/landing-page/panelizer"
-      And the "New Custom content" checkbox should be checked
+      And I wait
+     Then the "New Custom content" checkbox should be checked
       And the "New Rendered entity" checkbox should be checked
       And the "New Fielded custom content" checkbox should be checked
   
@@ -15,20 +16,24 @@ So that the site can show up the same custom HTML widget pan in other Landing pa
   Scenario: Check if In-Place Editor to allow privileged users to update and rearrange the content while viewing.
     Given I am a logged in user with the "webmaster" user
      When I go to "/admin/structure/types/manage/landing-page/panelizer/page_manager"
+      And I wait
      Then the "In-Place Editor" checkbox should be checked
   
   @javascript @local @development @staging @production
   Scenario: Check if a user with permission to administer landing page content can create a custom reusable HTML widget.
     Given I am a logged in user with the "test_site_admin" user
      When I go to "/node/add/landing-page"
+      And I wait
      Then I should see "Create Landing page"
      When I fill in "Test landing page by test site admin 1" for "Title"
      Then I press "Save"
-      And wait
+      And I wait
      When I go to "admin/content"
+      And I wait
      Then I should see "Content"
      When I fill in "Test landing page by test site admin 1" for "Title"
       And I press the "Apply" button
+      And I wait
      Then I should see "Test landing page by test site admin 1"
      When I click "Test landing page by test site admin 1"
       And I wait for AJAX to finish
@@ -50,29 +55,35 @@ So that the site can show up the same custom HTML widget pan in other Landing pa
       And I fill in "Test reusable HTML widget admin title" for "Administrative title"
       And I fill in "Test reusable HTML widget admin description." for "Administrative description"
       And I click "Reusability"
+      And I wait
       And I check "Make this entity reusable"
+      And I wait
       And I fill in "Testing Page elements" for "Category"
       And I click "Admin"
+      And I wait
       And I press "Finish"
-      And wait
+      And I wait
      Then I should see "Test reusable HTML widget"
       And I should see "Content of the Test reusable HTML widget"
      When I press "Save"
-      And wait
+      And I wait
      Then I should not see "Add new pane"
   
   @javascript @local @development @staging @production
   Scenario: Check if a user with permission to administer landing page content can add a ready reusable HTML widget.
     Given I am a logged in user with the "test_site_admin" user
      When I go to "/node/add/landing-page"
+      And I wait
      Then I should see "Create Landing page"
      When I fill in "Test landing page by test site admin 2" for "Title"
      Then I press "Save"
-      And wait
+      And I wait
      When I go to "admin/content"
+      And I wait
      Then I should see "Content"
      When I fill in "Test landing page by test site admin 2" for "Title"
       And I press the "Apply" button
+      And I wait
      Then I should see "Test landing page by test site admin 2"
      When I click "Test landing page by test site admin 2"
       And I wait for AJAX to finish
