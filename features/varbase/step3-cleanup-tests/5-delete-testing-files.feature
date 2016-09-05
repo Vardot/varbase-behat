@@ -3,7 +3,7 @@ Feature: Delete testing files and documents.
   Background: 
     Given I am a logged in user with the "webmaster" user
   
-  @javascript @tools @local @development @staging
+  @javascript @cleanup @tools @local @development @staging
   Scenario: Delete "english_file_with_spaces_and_capital_letters.pdf" testing file.
      When I go to "/admin/content/file"
       And I wait
@@ -21,7 +21,7 @@ Feature: Delete testing files and documents.
       And I wait
      Then I should see "Document english_file_with_spaces_and_capital_letters.pdf has been deleted."
 
-  @javascript @tools @local @development @staging
+  @javascript @cleanup @tools @local @development @staging
   Scenario: Delete "mlf_rby_m_msft.pdf" testing file.
      When I go to "/admin/content/file"
       And I wait
@@ -39,7 +39,7 @@ Feature: Delete testing files and documents.
       And I wait
      Then I should see "Document mlf_rby_m_msft.pdf has been deleted."
 
-  @javascript @tools @local @development @staging
+  @javascript @cleanup @tools @local @development @staging
   Scenario: Delete "Embed Flag Earth" testing file.
      When I go to "/admin/content/file"
       And I wait

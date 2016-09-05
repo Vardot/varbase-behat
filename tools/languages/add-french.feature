@@ -1,6 +1,6 @@
 Feature: Add French language if we do not have it to languages in the system.
 
-  @javascript @tools @french @local
+  @javascript @init @tools @local @development @staging @french
   Scenario: Add French language if we do not have it to languages in the system.
     Given I am a logged in user with the "webmaster" user
      When I go to "/admin/config/regional/language"
@@ -8,7 +8,7 @@ Feature: Add French language if we do not have it to languages in the system.
      Then I should not see "French"
       But I should see "Add language"
      When I click "Add language"
-      And wait max of 10s
+      And I wait
      Then I should see "Add a language to be supported by your site."
      When I select "fr" from "Language name"
       And I press "Add language"

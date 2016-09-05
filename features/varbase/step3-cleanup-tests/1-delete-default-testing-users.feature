@@ -9,7 +9,7 @@ Feature: Delete default testing users.
   Background: 
     Given I am a logged in user with the "webmaster" user
   
-  @javascript @tools @local @development @staging
+  @javascript @cleanup @tools @local @development @staging
   Scenario: Delete the test_authenticated user.
      When I go to "/admin/people"
       And I wait
@@ -30,7 +30,7 @@ Feature: Delete default testing users.
       And I wait for the batch job to finish
      Then I should see "test_authenticated has been deleted."
   
-  @javascript @tools @local @development @staging
+  @javascript @cleanup @tools @local @development @staging
   Scenario: Delete the test_editor user.
      When I go to "/admin/people"
       And I wait
@@ -51,7 +51,7 @@ Feature: Delete default testing users.
       And I wait for the batch job to finish
      Then I should see "test_editor has been deleted."
   
-  @javascript @tools @local @development @staging @production
+  @javascript @cleanup @tools @local @development @staging @production
   Scenario: Delete the test_content_admin user.
      When I go to "/admin/people"
       And I fill in "test_content_admin" for "Username"
@@ -71,7 +71,7 @@ Feature: Delete default testing users.
       And I wait for the batch job to finish
      Then I should see "test_content_admin has been deleted."
   
-  @javascript @tools @local @development @staging @production
+  @javascript @cleanup @tools @local @development @staging @production
   Scenario: Delete the test_site_admin user.
      When I go to "/admin/people"
       And I wait
@@ -91,7 +91,7 @@ Feature: Delete default testing users.
       And I wait for the batch job to finish
      Then I should see "test_site_admin has been deleted."
   
-  @javascript @tools @local @development @staging @production
+  @javascript @cleanup @tools @local @development @staging @production
   Scenario: Delete the test_super_admin user.
      When I go to "/admin/people"
       And I wait

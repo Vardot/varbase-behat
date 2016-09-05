@@ -3,7 +3,7 @@ Feature: Delete testing fieldable pane entities.
   Background: 
     Given I am a logged in user with the "webmaster" user
   
-  @javascript @tools @local @development @staging
+  @javascript @cleanup @tools @local @development @staging
   Scenario: Delete "Test reusable HTML widget" fieldable pane entity.
      When I go to "/admin/content/fieldable_pane_entity"
       And I wait
@@ -18,7 +18,7 @@ Feature: Delete testing fieldable pane entities.
       And I wait
      Then I should see "HTML Test reusable HTML widget has been deleted."
 
-  @javascript @tools @local @development @staging
+  @javascript @cleanup @tools @local @development @staging
   Scenario: Delete "Test 1 HTML content title" fieldable pane entity.
      When I go to "/admin/content/fieldable_pane_entity"
       And I wait
@@ -33,7 +33,7 @@ Feature: Delete testing fieldable pane entities.
       And I wait
      Then I should see "HTML Test 1 HTML content title has been deleted."
 
-  @javascript @tools @local @development @staging
+  @javascript @cleanup @tools @local @development @staging
   Scenario: Delete "Test 2 HTML content title" fieldable pane entity.
      When I go to "/admin/content/fieldable_pane_entity"
       And I wait
