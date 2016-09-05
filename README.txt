@@ -125,30 +125,31 @@ $ bin/behat -di
 ================================================================================
 
  Scenarios are tagged with the Behat tags of:
-   @DEV = Development 
-   @STG = Staging
-   @PROD = Production
+   @local = Local 
+   @development = Development server.
+   @staging = Staging and testing server.
+   @production = Production live server.
 
    So that we only run bin/behat --tags with the right tag for the environment.
 
    Example:
 ================================================================================
     
-    $ bin/behat --tags '@DEV' features/varbase/
+    $ bin/behat --tags '@development' features/varbase/
 
-    Which it will run Scenarios which has got the @DEV tag.
-
-================================================================================
-
-    $ bin/behat --tags '@STG' features/varbase/
-
-    Which it will run Scenarios which has got the @STG tag.
+    Which it will run Scenarios which has got the @development tag.
 
 ================================================================================
 
-    $ bin/behat --tags '@PROD' features/varbase/
+    $ bin/behat --tags '@staging' features/varbase/
 
-    Which it will run Scenarios which has got the @PROD tag.
+    Which it will run Scenarios which has got the @staging tag.
+
+================================================================================
+
+    $ bin/behat --tags '@production' features/varbase/
+
+    Which it will run Scenarios which has got the @production tag.
 
 ================================================================================
 
