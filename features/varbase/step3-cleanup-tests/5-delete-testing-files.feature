@@ -55,4 +55,4 @@ Feature: Delete testing files and documents.
      Then I should see "Are you sure you want to delete the file Embed Flag Earth?"
      When I press "Delete"
       And I wait
-     Then I should see "Document Embed Flag Earth has been deleted."
+     Then I should see "Image Embed Flag Earth has been deleted."
