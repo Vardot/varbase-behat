@@ -1,4 +1,4 @@
-Feature: Installation - Varbase - Default installation to initiate a site for a client
+Feature: Installation - Varbase - Default installation to initiate a site for a client.
 As an Application site Builder
 I want to be able to install Varbase for a selected client
 So that I will be able to initiate the site with the default installation
@@ -20,8 +20,8 @@ So that I will be able to initiate the site with the default installation
       And I wait for the batch job to finish
      Then I should see "Configure site"
       And I wait
-     When I fill in "Site name" with "Varbase"
-      And I fill in "Site e-mail address" with "vardot.com"
+     When I fill in "Site name" with "Varbase 7.x-3.x"
+      And I fill in "Site e-mail address" with "noreply@vardot.com"
       And I fill in "Username" with "webmaster"
       And I fill in "E-mail address" with "webmaster@vardot.com"
       And I fill in "Password" with "dD.123123"
