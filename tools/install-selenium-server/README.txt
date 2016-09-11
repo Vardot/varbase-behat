@@ -1,5 +1,5 @@
 
-# Install and configure selenium server to work for each automated testing session #
+# Installing and configuring selenium server to work for each automated testing session #
 
 Some time I do test using some internal or external selenium server, but they
 do not have the option of restarting every thing from the beginning .
@@ -8,7 +8,7 @@ I just want a very fast and basic solution, if the test finish I want the
 selenium server to restart, and gave me a fresh start for the next automated
 testing session.
  
-I made this list of script with a basic installer which :
+I made this list of script with a basic installer which:
 - Have Selenium standalone server will downloaded and installed on your localhost or server.
 - Then selenium will start working after reboots.
 - This selenium server will start at the 4445 port number.
@@ -51,5 +51,5 @@ $  sh ./uninstall-selenium-server.sh
 ================================================================================
 Then Reboot.
 
-The only thing we do need is a rest Button to restart the selenium server to 
+The only thing we do need is a reset Button to restart the selenium server to 
 work in a new automated testing session.
