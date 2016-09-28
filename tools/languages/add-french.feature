@@ -18,4 +18,3 @@ Feature: Add French language if we do not have it to languages in the system.
      When I go to "/admin/config/regional/language"
       And I wait
      Then I should see "French"
-  
