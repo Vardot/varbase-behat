@@ -10,7 +10,7 @@ So that they will be converted to links and visitors can click on them.
      When I go to "/node/add/page"
       And I wait
      Then I should see "Create Basic page"
-     When I select "visual_editor" from "body[und][0][format]"
+     When I select "full_html" from "body[0][format]"
       And I fill in "Test convert URLs" for "Title"
       And I fill in the rich text editor field "Body" with "<p>Test line #1 <br /> Test line #2 http://drupal.org <br /> Test line #3</p>"
      Then I press "Save"
@@ -22,4 +22,3 @@ So that they will be converted to links and visitors can click on them.
      When I click "http://drupal.org" in the "a" element with the "href" attribute set to "http://drupal.org"
       And I wait
      Then I should see "Drupal"
-  
