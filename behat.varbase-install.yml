@@ -7,7 +7,7 @@ default:
         - VarbaseContext:
             parameters:
               varbase_users:
-                webmaster: { email: 'webmaster@vardot.com', password: 'dD.123123' }
+                webmaster: { email: 'webmaster@vardot.com', password: 'dD.123123ddd' }
         - SelectorsContext:
            parameters:
              files_path: "%paths.base%/selectors/"

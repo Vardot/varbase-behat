@@ -53,7 +53,7 @@ $ php composer.phar install
 
   in the behat.varbase.yml file.
   or you can get the selenium stand alone server from
-  http://www.seleniumhq.org/download/ 
+  http://www.seleniumhq.org/download/
   then you could run this command in the same location in the terminal
 
 $ java -jar selenium-*.jar -port 4445
@@ -74,7 +74,7 @@ Feature: Website Base Requirements - User Registration - Only admins login
   I will not be able to register as a user in the website
   So that I will need a site admin or super admin to add me to the website
 
-  Background: 
+  Background:
     Given I am an anonymous user
 
   Scenario: Check if a not logged in user can create an account
@@ -125,7 +125,7 @@ $ bin/behat -di
 ================================================================================
 
  Scenarios are tagged with the Behat tags of:
-   @local = Local 
+   @local = Local
    @development = Development server.
    @staging = Staging and testing server.
    @production = Production live server.
@@ -134,7 +134,7 @@ $ bin/behat -di
 
    Example:
 ================================================================================
-    
+
     $ bin/behat --tags '@development' features/varbase/
 
     Which it will run Scenarios which has got the @development tag.
@@ -184,9 +184,3 @@ $ bin/behat -di
     $ bin/behat features/varbase/step1-init-tests
     $ bin/behat features/varbase/step2-apply-tests
     $ bin/behat features/varbase/step3-cleanup-tests
-
-
-11. If you want to test the installation process feature, you will need to use the varbase
-    Install config file, as you can see in the following command.
-
-    $ bin/behat --config=behat.varbase-install.yml tools/install-varbase/installation_varbase_default-installation-to-initiate-a-site-for-a-client.feature

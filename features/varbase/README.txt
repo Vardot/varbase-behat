@@ -25,11 +25,11 @@
 List of features in the step 1 init tests:
 --------------------------------------------------------------------------------
 Feature: Create default testing users.
-# test_authenticated: { email: 'authenticated.test@vardot.com', password: 'dD.123123' }
-# test_editor: { email: 'editor.test@vardot.com', password: 'dD.123123' }
-# test_content_admin: { email: 'content.admin.test@vardot.com', password: 'dD.123123' }
-# test_site_admin: { email: 'site.admin.test@vardot.com', password: 'dD.123123' }
-# test_super_admin: { email: 'super.admin.test@vardot.com', password: 'dD.123123' }
+# test_authenticated: { email: 'authenticated.test@vardot.com', password: 'dD.123123ddd' }
+# test_editor: { email: 'editor.test@vardot.com', password: 'dD.123123ddd' }
+# test_content_admin: { email: 'content.admin.test@vardot.com', password: 'dD.123123ddd' }
+# test_site_admin: { email: 'site.admin.test@vardot.com', password: 'dD.123123ddd' }
+# test_super_admin: { email: 'super.admin.test@vardot.com', password: 'dD.123123ddd' }
 
 Feature: Add Arabic language if we do not have it to languages in the system.
 Feature: Add French language if we do not have it to languages in the system.
@@ -41,35 +41,7 @@ List of Features in the step 2 apply tests:
 Feature: Website Base Requirements - User Registration - Only admins login.
 Feature: Website Base Requirements - User Roles - Simple Roles.
 Feature: User Management - Standard User Management - Request new password.
-Feature: Website Base Requirements - Website Languages - All content translatable
-         to all languages.
-Feature: User Management - Standard User Management - Admins can create users
-         and assign a role to them.
-Feature: Website Base Requirements - Website Languages - English.
-Feature: User Management - Standard User Management - Login.
-Feature: Content Editing - Rich Text Editor - Convert URLs into links.
-Feature: Content Editing - Rich Text Editor - Easy linking to internal content
-         by searching for content by its titles.
-Feature: Content Editing - Rich Text Editor - Input formats.
-Feature: Content Structure Features - Basic Pages - Basic page.
-Feature: Content Structure Features - Basic Pages - Pages with pre-defined layouts.
-Feature: File & Media Management - Assets Management - Ability to embed existing
-         files library in the rich text editor.
-Feature: File & Media Management - Assets Management - Files and their usage 
-         list page for admins.
-Feature: File & Media Management - Transliteration - Transliteration of 
-         non-Latin characters on all file types.
-Feature: Navigational Features - Breadcrumbs - Standard breadcrumbs.
-Feature: Navigational Features - Other menus - Standard menus.
-Feature: Page Layouts -  In-Page Layout Manager - Change the layout of a page
-         from within predefined templates.
-Feature: Page Layouts - In-page layout manager - Drag-and-drop page components 
-         to reorder or structure the page.
-Feature: Page Layouts - Site Widgets Available In Layouts - Create and re-use
-         custom HTML widgets.
-Feature: Page Layouts - Site widgets available in layouts - Re-use components
-         or blocks across all pages.
-Feature: User Management - Standard User Management - Admins can disable users.
+
 
 List of features in the step 2 cleanup tests:
 --------------------------------------------------------------------------------
@@ -79,5 +51,3 @@ Feature: Delete default testing users.
 
 Feature: Delete Arabic language from the system.
 Feature: Delete French language from the system.
-Feature: Delete testing fieldable pane entities.
-Feature: Delete testing files and documents.
