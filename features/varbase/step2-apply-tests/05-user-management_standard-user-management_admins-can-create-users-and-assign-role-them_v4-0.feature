@@ -7,7 +7,7 @@ So that they will be able to use the site.
     Given I am a logged in user with the "webmaster" user
 
   @javascript @local @development @staging @production
-  Scenario: Check if admins can see "Add user" button under people administration.
+  Scenario: Check if admins can see the "Add user" button under People administration page.
     Given I go to "/admin/people"
      When I click "Add user"
       And I should see "People"
@@ -15,7 +15,7 @@ So that they will be able to use the site.
       And I should see "Email address"
 
   @javascript @local @development @staging @production
-  Scenario: Check if admins can create new user account as an (authenticated user)
+  Scenario: Check if admins can create a new user account as an (authenticated user).
     Given I go to "/admin/people/create"
      When I fill in "tester@vardot.com" for "Email address"
       And I fill in "Tester" for "Username"
