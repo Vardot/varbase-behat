@@ -7,13 +7,13 @@ So that I can reset my password for the account
     Given I am not logged in
 
   @local @development @staging @production
-  Scenario: Check if a non logged in users can reset their passwords.
+  Scenario: Check that an anonymous user can reset his/her password.
      When I go to "/user/login"
       And I wait
      Then I should see "Reset your password"
 
   @local @development @staging @production
-  Scenario: Check if the email has been used to rest the password is not existing email.
+  Scenario: Verify that the system cannot send an email to non-existing users/emails.
      When I go to "/user/password"
       And I wait
      Then I should see "Username or email address"
