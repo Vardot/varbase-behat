@@ -23,8 +23,8 @@ So that they will be able to use the site.
       And I fill in "dD.123123ddd" for "Confirm password"
       And I press "Create new account"
 
-  @javascript @local @development @staging @production
-  Scenario: Delete the test_authenticated user.
+  @javascript @cleanup @local @development @staging @production
+  Scenario: Delete the Tester user.
      When I go to "/admin/people"
       And I fill in "Tester" for "Name or email contains"
       And I press "Filter"
