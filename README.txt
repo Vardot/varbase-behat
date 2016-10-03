@@ -66,28 +66,34 @@ $ sh ./tools/install-selenium-server/install-selenium-server-2.53.1.sh
 --------------------------------------------------------------------------------
 6. Run the behat command at ../behat/
 
-$ bin/behat features/varbase/step2-apply-tests/01-website-base-requirements_user-registration_only-admins-login_v1-0.feature
+$ bin/behat features/varbase/step2-apply-tests/01-website-base-requirements_user-registration_only-admins-login_v4-0.feature
 
 ================================================================================
 Feature: Website Base Requirements - User Registration - Only admins login
-  As an anonymous user
-  I will not be able to register as a user in the website
-  So that I will need a site admin or super admin to add me to the website
+As an anonymous user
+I will not be able to register as a user in the website
+So that I will need a site admin or super admin to add me to the website
 
-  Background:
+  Background: 
     Given I am an anonymous user
-
-  Scenario: Check if a not logged in user can create an account
-    When I go to "/user"
-    Then I should not see "Create new account"
-
-  Scenario: Check if a not logged in user can register an account
-    When I go to "/user/register"
-    Then I should see "Access denied"
-
-  Scenario: Check if a not logged in user can access administration pages
-    When I go to "/admin"
-    Then I should see "Access denied"
+  
+  @local @development @staging @production 
+  Scenario: Check that create new account options does not appear for anonymous users.
+     When I go to "/user"
+      And I wait
+     Then I should not see "Create new account"
+  
+  @local @development @staging @production
+  Scenario: Check that only admin can create an account.
+     When I go to "/user/register"
+      And I wait
+     Then I should see "Access denied"
+  
+  @local @development @staging @production
+  Scenario: Verify that anonymous users cannot access admin pages.
+     When I go to "/admin"
+      And I wait
+     Then I should see "Access denied"
 
 3 scenarios (3 passed)
 9 steps (9 passed)
