@@ -9,7 +9,7 @@ So that I will be able to Change the layout of the page to use one of the predef
      When I go to "/admin/structure/types/manage/landing-page/panelizer/page_manager"
       And I wait
      Then the "In-Place Editor" checkbox should be checked
-  
+
   @local @development @staging @production
   Scenario: Check if we create a Test Landing page we can see Change layout floating button to change the layout.
     Given I am a logged in user with the "test_site_admin" user
@@ -21,7 +21,7 @@ So that I will be able to Change the layout of the page to use one of the predef
       And I wait
      Then I should see "Landing page Test landing page by test site admin has been created."
       And I should see "Change Layout"
-  
+
   @javascript @local @development @staging @production
   Scenario: Check that a user with the editor role which has NO permission to change layouts can not see Change Layout for published landing pages.
     Given I am a logged in user with the "test_editor" user
@@ -36,7 +36,7 @@ So that I will be able to Change the layout of the page to use one of the predef
       And I wait
      Then I should see "Test landing page by test site admin"
       And I should not see "Change layout"
-  
+
   @javascript @local @development @staging @production
   Scenario: Check that a user with the content admin role which has permission to change layouts can see Change Layout for published landing pages.
     Given I am a logged in user with the "test_content_admin" user
@@ -51,7 +51,7 @@ So that I will be able to Change the layout of the page to use one of the predef
       And I wait
      Then I should see "Test landing page by test site admin"
       And I should see "Change layout"
-  
+
   @javascript @local @development @staging @production
   Scenario: Check if a user with permission to Administer Panelizer layout can change the layout of a landing page.
     Given I am a logged in user with the "test_site_admin" user
@@ -79,5 +79,5 @@ So that I will be able to Change the layout of the page to use one of the predef
       And I wait for AJAX to finish
      Then I should see "Save"
      When I press "Save"
+      And I wait for AJAX to finish
      Then I should not see "Save"
-  
