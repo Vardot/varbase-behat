@@ -958,12 +958,12 @@ class VarbaseContext extends RawDrupalContext implements SnippetAcceptingContext
       $panleRegionId = "panels-ipe-regionid-" . str_replace(' ', '-', strtolower($panleRegion));
     }
 
-    $elementpanelRegion = $this->getSession()->getPage()->find('xpath', "//*[contains(@id, '{$panleRegionId}')]");
+    $elementpanelRegion = $this->getSession()->getPage()->find('xpath', "//div[contains(@id, '{$panleRegionId}')]");
     if (empty($elementpanelRegion)) {
       throw new Exception('The panle region [ ' . $panleRegion . ' ] is not in the page.');
     }
 
-    $element = $this->getSession()->getPage()->find('xpath', "//*[contains(@id, '{$panleRegionId}')]//*[text()='{$text}']");
+    $element = $this->getSession()->getPage()->find('xpath', "//*[@id='{$panleRegionId}']//a[contains(@title,'{$text}') and contains(@href,'ajax/ipe/select-content')]");
     if (empty($element)) {
       throw new Exception('The panle region "' . $panleRegion . '" dose not have "'. $text .'".');
     }
