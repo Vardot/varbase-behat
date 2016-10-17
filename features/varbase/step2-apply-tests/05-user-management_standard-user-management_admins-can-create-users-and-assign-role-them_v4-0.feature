@@ -28,17 +28,16 @@ So that they will be able to use the site.
      When I go to "/admin/people"
       And I fill in "Tester" for "Name or email contains"
       And I press "Filter"
-      And wait
+      And I wait
      Then I should see "Tester"
      When I click "Tester"
-      And wait
+      And I wait
      Then I should see "Tester"
      When I click "Edit"
-      And wait
+      And I wait
       And I press "Cancel account"
-      And wait
+      And I wait
      Then I should see "Are you sure you want to cancel the account Tester?"
      When I select the radio button "Delete the account and its content."
       And I press "Cancel account"
-      And I wait for the batch job to finish
-     Then I should see "Tester has been deleted."
+     Then I should see "People"
