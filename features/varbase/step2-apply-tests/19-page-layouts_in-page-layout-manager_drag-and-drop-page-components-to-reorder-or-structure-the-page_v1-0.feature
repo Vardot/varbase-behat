@@ -9,7 +9,7 @@ So that I will be able to Customize content, drag and drop page components to re
      When I go to "/admin/structure/types/manage/landing-page/panelizer/page_manager"
       And I wait
      Then the "In-Place Editor" checkbox should be checked
-  
+
   @javascript @local @development @staging @production
   Scenario: Add a "Test Landing page" And check the layout to "Left sidebar" Basic Layout.
     Given I am a logged in user with the "test_site_admin" user
@@ -21,7 +21,7 @@ So that I will be able to Customize content, drag and drop page components to re
      Then I should see "Landing page Test Landing page has been created."
       And I should see "Customize this page"
       And I should see "Change layout"
-  
+
      When I click "Change layout"
       And I wait for AJAX to finish
      Then I should see "Change layout"
@@ -34,7 +34,7 @@ So that I will be able to Customize content, drag and drop page components to re
       And I wait for AJAX to finish
      When I press "Save"
       And I wait for AJAX to finish
-  
+
   @javascript @local @development @staging @production
   Scenario: Add Test 1 custom content pane to the "Test Landing page".
     Given I am a logged in user with the "test_site_admin" user
@@ -49,12 +49,12 @@ So that I will be able to Customize content, drag and drop page components to re
       And I wait
       And I wait for AJAX to finish
      Then I should see "Customize this page"
-  
+
      When I click "Customize this page"
       And I wait for AJAX to finish
      Then I should see "Add new pane" in the "left" panel region
-     Then I should see "Add new pane" in the "center" panel region
-  
+      And I should see "Add new pane" in the "center" panel region
+
   # Add Test 1 custom content pane.
      When I click "Add new pane" in the "left" panel region
       And I wait for AJAX to finish
@@ -68,7 +68,7 @@ So that I will be able to Customize content, drag and drop page components to re
      When I press "Save"
       And I wait for AJAX to finish
      Then I should see "Test 1 HTML content title"
-  
+
   @javascript @local @development @staging @production
   Scenario: Add Test 2 custom content pane to the "Test Landing page".
     Given I am a logged in user with the "test_site_admin" user
@@ -84,12 +84,13 @@ So that I will be able to Customize content, drag and drop page components to re
       And I wait for AJAX to finish
      Then I should see "Customize this page"
       And I should see "Test 1 HTML content title"
-  
+
      When I click "Customize this page"
+      And I wait 5s
       And I wait for AJAX to finish
      Then I should see "Add new pane" in the "left" panel region
-     Then I should see "Add new pane" in the "bottom" panel region
-  
+      And I should see "Add new pane" in the "bottom" panel region
+
   # Add Test 2 custom content pane.
      When I click "Add new pane" in the "left" panel region
       And I wait for AJAX to finish
@@ -104,7 +105,7 @@ So that I will be able to Customize content, drag and drop page components to re
       And I wait for AJAX to finish
      Then I should see "Test 2 HTML content title"
       And I should see "Test 1 HTML content title"
-  
+
   @javascript @local @development @staging @production
   Scenario: Check that a user with a permission to customize content can drag
   Drop panes then save.
@@ -120,11 +121,11 @@ So that I will be able to Customize content, drag and drop page components to re
       And I wait for AJAX to finish
      Then I should see "Test 1 HTML content title" in the "left" panel region
       And I should see "Test 2 HTML content title" in the "left" panel region
-  
+
      When I click "Customize this page"
       And I wait for AJAX to finish
      Then I should see "Add new pane" in the "left" panel region
-  
+
      When I drag and drop "#panels-ipe-regionid-left .panels-ipe-portlet-wrapper" to "#panels-ipe-regionid-center .panels-ipe-sort-container"
      Then I wait for AJAX to finish
       And I wait 5s
@@ -133,4 +134,3 @@ So that I will be able to Customize content, drag and drop page components to re
      Then I should not see "Add new pane"
       And I should see "Test 1 HTML content title" in the "center" panel region
       And I should see "Test 2 HTML content title" in the "center" panel region
-  
