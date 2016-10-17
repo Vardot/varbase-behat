@@ -3,9 +3,9 @@ As a site admin user
 I want to be able create new user accounts and assign roles to them
 So that they will be able to use the site.
 
-  Background: 
+  Background:
     Given I am a logged in user with the "webmaster" user
-  
+
   @javascript @local @development @staging @production
   Scenario: Check if admins can see "Add user" button under people administration.
     Given I go to "/admin/people"
@@ -13,7 +13,7 @@ So that they will be able to use the site.
       And I should see "People"
       And I should see "Username"
       And I should see "E-mail address"
-  
+
   @javascript @local @development @staging @production
   Scenario: Check if admins can create new user account as an (authenticated user)
     Given I go to "/admin/people/create"
@@ -34,24 +34,23 @@ So that they will be able to use the site.
       And I fill in "dD.123123" for "Password"
       And I fill in "dD.123123" for "Confirm password"
      Then I press "Save"
-  
+
   @javascript @local @development @staging @production
-  Scenario: Delete the test_authenticated user.
+  Scenario: Delete the Tester user.
      When I go to "/admin/people"
       And I fill in "Tester" for "Username"
       And I press "Apply"
-      And wait
+      And I wait
      Then I should see "Tester"
      When I click "Tester"
-      And wait
+      And I wait
      Then I should see "History"
      When I click "Edit"
-      And wait
+      And I wait
       And I press "Cancel account"
-      And wait
+      And I wait
      Then I should see "Are you sure you want to cancel the account Tester?"
      When I select the radio button "Delete the account and its content."
       And I press "Cancel account"
-      And wait
+      And I wait for the batch job to finish
      Then I should see "Tester has been deleted."
-  
