@@ -80,31 +80,14 @@ So that I will be able to Customize content, drag and drop page components to re
       And I wait for AJAX to finish
      Then I should see "Test Landing page"
      When I click "Test Landing page"
-      And I wait 5s
       And I wait for AJAX to finish
      Then I should see "Customize this page"
       And I should see "Test 1 HTML content title"
 
      When I click "Customize this page"
-      And I wait 5s
       And I wait for AJAX to finish
      Then I should see "Add new pane" in the "left" panel region
       And I should see "Add new pane" in the "bottom" panel region
-
-  # Add Test 2 custom content pane.
-     When I click "Add new pane" in the "left" panel region
-      And I wait for AJAX to finish
-     Then I should see "Add content to Left Sidebar"
-     When I click "HTML"
-      And I wait for AJAX to finish
-      And I fill in "Test 2 HTML content title" for "Title"
-      And I fill in the rich text editor field "HTML" with "Test 2 HTML content body"
-      And I press "Finish"
-      And I wait for AJAX to finish
-     When I press "Save"
-      And I wait for AJAX to finish
-     Then I should see "Test 2 HTML content title"
-      And I should see "Test 1 HTML content title"
 
   @javascript @local @development @staging @production
   Scenario: Check that a user with a permission to customize content can drag
@@ -120,7 +103,6 @@ So that I will be able to Customize content, drag and drop page components to re
      When I click "Test Landing page"
       And I wait for AJAX to finish
      Then I should see "Test 1 HTML content title" in the "left" panel region
-      And I should see "Test 2 HTML content title" in the "left" panel region
 
      When I click "Customize this page"
       And I wait for AJAX to finish
@@ -133,4 +115,3 @@ So that I will be able to Customize content, drag and drop page components to re
       And I wait for AJAX to finish
      Then I should not see "Add new pane"
       And I should see "Test 1 HTML content title" in the "center" panel region
-      And I should see "Test 2 HTML content title" in the "center" panel region
