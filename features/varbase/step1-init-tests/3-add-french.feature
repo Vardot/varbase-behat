@@ -11,11 +11,18 @@ Feature: Add French language if we do not have it to languages in the system.
       And I wait
      Then I should see "Add a language to be supported by your site."
      When I select "fr" from "Language name"
-      And I press "Add language"
+      And I press the "Add language" button
+
+      And I wait for the batch job to finish
+      And I wait for the batch job to finish
+      And I wait 150s
+      And I wait for the batch job to finish
       And I wait for the batch job to finish
      Then I should see "The language French has been created and can now be used."
+      And I wait for the batch job to finish
+      And I wait for the batch job to finish
+      And I wait for the batch job to finish
       And I wait for the batch job to finish
      When I go to "/admin/config/regional/language"
       And I wait
      Then I should see "French"
-  
