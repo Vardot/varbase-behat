@@ -1,10 +1,11 @@
 {
-  "name":         "vardot/varbase-behat",
-  "description":  "Custom Behat set of Contexts, and Gherkin Features, which help in the automated testing of Varbase.",
-  "keywords":     ["web", "testing", "browser", "varbase", "vardot"],
-  "homepage":     "http://vardot.com",
-  "license":      "GPL-2.0+",
-
+  "name": "vardot/varbase-behat",
+  "description": "Custom Behat set of Contexts, and Gherkin Features, which help in the automated testing of Varbase.",
+  "keywords": ["web", "testing", "browser", "varbase", "vardot"],
+  "homepage": "http://vardot.com",
+  "license": "GPL-2.0+",
+  "minimum-stability": "dev",
+  "prefer-stable": true,
   "authors": [
     {
       "name":     "Rajab Natshah",
