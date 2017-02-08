@@ -3,15 +3,13 @@ As a logged in user with a permission to translate content
 I want to be able to check if all content types are translatable
 So that I will be able to create a content then I will have the option to translate the content to other languages in the site
 
-# Run the following Gherkin Features to add Arabic and French languages.
+# Run the following Gherkin Features to add Arabic language.
 # bin/behat features/varbase/step1-init-tests/2-add-arabic.feature
-# bin/behat features/varbase/step1-init-tests/3-add-french.feature
 
 # Run the following Gherkin Features After you finish work
-# So that you can delete Arabic and French languages.
+# So that you can delete Arabic language.
 #
 # bin/behat features/varbase/step3-cleanup-tests/2-delete-arabic.feature
-# bin/behat features/varbase/step3-cleanup-tests/3-delete-french.feature
 
   @javascript @local @development @staging @production
   Scenario: Check if site admin can translate an existing English Basic Page
@@ -34,26 +32,12 @@ So that I will be able to create a content then I will have the option to transl
       And I should see "Not translated" in the "Arabic" row
      When I click "Add" in the "Arabic" row
       And I wait
-     Then I should see "Create Arabic translation"
-     When I fill in "تجربة صفحة بسيطة عربية العنوان" for "Title"
+     Then I should see "Create Arabic translation of Test English Basic page"
+     When I fill in "تجربة صفحة بسيطة عربية العنوان" for "edit-title-0-value"
       And I fill in the rich text editor field "Body" with "تجربة صفحة بسيطة عربية المحتوى"
-      And I press "Save"
+      And I press the "op" button
       And I wait
      Then I should see "تجربة صفحة بسيطة عربية العنوان"
      When I click "Translate"
       And I wait
      Then I should see "Test English Basic page"
-      And I should see "Not translated" in the "French" row
-     When I click "Add" in the "French" row
-      And I wait
-     Then I should see "Create French translation"
-     When I fill in "La page test d'anglais de base" for "Title"
-      And I fill in the rich text editor field "Body" with "Corps de la page test d'anglais de base"
-      And I press "Save"
-      And I wait
-     Then I should see "La page test d'anglais de base"
-     When I click "Translate"
-      And I wait
-     Then I should see "Test English Basic page"
-
-  

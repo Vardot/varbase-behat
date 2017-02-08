@@ -3,3 +3,4 @@ bin/*
 reports/*
 screenshots/*
 composer.phar
+/nbproject/

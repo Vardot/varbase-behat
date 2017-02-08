@@ -40,4 +40,5 @@ So that they will be able to use the site.
      Then I should see "Are you sure you want to cancel the account Tester?"
      When I select the radio button "Delete the account and its content."
       And I press "Cancel account"
+      And I wait for the batch job to finish
      Then I should see "People"

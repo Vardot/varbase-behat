@@ -7,4 +7,4 @@ If you want to test the installation process feature, you will need to use the
  varbase Install config file, as you can see in the following command.
 
 
-$ bin/behat --config=behat.varbase-install.yml tools/install-varbase/default-installation.feature
+$ bin/behat --config=behat.varbase-install.yml tools/install-varbase/installation_varbase_default-installation-to-initiate-a-site-for-a-client.feature
