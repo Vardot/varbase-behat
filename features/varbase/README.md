@@ -6,9 +6,9 @@
   You will need to create the list of Testing users, and Add French, and Arabic
   languages to the site.
 
-  # --------------------------------------------------------------------------
-  # You can run the following command:
-  # --------------------------------------------------------------------------
+  --------------------------------------------------------------------------
+  You can run the following command:
+  --------------------------------------------------------------------------
 ```
   $ bin/behat features/varbase/ --format pretty --out std  --format html  --out reports/report-$( date '+%Y-%m-%d_%H-%M-%S' )
 ```
