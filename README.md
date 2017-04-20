@@ -195,7 +195,7 @@ $ bin/behat -di
     languages to the site.
 
     # --------------------------------------------------------------------------
-    # You can run the following command:
+     You can run the following command:
     # --------------------------------------------------------------------------
 ```
     $ bin/behat features/varbase/ --format pretty --out std  --format html  --out reports/report-$( date '+%Y-%m-%d_%H-%M-%S' )
