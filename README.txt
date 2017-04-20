@@ -1,4 +1,4 @@
-# Varbase Behat #
+# Varbase Behat
 
   Varbase Behat is a set of Gherkin Features and custom Varbase Context with
  Custom step definitions, and assets, which help with the automatic testing
