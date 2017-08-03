@@ -1,6 +1,6 @@
 {
   "name": "vardot/varbase-behat",
-  "description": "Custom Behat set of Contexts, and Gherkin Features, which help in the automated testing of Varbase.",
+  "description": "Varbase Behat is a standalone testing framework, with a set of Gherkin Features and custom Varbase Context with custom step definitions, and assets, which help with the automatic testing for Varbase websites https://www.vardot.com",
   "keywords": ["web", "testing", "browser", "varbase", "vardot"],
   "homepage": "http://vardot.com",
   "license": "GPL-2.0+",
@@ -8,8 +8,7 @@
   "prefer-stable": true,
   "authors": [
     {
-      "name":     "Rajab Natshah",
-      "email":    "r.natshah@vardot.com",
+      "name":     "Vardot",
       "homepage": "http://vardot.com"
     }
   ],
