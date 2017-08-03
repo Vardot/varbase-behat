@@ -1,8 +1,6 @@
 # Varbase Behat
 
-  Varbase Behat is a set of Gherkin Features and custom Varbase Context with
- Custom step definitions, and assets, which help with the automatic testing
- for varbase websites.
+ Varbase Behat is a standalone testing framework, with a set of Gherkin Features and custom Varbase Context with custom step definitions, and assets, which help with the automatic testing for Varbase websites https://www.vardot.com
 
 
    This page can help  you to have all steps, which you need to run the
